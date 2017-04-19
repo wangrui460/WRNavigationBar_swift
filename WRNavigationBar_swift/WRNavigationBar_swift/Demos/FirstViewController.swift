@@ -31,9 +31,20 @@ class FirstViewController: UIViewController
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableHeaderView = imageView
+        navigationController?.navigationBar.wr_setBackgroundColor(color: .clear)
     }
 }
 
+
+// MARK: - viewWillAppear .. ScrollViewDidScroll
+extension FirstViewController
+{
+    override func viewWillDisappear(_ animated: Bool)
+    {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.wr_clear()
+    }
+}
 
 extension FirstViewController:UITableViewDelegate,UITableViewDataSource
 {

@@ -16,6 +16,7 @@
 		1A0DF7B51EA7380600191349 /* SixthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0DF7B41EA7380600191349 /* SixthViewController.swift */; };
 		1A0DF7B71EA7471B00191349 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0DF7B61EA7471B00191349 /* FirstViewController.swift */; };
 		1A0DF7B91EA7521C00191349 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0DF7B81EA7521C00191349 /* BaseNavigationController.swift */; };
+		1A0DF7BE1EA7545900191349 /* UINavigationBar+WRAddition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0DF7BD1EA7545900191349 /* UINavigationBar+WRAddition.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		1A0DF7B41EA7380600191349 /* SixthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SixthViewController.swift; sourceTree = "<group>"; };
 		1A0DF7B61EA7471B00191349 /* FirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		1A0DF7B81EA7521C00191349 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
+		1A0DF7BD1EA7545900191349 /* UINavigationBar+WRAddition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+WRAddition.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 		1A0DF79A1EA7179500191349 /* WRNavigationBar */ = {
 			isa = PBXGroup;
 			children = (
+				1A0DF7BD1EA7545900191349 /* UINavigationBar+WRAddition.swift */,
 			);
 			path = WRNavigationBar;
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A0DF7BE1EA7545900191349 /* UINavigationBar+WRAddition.swift in Sources */,
 				1A0DF7B31EA7372800191349 /* DemoListController.swift in Sources */,
 				1A0DF7B51EA7380600191349 /* SixthViewController.swift in Sources */,
 				1A0DF77B1EA7176500191349 /* AppDelegate.swift in Sources */,
