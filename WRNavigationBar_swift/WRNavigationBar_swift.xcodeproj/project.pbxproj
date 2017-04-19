@@ -8,11 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		1A0DF77B1EA7176500191349 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0DF77A1EA7176500191349 /* AppDelegate.swift */; };
-		1A0DF77D1EA7176500191349 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0DF77C1EA7176500191349 /* ViewController.swift */; };
 		1A0DF7801EA7176500191349 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A0DF77E1EA7176500191349 /* Main.storyboard */; };
 		1A0DF7821EA7176500191349 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A0DF7811EA7176500191349 /* Assets.xcassets */; };
 		1A0DF7851EA7176500191349 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A0DF7831EA7176500191349 /* LaunchScreen.storyboard */; };
 		1A0DF7901EA7176500191349 /* WRNavigationBar_swiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0DF78F1EA7176500191349 /* WRNavigationBar_swiftTests.swift */; };
+		1A0DF7B31EA7372800191349 /* DemoListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0DF7B21EA7372800191349 /* DemoListController.swift */; };
+		1A0DF7B51EA7380600191349 /* SixthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0DF7B41EA7380600191349 /* SixthViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,7 +29,6 @@
 /* Begin PBXFileReference section */
 		1A0DF7771EA7176500191349 /* WRNavigationBar_swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WRNavigationBar_swift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A0DF77A1EA7176500191349 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1A0DF77C1EA7176500191349 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1A0DF77F1EA7176500191349 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1A0DF7811EA7176500191349 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A0DF7841EA7176500191349 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -36,6 +36,8 @@
 		1A0DF78B1EA7176500191349 /* WRNavigationBar_swiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WRNavigationBar_swiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A0DF78F1EA7176500191349 /* WRNavigationBar_swiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WRNavigationBar_swiftTests.swift; sourceTree = "<group>"; };
 		1A0DF7911EA7176500191349 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1A0DF7B21EA7372800191349 /* DemoListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoListController.swift; sourceTree = "<group>"; };
+		1A0DF7B41EA7380600191349 /* SixthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SixthViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,9 +79,9 @@
 		1A0DF7791EA7176500191349 /* WRNavigationBar_swift */ = {
 			isa = PBXGroup;
 			children = (
-				1A0DF79A1EA7179500191349 /* WRNavigationBar */,
 				1A0DF77A1EA7176500191349 /* AppDelegate.swift */,
-				1A0DF77C1EA7176500191349 /* ViewController.swift */,
+				1A0DF79A1EA7179500191349 /* WRNavigationBar */,
+				1A0DF7B11EA7370000191349 /* Demos */,
 				1A0DF77E1EA7176500191349 /* Main.storyboard */,
 				1A0DF7811EA7176500191349 /* Assets.xcassets */,
 				1A0DF7831EA7176500191349 /* LaunchScreen.storyboard */,
@@ -102,6 +104,15 @@
 			children = (
 			);
 			path = WRNavigationBar;
+			sourceTree = "<group>";
+		};
+		1A0DF7B11EA7370000191349 /* Demos */ = {
+			isa = PBXGroup;
+			children = (
+				1A0DF7B21EA7372800191349 /* DemoListController.swift */,
+				1A0DF7B41EA7380600191349 /* SixthViewController.swift */,
+			);
+			path = Demos;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,7 +220,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A0DF77D1EA7176500191349 /* ViewController.swift in Sources */,
+				1A0DF7B31EA7372800191349 /* DemoListController.swift in Sources */,
+				1A0DF7B51EA7380600191349 /* SixthViewController.swift in Sources */,
 				1A0DF77B1EA7176500191349 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
