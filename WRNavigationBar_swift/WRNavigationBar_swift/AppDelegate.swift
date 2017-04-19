@@ -25,8 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow.init(frame: UIScreen.main.bounds)
         window?.backgroundColor = UIColor.white
         
-        let firstNav = UINavigationController.init(rootViewController: DemoListController())
-        let secondNav = UINavigationController.init(rootViewController: SixthViewController())
+        let firstNav = BaseNavigationController.init(rootViewController: DemoListController())
+        let secondNav = BaseNavigationController.init(rootViewController: SixthViewController())
         secondNav.title = "没有系统返回按钮的情况"
         let tabBarVC = UITabBarController.init()
         tabBarVC.viewControllers = [firstNav, secondNav]

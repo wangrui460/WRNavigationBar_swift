@@ -20,9 +20,7 @@ class DemoListController: UIViewController
         tableView.dataSource = self
         tableView.delegate = self
     }
-
 }
-
 
 // MARK: - tableView delegate / dataSource
 extension DemoListController: UITableViewDelegate, UITableViewDataSource
@@ -59,10 +57,24 @@ extension DemoListController: UITableViewDelegate, UITableViewDataSource
         return 60
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
         tableView.deselectRow(at: indexPath, animated: true)
+        switch indexPath.row {
+        case 0:
+            navigationController?.pushViewController(FirstViewController(), animated: true)
+        case 1:
+            navigationController?.pushViewController(FirstViewController(), animated: true)
+        case 2:
+            navigationController?.pushViewController(FirstViewController(), animated: true)
+        case 3:
+            navigationController?.pushViewController(FirstViewController(), animated: true)
+        case 4:
+            navigationController?.pushViewController(FirstViewController(), animated: true)
+        default:
+           break
+        }
     }
-    
 }
 
 
