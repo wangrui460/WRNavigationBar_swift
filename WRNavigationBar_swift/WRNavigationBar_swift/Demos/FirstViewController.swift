@@ -8,9 +8,11 @@
 
 import UIKit
 
+let IMAGE_HEIGHT:CGFloat = 260
+let NAVBAR_COLORCHANGE_POINT:CGFloat = IMAGE_HEIGHT - CGFloat(kNavBarBottom * 2)
+
 class FirstViewController: UIViewController
-{
-    let IMAGE_HEIGHT:CGFloat = 260
+{    
     lazy var tableView:UITableView = {
         let table:UITableView = UITableView(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: self.view.bounds.height), style: .plain)
         table.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0);
@@ -18,7 +20,7 @@ class FirstViewController: UIViewController
     }()
     lazy var imageView:UIImageView = {
         let imgView = UIImageView(image: UIImage(named: "image1"))
-        imgView.frame = CGRect.init(x: 0, y: 0, width: kScreenWidth, height: self.IMAGE_HEIGHT)
+        imgView.frame = CGRect.init(x: 0, y: 0, width: kScreenWidth, height: IMAGE_HEIGHT)
         return imgView
     }()
     
@@ -31,6 +33,7 @@ class FirstViewController: UIViewController
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableHeaderView = imageView
+        navigationController?.navigationBar.barStyle = .black
         navigationController?.navigationBar.wr_setBackgroundColor(color: .clear)
     }
 }
@@ -39,12 +42,37 @@ class FirstViewController: UIViewController
 // MARK: - viewWillAppear .. ScrollViewDidScroll
 extension FirstViewController
 {
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        tableView.delegate = self
+        navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.wr_setBackgroundColor(color: .clear)
+    }
+    
     override func viewWillDisappear(_ animated: Bool)
     {
         super.viewWillDisappear(animated)
+        // 如果不取消代理的话，跳转到下一个页面后，还会调用 scrollViewDidScroll 方法
+        tableView.delegate = nil
         navigationController?.navigationBar.wr_clear()
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView)
+    {
+        let offsetY = scrollView.contentOffset.y
+        if (offsetY > NAVBAR_COLORCHANGE_POINT)
+        {
+            let alpha = (offsetY - NAVBAR_COLORCHANGE_POINT) / CGFloat(kNavBarBottom)
+            navigationController?.navigationBar.wr_setBackgroundColor(color: MainNavBarColor.withAlphaComponent(alpha))
+        }
+        else
+        {
+            navigationController?.navigationBar.wr_setBackgroundColor(color: UIColor.clear)
+        }
+    }
 }
+
 
 extension FirstViewController:UITableViewDelegate,UITableViewDataSource
 {

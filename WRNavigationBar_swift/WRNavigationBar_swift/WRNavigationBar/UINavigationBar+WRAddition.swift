@@ -57,7 +57,6 @@ extension UINavigationBar
         }
     }
     
-    
     /// 设置导航栏在垂直方向上平移多少距离
     func wr_setTranslationY(translationY:CGFloat)
     {
@@ -75,8 +74,7 @@ extension UINavigationBar
         })
     }
     
-    
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////
     // private func
     func backgroundView() -> UIView?
     {
@@ -87,5 +85,20 @@ extension UINavigationBar
     {
         objc_setAssociatedObject(self, kBackgroundViewKey, backgroundView, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
-    
+}
+
+extension UINavigationController: UINavigationBarDelegate
+{
+    // 加上一个这样的分类和方法可以解决返回熊猫美妆界面时，导航栏过一段时间再透明的问题（如果觉得没必要可以去掉）
+    public func navigationBar(_ navigationBar: UINavigationBar, shouldPop item: UINavigationItem) -> Bool
+    {
+        if (self.viewControllers.count < (navigationBar.items?.count)!) {
+            return true
+        }
+        
+        DispatchQueue.main.async {
+            self.popViewController(animated: true)
+        }
+        return false
+    }
 }
