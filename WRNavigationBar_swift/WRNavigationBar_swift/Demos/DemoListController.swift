@@ -64,9 +64,9 @@ extension DemoListController: UITableViewDelegate, UITableViewDataSource
         case 0:
             navigationController?.pushViewController(FirstViewController(), animated: true)
         case 1:
-            navigationController?.pushViewController(FirstViewController(), animated: true)
+            navigationController?.pushViewController(SecondViewController(), animated: true)
         case 2:
-            navigationController?.pushViewController(FirstViewController(), animated: true)
+            navigationController?.pushViewController(ThirdViewController(), animated: true)
         case 3:
             navigationController?.pushViewController(FirstViewController(), animated: true)
         case 4:

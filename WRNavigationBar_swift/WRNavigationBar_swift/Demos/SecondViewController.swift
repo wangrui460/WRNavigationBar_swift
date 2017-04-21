@@ -1,18 +1,17 @@
 //
-//  FirstViewController.swift
+//  SecondViewController.swift
 //  WRNavigationBar_swift
 //
-//  Created by wangrui on 2017/4/19.
+//  Created by wangrui on 2017/4/21.
 //  Copyright © 2017年 wangrui. All rights reserved.
 //
 
 import UIKit
 
-private let IMAGE_HEIGHT:CGFloat = 260
-private let NAVBAR_COLORCHANGE_POINT:CGFloat = IMAGE_HEIGHT - CGFloat(kNavBarBottom * 2)
+private let NAVBAR_TRANSLATION_POINT:CGFloat = 0
 
-class FirstViewController: UIViewController
-{    
+class SecondViewController: UIViewController
+{
     lazy var tableView:UITableView = {
         let table:UITableView = UITableView(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: self.view.bounds.height), style: .plain)
         table.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0);
@@ -21,60 +20,73 @@ class FirstViewController: UIViewController
         return table
     }()
     lazy var imageView:UIImageView = {
-        let imgView = UIImageView(image: UIImage(named: "image1"))
-        imgView.frame = CGRect.init(x: 0, y: 0, width: kScreenWidth, height: IMAGE_HEIGHT)
+        let imgView = UIImageView(image: UIImage(named: "image2"))
         return imgView
     }()
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        title = "熊猫美妆"
+        title = "丽人丽妆"
         view.backgroundColor = UIColor.red
         view.addSubview(tableView)
         tableView.tableHeaderView = imageView
-        navigationController?.navigationBar.barStyle = .black
-        navigationController?.navigationBar.wr_setBackgroundColor(color: .clear)
     }
 }
 
 
 // MARK: - viewWillAppear .. ScrollViewDidScroll
-extension FirstViewController
+extension SecondViewController
 {
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
-        tableView.delegate = self
-        navigationController?.navigationBar.barStyle = .black
-        navigationController?.navigationBar.wr_setBackgroundColor(color: .clear)
+    }
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        // 必须在view完全加载好再调用这个方法，否则就会出现白块的状况
+        scrollViewDidScroll(self.tableView)
+        tableView.delegate = self;
     }
     
     override func viewWillDisappear(_ animated: Bool)
     {
         super.viewWillDisappear(animated)
-        // 如果不取消代理的话，跳转到下一个页面后，还会调用 scrollViewDidScroll 方法
         tableView.delegate = nil
+        navigationController?.navigationBar.wr_setTranslationY(translationY: 0)
         navigationController?.navigationBar.wr_clear()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
         let offsetY = scrollView.contentOffset.y
-        if (offsetY > NAVBAR_COLORCHANGE_POINT)
+        if (offsetY > NAVBAR_TRANSLATION_POINT)
         {
-            let alpha = (offsetY - NAVBAR_COLORCHANGE_POINT) / CGFloat(kNavBarBottom)
-            navigationController?.navigationBar.wr_setBackgroundColor(color: MainNavBarColor.withAlphaComponent(alpha))
+            UIView.animate(withDuration: 0.3, animations: { [weak self] in
+                self?.setNavigationBarTransformProgress(progress: 1)
+            })
         }
         else
         {
-            navigationController?.navigationBar.wr_setBackgroundColor(color: UIColor.clear)
+            UIView.animate(withDuration: 0.3, animations: { [weak self] in
+                self?.setNavigationBarTransformProgress(progress: 0)
+            })
         }
+    }
+    
+    // private 
+    func setNavigationBarTransformProgress(progress:CGFloat)
+    {
+        navigationController?.navigationBar.wr_setTranslationY(translationY: -CGFloat(kNavBarHeight) * progress)
+        // 有系统的返回按钮，所以 hasSystemBackIndicator = YES
+        navigationController?.navigationBar.wr_setBarButtonItemsAlpha(alpha: 1 - progress, hasSystemBackIndicator: true)
     }
 }
 
 
-extension FirstViewController:UITableViewDelegate,UITableViewDataSource
+extension SecondViewController:UITableViewDelegate,UITableViewDataSource
 {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 15

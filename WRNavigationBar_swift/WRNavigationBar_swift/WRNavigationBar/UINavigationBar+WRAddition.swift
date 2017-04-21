@@ -68,9 +68,9 @@ extension UINavigationBar
     {
         // 设置导航栏不透明
         self.setBackgroundImage(nil, for: .default)
-        DispatchQueue.main.asyncAfter(deadline: .now()+0.5, execute: {
-            self.backgroundView()?.removeFromSuperview()
-            self.setBackgroundView(backgroundView: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.5, execute: { [weak self] in
+            self?.backgroundView()?.removeFromSuperview()
+            self?.setBackgroundView(backgroundView: nil)
         })
     }
     

@@ -1,18 +1,17 @@
 //
-//  FirstViewController.swift
+//  ThirdViewController.swift
 //  WRNavigationBar_swift
 //
-//  Created by wangrui on 2017/4/19.
+//  Created by wangrui on 2017/4/21.
 //  Copyright © 2017年 wangrui. All rights reserved.
 //
 
 import UIKit
 
-private let IMAGE_HEIGHT:CGFloat = 260
-private let NAVBAR_COLORCHANGE_POINT:CGFloat = IMAGE_HEIGHT - CGFloat(kNavBarBottom * 2)
+private let NAVBAR_TRANSLATION_POINT:CGFloat = 0
 
-class FirstViewController: UIViewController
-{    
+class ThirdViewController: UIViewController
+{
     lazy var tableView:UITableView = {
         let table:UITableView = UITableView(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: self.view.bounds.height), style: .plain)
         table.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0);
@@ -21,60 +20,78 @@ class FirstViewController: UIViewController
         return table
     }()
     lazy var imageView:UIImageView = {
-        let imgView = UIImageView(image: UIImage(named: "image1"))
-        imgView.frame = CGRect.init(x: 0, y: 0, width: kScreenWidth, height: IMAGE_HEIGHT)
+        let imgView = UIImageView(image: UIImage(named: "image2"))
         return imgView
     }()
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        title = "熊猫美妆"
+        title = "你妹的"
         view.backgroundColor = UIColor.red
         view.addSubview(tableView)
         tableView.tableHeaderView = imageView
-        navigationController?.navigationBar.barStyle = .black
-        navigationController?.navigationBar.wr_setBackgroundColor(color: .clear)
     }
 }
 
 
 // MARK: - viewWillAppear .. ScrollViewDidScroll
-extension FirstViewController
+extension ThirdViewController
 {
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
-        tableView.delegate = self
-        navigationController?.navigationBar.barStyle = .black
-        navigationController?.navigationBar.wr_setBackgroundColor(color: .clear)
+    }
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        // 必须在view完全加载好再调用这个方法，否则就会出现白块的状况
+        scrollViewDidScroll(self.tableView)
+        tableView.delegate = self;
     }
     
     override func viewWillDisappear(_ animated: Bool)
     {
         super.viewWillDisappear(animated)
-        // 如果不取消代理的话，跳转到下一个页面后，还会调用 scrollViewDidScroll 方法
         tableView.delegate = nil
+        navigationController?.navigationBar.wr_setTranslationY(translationY: 0)
         navigationController?.navigationBar.wr_clear()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
         let offsetY = scrollView.contentOffset.y
-        if (offsetY > NAVBAR_COLORCHANGE_POINT)
+        // 向上滑动的距离
+        let scrollUpHeight = offsetY - NAVBAR_TRANSLATION_POINT
+        // 除数表示 -> 导航栏从完全不透明到完全透明的过渡距离
+        let progress = scrollUpHeight / CGFloat(kNavBarHeight)
+        if (offsetY > NAVBAR_TRANSLATION_POINT)
         {
-            let alpha = (offsetY - NAVBAR_COLORCHANGE_POINT) / CGFloat(kNavBarBottom)
-            navigationController?.navigationBar.wr_setBackgroundColor(color: MainNavBarColor.withAlphaComponent(alpha))
+            if (scrollUpHeight > CGFloat(kNavBarHeight)) {
+                setNavigationBarTransformProgress(progress: 1)
+            }
+            else {
+                setNavigationBarTransformProgress(progress: progress)
+            }
         }
         else
         {
-            navigationController?.navigationBar.wr_setBackgroundColor(color: UIColor.clear)
+            self.setNavigationBarTransformProgress(progress: 0)
         }
+    }
+    
+    // private
+    func setNavigationBarTransformProgress(progress:CGFloat)
+    {
+        navigationController?.navigationBar.wr_setTranslationY(translationY: -CGFloat(kNavBarHeight) * progress)
+        // 有系统的返回按钮，所以 hasSystemBackIndicator = YES
+        navigationController?.navigationBar.wr_setBarButtonItemsAlpha(alpha: 1 - progress, hasSystemBackIndicator: true)
     }
 }
 
 
-extension FirstViewController:UITableViewDelegate,UITableViewDataSource
+extension ThirdViewController:UITableViewDelegate,UITableViewDataSource
 {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 15
@@ -92,10 +109,7 @@ extension FirstViewController:UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         tableView.deselectRow(at: indexPath, animated: true)
-        let vc:UIViewController = UIViewController()
-        vc.view.backgroundColor = UIColor.red
-        let str = String(format: "WRNavigationBar %zd", indexPath.row)
-        vc.title = str
-        navigationController?.pushViewController(vc, animated: true)
+        
+        // 做成这种样式，最好不要有点击事件
     }
 }
