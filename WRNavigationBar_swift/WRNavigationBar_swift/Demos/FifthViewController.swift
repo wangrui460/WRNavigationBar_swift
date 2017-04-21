@@ -89,19 +89,6 @@ extension FifthViewController
         }
     }
     
-//    // private
-//    private func changeNavBarAnimateWithIsClear(isClear:Bool)
-//    {
-//        UIView.animate(withDuration: 0.8, animations: { [weak self] in
-//            if (isClear == true) {
-//                self?.navigationController?.navigationBar.wr_setBackgroundColor(color: .clear)
-//            }
-//            else {
-//                self?.navigationController?.navigationBar.wr_setBackgroundColor(color: MainNavBarColor)
-//            }
-//        })
-//    }
-    
     // private
     fileprivate func imageScaledToSize(image:UIImage, newSize:CGSize) -> UIImage
     {
