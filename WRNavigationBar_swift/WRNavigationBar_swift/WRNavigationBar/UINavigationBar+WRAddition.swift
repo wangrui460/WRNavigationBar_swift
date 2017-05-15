@@ -9,6 +9,7 @@
 import UIKit
 
 let kBackgroundViewKey = UnsafeRawPointer(bitPattern: "kBackgroundViewKey".hash)
+let kNavBarBottom = 64
 
 extension UINavigationBar
 {

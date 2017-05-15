@@ -12,7 +12,6 @@ let MainNavBarColor = UIColor.init(red: 0/255.0, green: 175/255.0, blue: 240/255
 let kScreenWidth = UIScreen.main.bounds.width
 let kScreenHeight = UIScreen.main.bounds.height
 let kTabBarHeight = 49
-let kNavBarBottom = 64
 let kNavBarHeight = 44
 
 @UIApplicationMain
