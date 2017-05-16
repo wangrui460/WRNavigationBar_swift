@@ -20,7 +20,7 @@ extension UINavigationBar
         {
             // 设置导航栏本身全透明
             self.setBackgroundImage(UIImage(), for: .default)
-            self.setBackgroundView(backgroundView: UIView(frame: CGRect(x: 0, y: 0, width: Int(kScreenWidth), height: kNavBarBottom)))
+            self.setBackgroundView(backgroundView: UIView(frame: CGRect(x: 0, y: 0, width: Int(bounds.width), height: kNavBarBottom)))
             // _UIBarBackground是导航栏的第一个子控件
             self.subviews.first?.insertSubview(self.backgroundView() ?? UIView(), at: 0)
             // 隐藏导航栏底部默认黑线
@@ -71,10 +71,6 @@ extension UINavigationBar
         self.setBackgroundImage(nil, for: .default)
         self.backgroundView()?.removeFromSuperview()
         self.setBackgroundView(backgroundView: nil)
-//        DispatchQueue.main.asyncAfter(deadline: .now()+0.5, execute: { [weak self] in
-//            self?.backgroundView()?.removeFromSuperview()
-//            self?.setBackgroundView(backgroundView: nil)
-//        })
     }
     
     //////////////////////////////////////////////////////////////////////////////////////////////////
