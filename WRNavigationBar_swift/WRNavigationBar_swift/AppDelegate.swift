@@ -26,9 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let firstNav = BaseNavigationController.init(rootViewController: DemoListController())
         let secondNav = BaseNavigationController.init(rootViewController: SixthViewController())
+        let thirdNav = BaseNavigationController.init(rootViewController: CustomNavBarController())
         secondNav.title = "没有系统返回按钮的情况"
+        thirdNav.title = "自定义导航栏"
         let tabBarVC = UITabBarController.init()
-        tabBarVC.viewControllers = [firstNav, secondNav]
+        tabBarVC.viewControllers = [firstNav, secondNav, thirdNav]
         
         window?.rootViewController = tabBarVC
         window?.makeKeyAndVisible()
