@@ -92,11 +92,14 @@ extension FourthViewController
     private func changeNavBarAnimateWithIsClear(isClear:Bool)
     {
         UIView.animate(withDuration: 0.8, animations: { [weak self] in
-            if (isClear == true) {
-                self?.navigationController?.navigationBar.wr_setBackgroundColor(color: .clear)
-            }
-            else {
-                self?.navigationController?.navigationBar.wr_setBackgroundColor(color: MainNavBarColor)
+            if let weakSelf = self
+            {
+                if (isClear == true) {
+                    weakSelf.navigationController?.navigationBar.wr_setBackgroundColor(color: .clear)
+                }
+                else {
+                    weakSelf.navigationController?.navigationBar.wr_setBackgroundColor(color: MainNavBarColor)
+                }
             }
         })
     }
@@ -132,7 +135,7 @@ extension FourthViewController: UITableViewDelegate,UITableViewDataSource
     {
         tableView.deselectRow(at: indexPath, animated: true)
         let vc:UIViewController = UIViewController()
-        vc.view.backgroundColor = UIColor.red
+        vc.view.backgroundColor = UIColor.white
         let str = String(format: "WRNavigationBar %zd", indexPath.row)
         vc.title = str
         navigationController?.pushViewController(vc, animated: true)

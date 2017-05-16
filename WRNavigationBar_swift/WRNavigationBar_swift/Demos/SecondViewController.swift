@@ -46,8 +46,6 @@ extension SecondViewController
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
-        // 必须在view完全加载好再调用这个方法，否则就会出现白块的状况
-        scrollViewDidScroll(self.tableView)
         tableView.delegate = self;
     }
     
@@ -65,13 +63,17 @@ extension SecondViewController
         if (offsetY > NAVBAR_TRANSLATION_POINT)
         {
             UIView.animate(withDuration: 0.3, animations: { [weak self] in
-                self?.setNavigationBarTransformProgress(progress: 1)
+                if let weakSelf = self {
+                    weakSelf.setNavigationBarTransformProgress(progress: 1)
+                }
             })
         }
         else
         {
             UIView.animate(withDuration: 0.3, animations: { [weak self] in
-                self?.setNavigationBarTransformProgress(progress: 0)
+                if let weakSelf = self {
+                    weakSelf.setNavigationBarTransformProgress(progress: 0)
+                }
             })
         }
     }

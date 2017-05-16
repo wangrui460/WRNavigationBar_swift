@@ -54,9 +54,8 @@ extension CustomNavBarController
         navigationController?.navigationBar.barStyle = .black
     }
     
-    override func viewWillDisappear(_ animated: Bool)
-    {
-        super.viewWillDisappear(animated)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         // 如果不取消代理的话，跳转到下一个页面后，还会调用 scrollViewDidScroll 方法
         tableView.delegate = nil
         navBar.wr_clear()
