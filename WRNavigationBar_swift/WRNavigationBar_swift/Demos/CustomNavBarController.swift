@@ -14,15 +14,16 @@ private let NAVBAR_COLORCHANGE_POINT:CGFloat = IMAGE_HEIGHT - CGFloat(kNavBarBot
 class CustomNavBarController: BaseViewController
 {    
     lazy var tableView:UITableView = {
-        let table:UITableView = UITableView(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: self.view.bounds.height), style: .plain)
-        table.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0);
+        let frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: self.view.bounds.height)
+        let table:UITableView = UITableView(frame: frame, style: .plain)
+        table.contentInset = UIEdgeInsetsMake(0, 0, CGFloat(kTabBarHeight), 0);
         table.delegate = self
         table.dataSource = self
         return table
     }()
     lazy var imageView:UIImageView = {
         let imgView = UIImageView(image: UIImage(named: "image1"))
-        imgView.frame = CGRect.init(x: 0, y: 0, width: kScreenWidth, height: IMAGE_HEIGHT)
+        imgView.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: IMAGE_HEIGHT)
         return imgView
     }()
     
@@ -34,8 +35,10 @@ class CustomNavBarController: BaseViewController
         view.addSubview(tableView)
         tableView.tableHeaderView = imageView
         view.insertSubview(navBar, aboveSubview: tableView)
-        navBar.barStyle = .black
+        navigationController?.navigationBar.barStyle = .black
         navBar.wr_setBackgroundColor(color: .clear)
+        navItem.leftBarButtonItem = UIBarButtonItem(title: "star", style: .plain, target: self, action: nil)
+        navItem.title = "自定义导航栏"
     }
 }
 
@@ -47,8 +50,8 @@ extension CustomNavBarController
     {
         super.viewWillAppear(animated)
         tableView.delegate = self
-        navBar.barStyle = .black
-        navBar.wr_setBackgroundColor(color: .clear)
+        scrollViewDidScroll(tableView)
+        navigationController?.navigationBar.barStyle = .black
     }
     
     override func viewWillDisappear(_ animated: Bool)
@@ -93,10 +96,16 @@ extension CustomNavBarController:UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         tableView.deselectRow(at: indexPath, animated: true)
-        let vc:UIViewController = BaseViewController()
+        let vc:BaseViewController = BaseViewController()
         vc.view.backgroundColor = UIColor.red
         let str = String(format: "WRNavigationBar %zd", indexPath.row)
-        vc.title = str
+        vc.navItem.title = str
+        vc.navItem.leftBarButtonItem = UIBarButtonItem(title: "返回", style: .plain, target: self, action: #selector(back))
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc fileprivate func back()
+    {
+        _ = navigationController?.popViewController(animated: true)
     }
 }
