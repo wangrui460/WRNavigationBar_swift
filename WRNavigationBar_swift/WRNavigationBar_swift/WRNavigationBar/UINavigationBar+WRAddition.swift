@@ -104,8 +104,8 @@ extension DispatchQueue {
     }
 }
 
-extension UINavigationController {
-    
+extension UINavigationController
+{
     override open var preferredStatusBarStyle: UIStatusBarStyle {
         return topViewController?.preferredStatusBarStyle ?? .default
     }
@@ -119,7 +119,8 @@ extension UINavigationController {
             let needSwizzleSelectorArr = [
                 NSSelectorFromString("_updateInteractiveTransition:"),
                 #selector(popToViewController),
-                #selector(popToRootViewController)
+                #selector(popToRootViewController),
+                #selector(pushViewController)
             ]
             
             for selector in needSwizzleSelectorArr {
@@ -187,16 +188,67 @@ extension UINavigationController {
         return UIColor(red: nowRed, green: nowGreen, blue: nowBlue, alpha: nowAlpha)
     }
     
-    func wr_popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]? {
+    func wr_popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]?
+    {
         setNeedsNavigationBackground(color: viewController.navBarBgColor)
         navigationBar.tintColor = viewController.navBarTintColor
         return wr_popToViewController(viewController, animated: animated)
     }
     
-    func wr_popToRootViewControllerAnimated(_ animated: Bool) -> [UIViewController]? {
+    func wr_popToRootViewControllerAnimated(_ animated: Bool) -> [UIViewController]?
+    {
         setNeedsNavigationBackground(color: viewControllers.first?.navBarBgColor ?? .defaultNavBarBgColor)
         navigationBar.tintColor = viewControllers.first?.navBarTintColor
         return wr_popToRootViewControllerAnimated(animated)
+    }
+    
+    func wr_pushViewController(_ viewController: UIViewController, animated: Bool)
+    {
+        var displayLink:CADisplayLink? = CADisplayLink(target: self, selector: #selector(needDisplay))
+        displayLink?.add(to: RunLoop.main, forMode: .defaultRunLoopMode)
+        CATransaction.setCompletionBlock {
+            displayLink?.invalidate()
+            displayLink = nil
+            pushPropertys.displayCount = 0
+        };
+        CATransaction.setAnimationDuration(pushPropertys.pushDuration)
+        CATransaction.begin()
+        wr_pushViewController(viewController, animated: animated)
+        CATransaction.commit()
+    }
+    
+    struct pushPropertys {
+        fileprivate static let pushDuration = 0.13
+        fileprivate static var displayCount = 0
+        fileprivate static var pushProgress:CGFloat {
+            let all:CGFloat = CGFloat(60.0 * pushDuration)
+            let current = min(all, CGFloat(displayCount))
+            return current / all
+        }
+    }
+    
+    
+    func needDisplay()
+    {
+        guard let topViewController = topViewController,
+              let coordinator       = topViewController.transitionCoordinator
+            else {
+                // set rootVC navBarBgColor
+                setNeedsNavigationBackground(color: navBarBgColor)
+                return
+        }
+        
+        pushPropertys.displayCount += 1
+        let pushProgress = pushPropertys.pushProgress
+        // print("第\(pushPropertys.displayCount)次push的进度：\(pushProgress)")
+        let fromViewController = coordinator.viewController(forKey: .from)
+        let toViewController = coordinator.viewController(forKey: .to)
+        
+        // change navBarBgColor
+        let fromBgColor = fromViewController?.navBarBgColor ?? .defaultNavBarBgColor
+        let toBgColor = toViewController?.navBarBgColor ?? .defaultNavBarBgColor
+        let newBgColor = averageColor(fromColor: fromBgColor, toColor: toBgColor, percent: pushProgress)
+        setNeedsNavigationBackground(color: newBgColor)
     }
     
     fileprivate func setNeedsNavigationBackground(color: UIColor) {
@@ -205,9 +257,10 @@ extension UINavigationController {
 }
 
 
-extension UINavigationController: UINavigationBarDelegate {
-    
-    public func navigationBar(_ navigationBar: UINavigationBar, shouldPop item: UINavigationItem) -> Bool {
+extension UINavigationController: UINavigationBarDelegate
+{
+    public func navigationBar(_ navigationBar: UINavigationBar, shouldPop item: UINavigationItem) -> Bool
+    {
         if let topVC = topViewController,
            let coor = topVC.transitionCoordinator, coor.initiallyInteractive {
             //添加对返回交互的监控
@@ -231,27 +284,24 @@ extension UINavigationController: UINavigationBarDelegate {
         return true
     }
     
-    
-    
-    public func navigationBar(_ navigationBar: UINavigationBar, shouldPush item: UINavigationItem) -> Bool {
-            self.setNeedsNavigationBackground(color: self.topViewController?.navBarBgColor ?? UIColor.defaultNavBarBgColor)
-        return true
-    }
-    
     //处理返回手势中断的情况
-    private func dealInteractionChanges(_ context: UIViewControllerTransitionCoordinatorContext) {
+    private func dealInteractionChanges(_ context: UIViewControllerTransitionCoordinatorContext)
+    {
         let animations: (UITransitionContextViewControllerKey) -> () = {
             let curColor = context.viewController(forKey: $0)?.navBarBgColor ?? UIColor.defaultNavBarBgColor
             self.setNeedsNavigationBackground(color: curColor)
         }
         
         //自动取消了返回手势
-        if context.isCancelled {
+        if context.isCancelled
+        {
             let cancelDuration: TimeInterval = context.transitionDuration * Double(context.percentComplete)
             UIView.animate(withDuration: cancelDuration) {
                 animations(.from)
             }
-        } else {
+        }
+        else
+        {
             //自动完成了返回手势
             let finishDuration: TimeInterval = context.transitionDuration * Double(1 - context.percentComplete)
             UIView.animate(withDuration: finishDuration) {
@@ -260,6 +310,7 @@ extension UINavigationController: UINavigationBarDelegate {
         }
     }
 }
+
 
 // MARK: - 记录当前ViewController的导航栏颜色
 extension UIViewController
@@ -278,7 +329,7 @@ extension UIViewController
         }
         set {
             objc_setAssociatedObject(self, &AssociatedKeys.navBarBgColor, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            navigationController?.setNeedsNavigationBackground(color: newValue)
+//            navigationController?.setNeedsNavigationBackground(color: navBarBgColor)
         }
     }
     
