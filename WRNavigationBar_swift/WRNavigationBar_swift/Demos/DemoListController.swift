@@ -19,6 +19,8 @@ class DemoListController: UIViewController
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
+        navBarBgColor = MainNavBarColor
+        navBarTintColor = .white
     }
 }
 
@@ -27,7 +29,7 @@ extension DemoListController: UITableViewDelegate, UITableViewDataSource
 {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return 5
+        return 6
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
@@ -45,6 +47,8 @@ extension DemoListController: UITableViewDelegate, UITableViewDataSource
             str = "类似qq应用空间效果";
         case 4:
             str = "类似QQ空间效果";
+        case 5:
+            str = "解决问题";
         default:
             str = ""
         }
@@ -71,6 +75,8 @@ extension DemoListController: UITableViewDelegate, UITableViewDataSource
             navigationController?.pushViewController(FourthViewController(), animated: true)
         case 4:
             navigationController?.pushViewController(FifthViewController(), animated: true)
+        case 5:
+            navigationController?.pushViewController(ChangeFirstController(), animated: true)
         default:
            break
         }
