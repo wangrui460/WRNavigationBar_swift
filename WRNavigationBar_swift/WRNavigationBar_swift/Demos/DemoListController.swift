@@ -8,6 +8,8 @@
 
 import UIKit
 
+let kNavBarBottom = 64
+
 class DemoListController: UIViewController
 {
     lazy var tableView:UITableView = UITableView(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: self.view.bounds.height), style: .plain)

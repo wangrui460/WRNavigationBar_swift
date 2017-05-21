@@ -8,11 +8,12 @@
 
 import UIKit
 
-let kBackgroundViewKey = UnsafeRawPointer(bitPattern: "kBackgroundViewKey".hash)
-let kNavBarBottom = 64
-
 extension UINavigationBar
 {
+    fileprivate struct AssociatedKeys {
+        static var backgroundView:UIView = UIView()
+    }
+    
     /// 设置导航栏背景颜色
     func wr_setBackgroundColor(color:UIColor)
     {
@@ -20,7 +21,7 @@ extension UINavigationBar
         {
             // 设置导航栏本身全透明
             self.setBackgroundImage(UIImage(), for: .default)
-            self.setBackgroundView(backgroundView: UIView(frame: CGRect(x: 0, y: 0, width: Int(bounds.width), height: kNavBarBottom)))
+            self.setBackgroundView(backgroundView: UIView(frame: CGRect(x: 0, y: 0, width: Int(bounds.width), height: 64)))
             // _UIBarBackground是导航栏的第一个子控件
             self.subviews.first?.insertSubview(self.backgroundView() ?? UIView(), at: 0)
             // 隐藏导航栏底部默认黑线
@@ -77,12 +78,12 @@ extension UINavigationBar
     // private func
     func backgroundView() -> UIView?
     {
-        return objc_getAssociatedObject(self, kBackgroundViewKey) as? UIView
+        return objc_getAssociatedObject(self, &AssociatedKeys.backgroundView) as? UIView
     }
     
     func setBackgroundView(backgroundView:UIView?)
     {
-        objc_setAssociatedObject(self, kBackgroundViewKey, backgroundView, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        objc_setAssociatedObject(self, &AssociatedKeys.backgroundView, backgroundView, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
 }
 
@@ -210,6 +211,7 @@ extension UINavigationController
             displayLink?.invalidate()
             displayLink = nil
             pushPropertys.displayCount = 0
+            viewController.navBarBgColorCanChangeByVC = true
         };
         CATransaction.setAnimationDuration(pushPropertys.pushDuration)
         CATransaction.begin()
@@ -226,7 +228,6 @@ extension UINavigationController
             return current / all
         }
     }
-    
     
     func needDisplay()
     {
@@ -316,10 +317,21 @@ extension UINavigationController: UINavigationBarDelegate
 extension UIViewController
 {
     fileprivate struct AssociatedKeys {
+        static var navBarBgColorCanChangeByVC: Bool = false
         static var navBarBgColor: UIColor = UIColor.defaultNavBarBgColor
         static var navBarTintColor: UIColor = UIColor.defaultNavBarTintColor
     }
-    
+    var navBarBgColorCanChangeByVC:Bool {
+        get {
+            guard let canChange = objc_getAssociatedObject(self, &AssociatedKeys.navBarBgColorCanChangeByVC) as? Bool else {
+                return false
+            }
+            return canChange
+        }
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.navBarBgColorCanChangeByVC, newValue, .OBJC_ASSOCIATION_ASSIGN)
+        }
+    }
     var navBarBgColor: UIColor {
         get {
             guard let color = objc_getAssociatedObject(self, &AssociatedKeys.navBarBgColor) as? UIColor else {
@@ -328,8 +340,15 @@ extension UIViewController
             return color
         }
         set {
+//            guard let color = objc_getAssociatedObject(self, &AssociatedKeys.navBarBgColor) as? UIColor else {
+//                
+//                objc_setAssociatedObject(self, &AssociatedKeys.navBarBgColor, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+//                return
+//            }
             objc_setAssociatedObject(self, &AssociatedKeys.navBarBgColor, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-//            navigationController?.setNeedsNavigationBackground(color: navBarBgColor)
+            if navBarBgColorCanChangeByVC == true {
+                navigationController?.setNeedsNavigationBackground(color: newValue)
+            }
         }
     }
     
