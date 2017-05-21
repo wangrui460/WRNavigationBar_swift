@@ -105,6 +105,9 @@ extension DispatchQueue {
     }
 }
 
+//==========================================================================
+// MARK: - UINavigationController
+//==========================================================================
 extension UINavigationController
 {
     override open var preferredStatusBarStyle: UIStatusBarStyle {
@@ -152,8 +155,8 @@ extension UINavigationController
         let toViewController = coordinator.viewController(forKey: .to)
         
         // change navBarBgColor
-        let fromBgColor = fromViewController?.navBarBgColor ?? .defaultNavBarBgColor
-        let toBgColor = toViewController?.navBarBgColor ?? .defaultNavBarBgColor
+        let fromBgColor = fromViewController?.navBarBarTintColor ?? .defaultNavBarBarTintColor
+        let toBgColor = toViewController?.navBarBarTintColor ?? .defaultNavBarBarTintColor
         let newBgColor = averageColor(fromColor: fromBgColor, toColor: toBgColor, percent: percentComplete)
         setNeedsNavigationBackground(color: newBgColor)
         
@@ -191,14 +194,14 @@ extension UINavigationController
     
     func wr_popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]?
     {
-        setNeedsNavigationBackground(color: viewController.navBarBgColor)
+        setNeedsNavigationBackground(color: viewController.navBarBarTintColor)
         navigationBar.tintColor = viewController.navBarTintColor
         return wr_popToViewController(viewController, animated: animated)
     }
     
     func wr_popToRootViewControllerAnimated(_ animated: Bool) -> [UIViewController]?
     {
-        setNeedsNavigationBackground(color: viewControllers.first?.navBarBgColor ?? .defaultNavBarBgColor)
+        setNeedsNavigationBackground(color: viewControllers.first?.navBarBarTintColor ?? .defaultNavBarBarTintColor)
         navigationBar.tintColor = viewControllers.first?.navBarTintColor
         return wr_popToRootViewControllerAnimated(animated)
     }
@@ -211,7 +214,7 @@ extension UINavigationController
             displayLink?.invalidate()
             displayLink = nil
             pushPropertys.displayCount = 0
-            viewController.navBarBgColorCanChangeByVC = true
+            viewController.pushToCurrentVCFinished = true
         };
         CATransaction.setAnimationDuration(pushPropertys.pushDuration)
         CATransaction.begin()
@@ -235,7 +238,7 @@ extension UINavigationController
               let coordinator       = topViewController.transitionCoordinator
             else {
                 // set rootVC navBarBgColor
-                setNeedsNavigationBackground(color: navBarBgColor)
+                setNeedsNavigationBackground(color: navBarBarTintColor)
                 return
         }
         
@@ -246,8 +249,8 @@ extension UINavigationController
         let toViewController = coordinator.viewController(forKey: .to)
         
         // change navBarBgColor
-        let fromBgColor = fromViewController?.navBarBgColor ?? .defaultNavBarBgColor
-        let toBgColor = toViewController?.navBarBgColor ?? .defaultNavBarBgColor
+        let fromBgColor = fromViewController?.navBarBarTintColor ?? .defaultNavBarBarTintColor
+        let toBgColor = toViewController?.navBarBarTintColor ?? .defaultNavBarBarTintColor
         let newBgColor = averageColor(fromColor: fromBgColor, toColor: toBgColor, percent: pushProgress)
         setNeedsNavigationBackground(color: newBgColor)
     }
@@ -257,7 +260,9 @@ extension UINavigationController
     }
 }
 
-
+//==========================================================================
+// MARK: - UINavigationBarDelegate
+//==========================================================================
 extension UINavigationController: UINavigationBarDelegate
 {
     public func navigationBar(_ navigationBar: UINavigationBar, shouldPop item: UINavigationItem) -> Bool
@@ -289,7 +294,7 @@ extension UINavigationController: UINavigationBarDelegate
     private func dealInteractionChanges(_ context: UIViewControllerTransitionCoordinatorContext)
     {
         let animations: (UITransitionContextViewControllerKey) -> () = {
-            let curColor = context.viewController(forKey: $0)?.navBarBgColor ?? UIColor.defaultNavBarBgColor
+            let curColor = context.viewController(forKey: $0)?.navBarBarTintColor ?? UIColor.defaultNavBarBarTintColor
             self.setNeedsNavigationBackground(color: curColor)
         }
         
@@ -312,46 +317,62 @@ extension UINavigationController: UINavigationBarDelegate
     }
 }
 
-
-// MARK: - 记录当前ViewController的导航栏颜色
+//=============================================================================
+// MARK: - store navigationBar barTintColor and tintColor every viewController
+//=============================================================================
 extension UIViewController
 {
-    fileprivate struct AssociatedKeys {
-        static var navBarBgColorCanChangeByVC: Bool = false
-        static var navBarBgColor: UIColor = UIColor.defaultNavBarBgColor
+    fileprivate struct AssociatedKeys
+    {
+        static var pushToCurrentVCFinished: Bool = false
+        static var pushToNextVCFinished:Bool = false
+        static var navBarBarTintColor: UIColor = UIColor.defaultNavBarBarTintColor
         static var navBarTintColor: UIColor = UIColor.defaultNavBarTintColor
     }
-    var navBarBgColorCanChangeByVC:Bool {
+    
+    // navigationBar barTintColor can change by current VC when fromVC push finished
+    var pushToCurrentVCFinished:Bool {
         get {
-            guard let canChange = objc_getAssociatedObject(self, &AssociatedKeys.navBarBgColorCanChangeByVC) as? Bool else {
+            guard let isFinished = objc_getAssociatedObject(self, &AssociatedKeys.pushToCurrentVCFinished) as? Bool else {
                 return false
             }
-            return canChange
+            return isFinished
         }
         set {
-            objc_setAssociatedObject(self, &AssociatedKeys.navBarBgColorCanChangeByVC, newValue, .OBJC_ASSOCIATION_ASSIGN)
+            objc_setAssociatedObject(self, &AssociatedKeys.pushToCurrentVCFinished, newValue, .OBJC_ASSOCIATION_ASSIGN)
         }
     }
-    var navBarBgColor: UIColor {
+    
+    // navigationBar barTintColor cannot change by current VC when push finished
+    var pushToNextVCFinished:Bool {
         get {
-            guard let color = objc_getAssociatedObject(self, &AssociatedKeys.navBarBgColor) as? UIColor else {
-                return UIColor.defaultNavBarBgColor
+            guard let isFinished = objc_getAssociatedObject(self, &AssociatedKeys.pushToNextVCFinished) as? Bool else {
+                return false
             }
-            return color
+            return isFinished
         }
         set {
-//            guard let color = objc_getAssociatedObject(self, &AssociatedKeys.navBarBgColor) as? UIColor else {
-//                
-//                objc_setAssociatedObject(self, &AssociatedKeys.navBarBgColor, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-//                return
-//            }
-            objc_setAssociatedObject(self, &AssociatedKeys.navBarBgColor, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            if navBarBgColorCanChangeByVC == true {
+            objc_setAssociatedObject(self, &AssociatedKeys.pushToNextVCFinished, newValue, .OBJC_ASSOCIATION_ASSIGN)
+        }
+    }
+    
+    // navigationBar barTintColor
+    var navBarBarTintColor: UIColor {
+        get {
+            guard let barTintColor = objc_getAssociatedObject(self, &AssociatedKeys.navBarBarTintColor) as? UIColor else {
+                return UIColor.defaultNavBarBarTintColor
+            }
+            return barTintColor
+        }
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.navBarBarTintColor, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            if pushToCurrentVCFinished == true && pushToNextVCFinished == false {
                 navigationController?.setNeedsNavigationBackground(color: newValue)
             }
         }
     }
     
+    // navigationBar tintColor
     var navBarTintColor: UIColor {
         get {
             guard let tintColor = objc_getAssociatedObject(self, &AssociatedKeys.navBarTintColor) as? UIColor else {
@@ -365,11 +386,48 @@ extension UIViewController
             objc_setAssociatedObject(self, &AssociatedKeys.navBarTintColor, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
+    
+    // swizzling two system methods: viewWillAppear(_:) and viewWillDisappear(_:)
+    private static let onceToken = UUID().uuidString
+    open override class func initialize()
+    {
+        guard self == UIViewController.self else { return }
+        DispatchQueue.once(token: onceToken)
+        {
+            let needSwizzleSelectors = [
+                #selector(viewWillAppear(_:)),
+                #selector(viewWillDisappear(_:))
+            ]
+            
+            for selector in needSwizzleSelectors
+            {
+                let newSelectorStr = "wr_" + selector.description
+                let originalMethod = class_getInstanceMethod(self, selector)
+                let swizzledMethod = class_getInstanceMethod(self, Selector(newSelectorStr))
+                method_exchangeImplementations(originalMethod, swizzledMethod)
+            }
+        }
+    }
+    
+    func wr_viewWillAppear(_ animated: Bool)
+    {
+        pushToNextVCFinished = false
+        wr_viewWillAppear(animated)
+    }
+    
+    func wr_viewWillDisappear(_ animated: Bool)
+    {
+        pushToNextVCFinished = true
+        wr_viewWillDisappear(animated)
+    }
 }
 
+//==========================================================================
+// MARK: - default navigationBar barTintColor and tintColor
+//==========================================================================
 extension UIColor
 {
-    class var defaultNavBarBgColor: UIColor {
+    class var defaultNavBarBarTintColor: UIColor {
         return UIColor.init(red: 0/255.0, green: 175/255.0, blue: 240/255.0, alpha: 1)
     }
     class var defaultNavBarTintColor: UIColor {

@@ -34,7 +34,7 @@ class ChangeFirstController: UIViewController
         view.backgroundColor = UIColor.red
         view.addSubview(tableView)
         tableView.tableHeaderView = imageView
-        navBarBgColor = .clear
+        navBarBarTintColor = .clear
         navBarTintColor = .white
     }
     
@@ -48,34 +48,21 @@ class ChangeFirstController: UIViewController
 }
 
 
-// MARK: - viewWillAppear .. ScrollViewDidScroll
+// MARK: - ScrollViewDidScroll
 extension ChangeFirstController
 {
-    override func viewWillAppear(_ animated: Bool)
-    {
-        super.viewWillAppear(animated)
-        tableView.delegate = self
-    }
-    
-    override func viewWillDisappear(_ animated: Bool)
-    {
-        super.viewWillDisappear(animated)
-        // 如果不取消代理的话，跳转到下一个页面后，还会调用 scrollViewDidScroll 方法
-        tableView.delegate = nil
-    }
-    
     func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
         let offsetY = scrollView.contentOffset.y
         if (offsetY > NAVBAR_COLORCHANGE_POINT)
         {
             let alpha = (offsetY - NAVBAR_COLORCHANGE_POINT) / CGFloat(kNavBarBottom)
-            navBarBgColor = MainNavBarColor.withAlphaComponent(alpha)
+            navBarBarTintColor = MainNavBarColor.withAlphaComponent(alpha)
             isStatusBarLight = false
         }
         else
         {
-            navBarBgColor = UIColor.clear
+            navBarBarTintColor = UIColor.clear
             isStatusBarLight = true
         }
         setNeedsStatusBarAppearanceUpdate()
@@ -103,7 +90,7 @@ extension ChangeFirstController:UITableViewDelegate,UITableViewDataSource
         tableView.deselectRow(at: indexPath, animated: true)
         let vc:UIViewController = UIViewController()
         vc.view.backgroundColor = UIColor.red
-        vc.navBarBgColor = MainNavBarColor
+        vc.navBarBarTintColor = MainNavBarColor
         let str = String(format: "WRNavigationBar %zd", indexPath.row)
         vc.title = str
         navigationController?.pushViewController(vc, animated: true)
