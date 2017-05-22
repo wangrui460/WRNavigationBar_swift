@@ -90,9 +90,15 @@ extension ChangeFirstController:UITableViewDelegate,UITableViewDataSource
         tableView.deselectRow(at: indexPath, animated: true)
         let vc:UIViewController = UIViewController()
         vc.view.backgroundColor = UIColor.white
-        vc.navBarBarTintColor = MainNavBarColor
+        vc.navBarBarTintColor = .darkGray
+        vc.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "root", style: .plain, target: self, action: #selector(popToRoot))
         let str = String(format: "WRNavigationBar %zd", indexPath.row)
         vc.title = str
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func popToRoot()
+    {
+        _ = navigationController?.popToRootViewController(animated: true)
     }
 }

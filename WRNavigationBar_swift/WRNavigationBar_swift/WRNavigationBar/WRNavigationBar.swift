@@ -173,7 +173,7 @@ extension UINavigationController
     }
     
     struct popProperties {
-        fileprivate static let popDuration = 0.20
+        fileprivate static let popDuration = 0.13
         fileprivate static var displayCount = 0
         fileprivate static var popProgress:CGFloat {
             let all:CGFloat = CGFloat(60.0 * popDuration)
@@ -202,9 +202,22 @@ extension UINavigationController
     // swizzling system method: popToRootViewControllerAnimated
     func wr_popToRootViewControllerAnimated(_ animated: Bool) -> [UIViewController]?
     {
-        setNeedsNavigationBarUpdate(barTintColor: viewControllers.first?.navBarBarTintColor ?? .defaultNavBarBarTintColor)
-        navigationBar.tintColor = viewControllers.first?.navBarTintColor
-        return wr_popToRootViewControllerAnimated(animated)
+        var displayLink:CADisplayLink? = CADisplayLink(target: self, selector: #selector(popNeedDisplay))
+        displayLink?.add(to: RunLoop.main, forMode: .defaultRunLoopMode)
+        CATransaction.setCompletionBlock {
+            displayLink?.invalidate()
+            displayLink = nil
+            popProperties.displayCount = 0
+        }
+        CATransaction.setAnimationDuration(popProperties.popDuration)
+        CATransaction.begin()
+        let vcs = wr_popToRootViewControllerAnimated(animated)
+        CATransaction.commit()
+        return vcs;
+        
+//        setNeedsNavigationBarUpdate(barTintColor: viewControllers.first?.navBarBarTintColor ?? .defaultNavBarBarTintColor)
+//        navigationBar.tintColor = viewControllers.first?.navBarTintColor
+//        return
     }
     
     // swizzling system method: pushViewController
@@ -247,7 +260,7 @@ extension UINavigationController
         
         pushProperties.displayCount += 1
         let pushProgress = pushProperties.pushProgress
-        // print("第\(pushPropertys.displayCount)次push的进度：\(pushProgress)")
+        print("第\(pushProperties.displayCount)次push的进度：\(pushProgress)")
         let fromViewController = coordinator.viewController(forKey: .from)
         let toViewController = coordinator.viewController(forKey: .to)
         
@@ -273,7 +286,7 @@ extension UINavigationController
         
         popProperties.displayCount += 1
         let popProgress = popProperties.popProgress
-         print("第\(popProperties.displayCount)次pop的进度：\(popProgress)")
+        // print("第\(popProperties.displayCount)次pop的进度：\(popProgress)")
         let fromViewController = coordinator.viewController(forKey: .from)
         let toViewController = coordinator.viewController(forKey: .to)
         
@@ -430,7 +443,8 @@ extension UIViewController
         {
             let needSwizzleSelectors = [
                 #selector(viewWillAppear(_:)),
-                #selector(viewWillDisappear(_:))
+                #selector(viewWillDisappear(_:)),
+                #selector(viewDidAppear(_:))
             ]
             
             for selector in needSwizzleSelectors
@@ -453,6 +467,12 @@ extension UIViewController
     {
         pushToNextVCFinished = true
         wr_viewWillDisappear(animated)
+    }
+    
+    func wr_viewDidAppear(_ animated: Bool)
+    {
+        navigationController?.setNeedsNavigationBarUpdate(barTintColor: navBarBarTintColor)
+        wr_viewDidAppear(animated)
     }
 }
 
