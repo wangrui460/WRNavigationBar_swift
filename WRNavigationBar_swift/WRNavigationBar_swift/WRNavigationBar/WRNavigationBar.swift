@@ -198,8 +198,12 @@ extension UINavigationController
         let toBarTintColor   = toViewController?.navBarBarTintColor ?? .defaultNavBarBarTintColor
         let newBarTintColor  = middleColor(fromColor: fromBarTintColor, toColor: toBarTintColor, percent: popProgress)
         setNeedsNavigationBarUpdate(barTintColor: newBarTintColor)
+        
         // change navBarTintColor
-        setNeedsNavigationBarUpdate(tintColor: toViewController?.navBarTintColor ?? .defaultNavBarTintColor)
+        let fromTintColor = fromViewController?.navBarTintColor ?? .defaultNavBarTintColor
+        let toTintColor = toViewController?.navBarTintColor ?? .defaultNavBarTintColor
+        let newTintColor = middleColor(fromColor: fromTintColor, toColor: toTintColor, percent: popProgress)
+        setNeedsNavigationBarUpdate(tintColor: newTintColor)
     }
     
     
@@ -255,7 +259,12 @@ extension UINavigationController
         let toBarTintColor   = toViewController?.navBarBarTintColor ?? .defaultNavBarBarTintColor
         let newBarTintColor  = middleColor(fromColor: fromBarTintColor, toColor: toBarTintColor, percent: pushProgress)
         setNeedsNavigationBarUpdate(barTintColor: newBarTintColor)
-        setNeedsNavigationBarUpdate(tintColor: toViewController?.navBarTintColor ?? .defaultNavBarTintColor)
+        
+        // change navBarTintColor
+        let fromTintColor = fromViewController?.navBarTintColor ?? .defaultNavBarTintColor
+        let toTintColor = toViewController?.navBarTintColor ?? .defaultNavBarTintColor
+        let newTintColor = middleColor(fromColor: fromTintColor, toColor: toTintColor, percent: pushProgress)
+        setNeedsNavigationBarUpdate(tintColor: newTintColor)
     }
 }
 
@@ -326,7 +335,7 @@ extension UINavigationController: UINavigationBarDelegate
         let fromVC = coordinator.viewController(forKey: .from)
         let toVC = coordinator.viewController(forKey: .to)
         
-        // change navBarBgColor
+        // change navBarBarTintColor
         let fromBarTintColor = fromVC?.navBarBarTintColor ?? .defaultNavBarBarTintColor
         let toBarTintColor = toVC?.navBarBarTintColor ?? .defaultNavBarBarTintColor
         let newBarTintColor = middleColor(fromColor: fromBarTintColor, toColor: toBarTintColor, percent: percentComplete)
@@ -468,6 +477,7 @@ extension UIViewController
     func wr_viewWillAppear(_ animated: Bool)
     {
         pushToNextVCFinished = false
+        navigationController?.setNeedsNavigationBarUpdate(tintColor: navBarTintColor)
         wr_viewWillAppear(animated)
     }
     
@@ -480,6 +490,7 @@ extension UIViewController
     func wr_viewDidAppear(_ animated: Bool)
     {
         navigationController?.setNeedsNavigationBarUpdate(barTintColor: navBarBarTintColor)
+        navigationController?.setNeedsNavigationBarUpdate(tintColor: navBarTintColor)
         wr_viewDidAppear(animated)
     }
 }
