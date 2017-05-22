@@ -87,24 +87,6 @@ extension UINavigationBar
     }
 }
 
-
-extension DispatchQueue {
-    
-    private static var onceTracker = [String]()
-    
-    public class func once(token: String, block: () -> Void) {
-        objc_sync_enter(self)
-        defer { objc_sync_exit(self) }
-        
-        if onceTracker.contains(token) {
-            return
-        }
-        
-        onceTracker.append(token)
-        block()
-    }
-}
-
 //==========================================================================
 // MARK: - UINavigationController
 //==========================================================================
@@ -391,7 +373,10 @@ extension UIViewController
     private static let onceToken = UUID().uuidString
     open override class func initialize()
     {
-        guard self == UIViewController.self else { return }
+        guard self == UIViewController.self else {
+            return
+        }
+        
         DispatchQueue.once(token: onceToken)
         {
             let needSwizzleSelectors = [
@@ -421,6 +406,31 @@ extension UIViewController
         wr_viewWillDisappear(animated)
     }
 }
+
+//====================================================================================
+// MARK: - Swizzling会改变全局状态,所以用 DispatchQueue.once 来确保无论多少线程都只会被执行一次
+//====================================================================================
+extension DispatchQueue {
+    
+    private static var onceTracker = [String]()
+    
+    //Executes a block of code, associated with a unique token, only once.  The code is thread safe and will only execute the code once even in the presence of multithreaded calls.
+    public class func once(token: String, block: () -> Void)
+    {   // 保证被 objc_sync_enter 和 objc_sync_exit 包裹的代码可以有序同步地执行
+        objc_sync_enter(self)
+        defer { // 作用域结束后执行defer中的代码
+            objc_sync_exit(self)
+        }
+        
+        if onceTracker.contains(token) {
+            return
+        }
+        
+        onceTracker.append(token)
+        block()
+    }
+}
+
 
 //==========================================================================
 // MARK: - default navigationBar barTintColor and tintColor
