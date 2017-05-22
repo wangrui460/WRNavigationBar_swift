@@ -89,7 +89,7 @@ extension ChangeFirstController:UITableViewDelegate,UITableViewDataSource
     {
         tableView.deselectRow(at: indexPath, animated: true)
         let vc:UIViewController = UIViewController()
-        vc.view.backgroundColor = UIColor.red
+        vc.view.backgroundColor = UIColor.white
         vc.navBarBarTintColor = MainNavBarColor
         let str = String(format: "WRNavigationBar %zd", indexPath.row)
         vc.title = str

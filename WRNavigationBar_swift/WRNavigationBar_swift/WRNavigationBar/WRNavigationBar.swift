@@ -96,10 +96,11 @@ extension UINavigationController
         return topViewController?.preferredStatusBarStyle ?? .default
     }
     
+    // call swizzling methods active 主动调用交换方法
     private static let onceToken = UUID().uuidString
-    open override class func initialize() {
+    open override class func initialize()
+    {
         guard self == UINavigationController.self else { return }
-        
         DispatchQueue.once(token: onceToken)
         {
             let needSwizzleSelectorArr = [
@@ -171,12 +172,31 @@ extension UINavigationController
         return UIColor(red: nowRed, green: nowGreen, blue: nowBlue, alpha: nowAlpha)
     }
     
+    struct popProperties {
+        fileprivate static let popDuration = 0.20
+        fileprivate static var displayCount = 0
+        fileprivate static var popProgress:CGFloat {
+            let all:CGFloat = CGFloat(60.0 * popDuration)
+            let current = min(all, CGFloat(displayCount))
+            return current / all
+        }
+    }
+    
     // swizzling system method: popToViewController
     func wr_popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]?
     {
-        setNeedsNavigationBarUpdate(barTintColor: viewController.navBarBarTintColor)
-        navigationBar.tintColor = viewController.navBarTintColor
-        return wr_popToViewController(viewController, animated: animated)
+        var displayLink:CADisplayLink? = CADisplayLink(target: self, selector: #selector(popNeedDisplay))
+        displayLink?.add(to: RunLoop.main, forMode: .defaultRunLoopMode)
+        CATransaction.setCompletionBlock { 
+            displayLink?.invalidate()
+            displayLink = nil
+            popProperties.displayCount = 0
+        }
+        CATransaction.setAnimationDuration(popProperties.popDuration)
+        CATransaction.begin()
+        let vcs = wr_popToViewController(viewController, animated: animated)
+        CATransaction.commit()
+        return vcs
     }
     
     // swizzling system method: popToRootViewControllerAnimated
@@ -190,7 +210,7 @@ extension UINavigationController
     // swizzling system method: pushViewController
     func wr_pushViewController(_ viewController: UIViewController, animated: Bool)
     {
-        var displayLink:CADisplayLink? = CADisplayLink(target: self, selector: #selector(needDisplay))
+        var displayLink:CADisplayLink? = CADisplayLink(target: self, selector: #selector(pushNeedDisplay))
         displayLink?.add(to: RunLoop.main, forMode: .defaultRunLoopMode)
         CATransaction.setCompletionBlock {
             displayLink?.invalidate()
@@ -214,13 +234,14 @@ extension UINavigationController
         }
     }
     
-    // change navigationBar barTintColor smooth  before push to current VC finished
-    func needDisplay()
+    // change navigationBar barTintColor smooth before push to current VC finished or before pop to current VC finished
+    func pushNeedDisplay()
     {
         guard let topViewController = topViewController,
               let coordinator       = topViewController.transitionCoordinator else {
-                // set rootVC navBarBarTintColor
+                // set rootVC navBarBarTintColor and navBarTintColor
                 setNeedsNavigationBarUpdate(barTintColor: navBarBarTintColor)
+                navigationBar.tintColor = navBarTintColor
                 return
         }
         
@@ -230,11 +251,39 @@ extension UINavigationController
         let fromViewController = coordinator.viewController(forKey: .from)
         let toViewController = coordinator.viewController(forKey: .to)
         
-        // change navBarBgColor
-        let fromBgColor = fromViewController?.navBarBarTintColor ?? .defaultNavBarBarTintColor
-        let toBgColor   = toViewController?.navBarBarTintColor ?? .defaultNavBarBarTintColor
-        let newBgColor  = middleColor(fromColor: fromBgColor, toColor: toBgColor, percent: pushProgress)
-        setNeedsNavigationBarUpdate(barTintColor: newBgColor)
+        // change navBarBarTintColor
+        let fromBarTintColor = fromViewController?.navBarBarTintColor ?? .defaultNavBarBarTintColor
+        let toBarTintColor   = toViewController?.navBarBarTintColor ?? .defaultNavBarBarTintColor
+        let newBarTintColor  = middleColor(fromColor: fromBarTintColor, toColor: toBarTintColor, percent: pushProgress)
+        setNeedsNavigationBarUpdate(barTintColor: newBarTintColor)
+        // change navBarTintColor
+        navigationBar.tintColor = toViewController?.navBarTintColor
+    }
+    
+    // change navigationBar barTintColor smooth before pop to current VC finished
+    func popNeedDisplay()
+    {
+        guard let topViewController = topViewController,
+            let coordinator       = topViewController.transitionCoordinator else {
+                // set rootVC navBarBarTintColor and navBarTintColor
+                setNeedsNavigationBarUpdate(barTintColor: navBarBarTintColor)
+                navigationBar.tintColor = navBarTintColor
+                return
+        }
+        
+        popProperties.displayCount += 1
+        let popProgress = popProperties.popProgress
+         print("第\(popProperties.displayCount)次pop的进度：\(popProgress)")
+        let fromViewController = coordinator.viewController(forKey: .from)
+        let toViewController = coordinator.viewController(forKey: .to)
+        
+        // change navBarBarTintColor
+        let fromBarTintColor = fromViewController?.navBarBarTintColor ?? .defaultNavBarBarTintColor
+        let toBarTintColor   = toViewController?.navBarBarTintColor ?? .defaultNavBarBarTintColor
+        let newBarTintColor  = middleColor(fromColor: fromBarTintColor, toColor: toBarTintColor, percent: popProgress)
+        setNeedsNavigationBarUpdate(barTintColor: newBarTintColor)
+        // change navBarTintColor
+        navigationBar.tintColor = toViewController?.navBarTintColor
     }
     
     fileprivate func setNeedsNavigationBarUpdate(barTintColor: UIColor) {
