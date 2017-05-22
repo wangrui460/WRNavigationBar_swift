@@ -51,22 +51,22 @@ class ChangeFirstController: UIViewController
 // MARK: - ScrollViewDidScroll
 extension ChangeFirstController
 {
-    func scrollViewDidScroll(_ scrollView: UIScrollView)
-    {
-        let offsetY = scrollView.contentOffset.y
-        if (offsetY > NAVBAR_COLORCHANGE_POINT)
-        {
-            let alpha = (offsetY - NAVBAR_COLORCHANGE_POINT) / CGFloat(kNavBarBottom)
-            navBarBarTintColor = MainNavBarColor.withAlphaComponent(alpha)
-            isStatusBarLight = false
-        }
-        else
-        {
-            navBarBarTintColor = UIColor.clear
-            isStatusBarLight = true
-        }
-        setNeedsStatusBarAppearanceUpdate()
-    }
+//    func scrollViewDidScroll(_ scrollView: UIScrollView)
+//    {
+//        let offsetY = scrollView.contentOffset.y
+//        if (offsetY > NAVBAR_COLORCHANGE_POINT)
+//        {
+//            let alpha = (offsetY - NAVBAR_COLORCHANGE_POINT) / CGFloat(kNavBarBottom)
+//            navBarBarTintColor = MainNavBarColor.withAlphaComponent(alpha)
+//            isStatusBarLight = false
+//        }
+//        else
+//        {
+//            navBarBarTintColor = UIColor.clear
+//            isStatusBarLight = true
+//        }
+//        setNeedsStatusBarAppearanceUpdate()
+//    }
 }
 
 
@@ -91,6 +91,7 @@ extension ChangeFirstController:UITableViewDelegate,UITableViewDataSource
         let vc:UIViewController = UIViewController()
         vc.view.backgroundColor = UIColor.white
         vc.navBarBarTintColor = .darkGray
+        vc.navBarTintColor = .orange
         vc.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "root", style: .plain, target: self, action: #selector(popToRoot))
         let str = String(format: "WRNavigationBar %zd", indexPath.row)
         vc.title = str

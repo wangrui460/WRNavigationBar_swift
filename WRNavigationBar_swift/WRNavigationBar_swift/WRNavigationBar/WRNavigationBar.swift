@@ -14,26 +14,38 @@ extension UINavigationBar
         static var backgroundView:UIView = UIView()
     }
     
-    /// 设置导航栏背景颜色
+    var backgroundView:UIView? {
+        get {
+            guard let bgView = objc_getAssociatedObject(self, &AssociatedKeys.backgroundView) as? UIView else {
+                return nil
+            }
+            return bgView
+        }
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.backgroundView, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    // set navigationBar barTintColor
     func wr_setBackgroundColor(color:UIColor)
     {
-        if (self.backgroundView() == nil)
+        if (backgroundView == nil)
         {
             // 设置导航栏本身全透明
-            self.setBackgroundImage(UIImage(), for: .default)
-            self.setBackgroundView(backgroundView: UIView(frame: CGRect(x: 0, y: 0, width: Int(bounds.width), height: 64)))
+            setBackgroundImage(UIImage(), for: .default)
+            backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: Int(bounds.width), height: 64))
             // _UIBarBackground是导航栏的第一个子控件
-            self.subviews.first?.insertSubview(self.backgroundView() ?? UIView(), at: 0)
+            subviews.first?.insertSubview(backgroundView ?? UIView(), at: 0)
             // 隐藏导航栏底部默认黑线
-            self.shadowImage = UIImage()
+            shadowImage = UIImage()
         }
-        self.backgroundView()?.backgroundColor = color
+        backgroundView?.backgroundColor = color
     }
     
     /// 设置导航栏所有BarButtonItem的透明度
     func wr_setBarButtonItemsAlpha(alpha:CGFloat, hasSystemBackIndicator:Bool)
     {
-        for view in self.subviews
+        for view in subviews
         {
             if (hasSystemBackIndicator == true)
             {
@@ -62,28 +74,16 @@ extension UINavigationBar
     /// 设置导航栏在垂直方向上平移多少距离
     func wr_setTranslationY(translationY:CGFloat)
     {
-        self.transform = CGAffineTransform.init(translationX: 0, y: translationY)
+        transform = CGAffineTransform.init(translationX: 0, y: translationY)
     }
     
     /// 清除在导航栏上设置的背景颜色、透明度、位移距离等属性
     func wr_clear()
     {
         // 设置导航栏不透明
-        self.setBackgroundImage(nil, for: .default)
-        self.backgroundView()?.removeFromSuperview()
-        self.setBackgroundView(backgroundView: nil)
-    }
-    
-    //////////////////////////////////////////////////////////////////////////////////////////////////
-    // private func
-    func backgroundView() -> UIView?
-    {
-        return objc_getAssociatedObject(self, &AssociatedKeys.backgroundView) as? UIView
-    }
-    
-    func setBackgroundView(backgroundView:UIView?)
-    {
-        objc_setAssociatedObject(self, &AssociatedKeys.backgroundView, backgroundView, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        setBackgroundImage(nil, for: .default)
+        backgroundView?.removeFromSuperview()
+        backgroundView = nil
     }
 }
 
@@ -98,6 +98,11 @@ extension UINavigationController
     
     fileprivate func setNeedsNavigationBarUpdate(barTintColor: UIColor) {
         navigationBar.wr_setBackgroundColor(color: barTintColor)
+    }
+    
+    fileprivate func setNeedsNavigationBarUpdate(tintColor: UIColor) {
+        navigationBar.tintColor = tintColor
+        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:tintColor]
     }
     
     // call swizzling methods active 主动调用交换方法
@@ -178,7 +183,7 @@ extension UINavigationController
             let coordinator       = topViewController.transitionCoordinator else {
                 // set rootVC navBarBarTintColor and navBarTintColor
                 setNeedsNavigationBarUpdate(barTintColor: navBarBarTintColor)
-                navigationBar.tintColor = navBarTintColor
+                setNeedsNavigationBarUpdate(tintColor: navBarTintColor)
                 return
         }
         
@@ -194,7 +199,7 @@ extension UINavigationController
         let newBarTintColor  = middleColor(fromColor: fromBarTintColor, toColor: toBarTintColor, percent: popProgress)
         setNeedsNavigationBarUpdate(barTintColor: newBarTintColor)
         // change navBarTintColor
-        navigationBar.tintColor = toViewController?.navBarTintColor
+        setNeedsNavigationBarUpdate(tintColor: toViewController?.navBarTintColor ?? .defaultNavBarTintColor)
     }
     
     
@@ -235,7 +240,7 @@ extension UINavigationController
               let coordinator       = topViewController.transitionCoordinator else {
                 // set rootVC navBarBarTintColor and navBarTintColor
                 setNeedsNavigationBarUpdate(barTintColor: navBarBarTintColor)
-                navigationBar.tintColor = navBarTintColor
+                setNeedsNavigationBarUpdate(tintColor: navBarTintColor)
                 return
         }
         
@@ -250,8 +255,7 @@ extension UINavigationController
         let toBarTintColor   = toViewController?.navBarBarTintColor ?? .defaultNavBarBarTintColor
         let newBarTintColor  = middleColor(fromColor: fromBarTintColor, toColor: toBarTintColor, percent: pushProgress)
         setNeedsNavigationBarUpdate(barTintColor: newBarTintColor)
-        // change navBarTintColor
-        navigationBar.tintColor = toViewController?.navBarTintColor
+        setNeedsNavigationBarUpdate(tintColor: toViewController?.navBarTintColor ?? .defaultNavBarTintColor)
     }
 }
 
@@ -332,7 +336,7 @@ extension UINavigationController: UINavigationBarDelegate
         let fromTintColor = fromVC?.navBarTintColor ?? .defaultNavBarTintColor
         let toTintColor = toVC?.navBarTintColor ?? .defaultNavBarTintColor
         let newTintColor = middleColor(fromColor: fromTintColor, toColor: toTintColor, percent: percentComplete)
-        navigationBar.tintColor = newTintColor
+        setNeedsNavigationBarUpdate(tintColor: newTintColor)
         
         wr_updateInteractiveTransition(percentComplete)
     }
@@ -428,8 +432,10 @@ extension UIViewController
             
         }
         set {
-            navigationController?.navigationBar.tintColor = newValue
             objc_setAssociatedObject(self, &AssociatedKeys.navBarTintColor, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            if pushToNextVCFinished == false {
+                navigationController?.setNeedsNavigationBarUpdate(tintColor: newValue)
+            }
         }
     }
     

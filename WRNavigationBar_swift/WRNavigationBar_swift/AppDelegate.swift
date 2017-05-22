@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = tabBarVC
         window?.makeKeyAndVisible()
         
-        setNavBarAppearence()
+//        setNavBarAppearence()
         return true
     }
 
