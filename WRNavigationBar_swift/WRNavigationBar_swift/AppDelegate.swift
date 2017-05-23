@@ -25,29 +25,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.backgroundColor = UIColor.white
         
         let firstNav = BaseNavigationController.init(rootViewController: DemoListController())
-        let secondNav = BaseNavigationController.init(rootViewController: SixthViewController())
-        let thirdNav = BaseNavigationController.init(rootViewController: CustomNavBarController())
-        secondNav.title = "没有系统返回按钮的情况"
-        thirdNav.title = "自定义导航栏"
+        let secondNav = BaseNavigationController.init(rootViewController: CustomNavBarController())
+        let thirdNav = BaseNavigationController.init(rootViewController: SixthViewController())
         let tabBarVC = UITabBarController.init()
         tabBarVC.viewControllers = [firstNav, secondNav, thirdNav]
+        setTabBarItems(tabBarVC: tabBarVC)
         
         window?.rootViewController = tabBarVC
         window?.makeKeyAndVisible()
         
-//        setNavBarAppearence()
+        setNavBarAppearence()
         return true
     }
 
+    func setTabBarItems(tabBarVC:UITabBarController)
+    {
+        let titles = ["普通",  "自定义导航栏", "没有系统返回按钮的情况"];
+        let normalImages = ["tabBar0",
+                            "tabBar1",
+                            "tabBar2"];
+        for (index, item) in tabBarVC.tabBar.items!.enumerated()
+        {
+            item.title = titles[index]
+            item.image = UIImage(named: normalImages[index])?.withRenderingMode(.alwaysOriginal)
+        }
+    }
+    
     func setNavBarAppearence()
     {
-        let navBar = UINavigationBar.appearance()
-        // BarButtonItem颜色（例如返回按钮颜色）
-        navBar.tintColor = UIColor.white
-        // 导航栏背景颜色
-        navBar.barTintColor = MainNavBarColor
-        // 标题文字颜色
-        navBar.titleTextAttributes = [NSFontAttributeName:UIFont.systemFont(ofSize: 21), NSForegroundColorAttributeName:UIColor.white]
+        // 修改导航栏默认的背景颜色
+        UIColor.defaultNavBarBarTintColor = UIColor.init(red: 0/255.0, green: 175/255.0, blue: 240/255.0, alpha: 1)
+        // 修改导航栏中间标题和所有按钮的默认颜色
+        UIColor.defaultNavBarTintColor = .white
+        // 统一设置状态栏样式
+        UIColor.defaultStatusBarStyle = .lightContent
     }
 }
 

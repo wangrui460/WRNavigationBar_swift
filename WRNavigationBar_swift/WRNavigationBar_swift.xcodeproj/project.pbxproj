@@ -49,7 +49,7 @@
 		1A0DF7B21EA7372800191349 /* DemoListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoListController.swift; sourceTree = "<group>"; };
 		1A0DF7B41EA7380600191349 /* SixthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SixthViewController.swift; sourceTree = "<group>"; };
 		1A0DF7B61EA7471B00191349 /* FirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		1A0DF7B81EA7521C00191349 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
+		1A0DF7B81EA7521C00191349 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseNavigationController.swift; path = Demos/BaseNavigationController.swift; sourceTree = "<group>"; };
 		1A0DF7BD1EA7545900191349 /* WRNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WRNavigationBar.swift; sourceTree = "<group>"; };
 		1A6FB6F31ED020EC0098622A /* ChangeFirstController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeFirstController.swift; sourceTree = "<group>"; };
 		1A869EDC1ECAA0C1006D96F8 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -100,8 +100,9 @@
 			isa = PBXGroup;
 			children = (
 				1A0DF77A1EA7176500191349 /* AppDelegate.swift */,
+				1A0DF7B81EA7521C00191349 /* BaseNavigationController.swift */,
 				1A0DF79A1EA7179500191349 /* WRNavigationBar */,
-				1A0DF7B11EA7370000191349 /* Demos */,
+				1A0DF7B11EA7370000191349 /* 普通 */,
 				1A0DF77E1EA7176500191349 /* Main.storyboard */,
 				1A0DF7811EA7176500191349 /* Assets.xcassets */,
 				1A0DF7831EA7176500191349 /* LaunchScreen.storyboard */,
@@ -127,7 +128,7 @@
 			path = WRNavigationBar;
 			sourceTree = "<group>";
 		};
-		1A0DF7B11EA7370000191349 /* Demos */ = {
+		1A0DF7B11EA7370000191349 /* 普通 */ = {
 			isa = PBXGroup;
 			children = (
 				1A0DF7B21EA7372800191349 /* DemoListController.swift */,
@@ -138,9 +139,9 @@
 				1AB702691EA9AC7A006DBA79 /* FourthViewController.swift */,
 				1AB7026B1EA9B753006DBA79 /* FifthViewController.swift */,
 				1A0DF7B41EA7380600191349 /* SixthViewController.swift */,
-				1A0DF7B81EA7521C00191349 /* BaseNavigationController.swift */,
 				1A6FB6F51ED023EE0098622A /* 自定义导航栏 */,
 			);
+			name = "普通";
 			path = Demos;
 			sourceTree = "<group>";
 		};

@@ -33,42 +33,26 @@ class FirstViewController: UIViewController
         view.backgroundColor = UIColor.red
         view.addSubview(tableView)
         tableView.tableHeaderView = imageView
-        navigationController?.navigationBar.barStyle = .black
-        navigationController?.navigationBar.wr_setBackgroundColor(color: .clear)
+        navBarBarTintColor = .clear
+        navBarTintColor = .white
     }
 }
 
 
-// MARK: - viewWillAppear .. ScrollViewDidScroll
+// MARK: - ScrollViewDidScroll
 extension FirstViewController
 {
-    override func viewWillAppear(_ animated: Bool)
-    {
-        super.viewWillAppear(animated)
-        tableView.delegate = self
-        navigationController?.navigationBar.barStyle = .black
-        navigationController?.navigationBar.wr_setBackgroundColor(color: .clear)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool)
-    {
-        super.viewWillDisappear(animated)
-        // 如果不取消代理的话，跳转到下一个页面后，还会调用 scrollViewDidScroll 方法
-        tableView.delegate = nil
-        navigationController?.navigationBar.wr_clear()
-    }
-    
     func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
         let offsetY = scrollView.contentOffset.y
         if (offsetY > NAVBAR_COLORCHANGE_POINT)
         {
             let alpha = (offsetY - NAVBAR_COLORCHANGE_POINT) / CGFloat(kNavBarBottom)
-            navigationController?.navigationBar.wr_setBackgroundColor(color: MainNavBarColor.withAlphaComponent(alpha))
+            navBarBarTintColor = MainNavBarColor.withAlphaComponent(alpha)
         }
         else
         {
-            navigationController?.navigationBar.wr_setBackgroundColor(color: UIColor.clear)
+            navBarBarTintColor = .clear
         }
     }
 }
@@ -93,7 +77,7 @@ extension FirstViewController:UITableViewDelegate,UITableViewDataSource
     {
         tableView.deselectRow(at: indexPath, animated: true)
         let vc:UIViewController = UIViewController()
-        vc.view.backgroundColor = UIColor.red
+        vc.view.backgroundColor = UIColor.gray
         let str = String(format: "WRNavigationBar %zd", indexPath.row)
         vc.title = str
         navigationController?.pushViewController(vc, animated: true)

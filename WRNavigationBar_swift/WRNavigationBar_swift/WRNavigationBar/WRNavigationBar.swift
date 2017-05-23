@@ -93,7 +93,7 @@ extension UINavigationBar
 extension UINavigationController
 {
     override open var preferredStatusBarStyle: UIStatusBarStyle {
-        return topViewController?.preferredStatusBarStyle ?? .default
+        return topViewController?.statusBarStyle ?? UIColor.defaultStatusBarStyle
     }
     
     fileprivate func setNeedsNavigationBarUpdate(barTintColor: UIColor) {
@@ -387,6 +387,7 @@ extension UIViewController
         static var pushToNextVCFinished:Bool = false
         static var navBarBarTintColor: UIColor = UIColor.defaultNavBarBarTintColor
         static var navBarTintColor: UIColor = UIColor.defaultNavBarTintColor
+        static var statusBarStyle: UIStatusBarStyle = UIStatusBarStyle.default
     }
     
     // navigationBar barTintColor can change by current VC when fromVC push finished
@@ -445,6 +446,19 @@ extension UIViewController
             if pushToNextVCFinished == false {
                 navigationController?.setNeedsNavigationBarUpdate(tintColor: newValue)
             }
+        }
+    }
+
+    // statusBarStyle
+    var statusBarStyle: UIStatusBarStyle {
+        get {
+            guard let style = objc_getAssociatedObject(self, &AssociatedKeys.statusBarStyle) as? UIStatusBarStyle else {
+                return UIColor.defaultStatusBarStyle
+            }
+            return style
+        }
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.statusBarStyle, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
@@ -520,15 +534,50 @@ extension DispatchQueue {
 }
 
 
-//==========================================================================
-// MARK: - default navigationBar barTintColor and tintColor
-//==========================================================================
+//===========================================================================================
+// MARK: - default navigationBar barTintColor、tintColor and statusBarStyle YOU CAN CHANGE!!!
+//===========================================================================================
 extension UIColor
 {
-    class var defaultNavBarBarTintColor: UIColor {
-        return UIColor.init(red: 0/255.0, green: 175/255.0, blue: 240/255.0, alpha: 1)
+    fileprivate struct AssociatedKeys
+    {
+        static var defNavBarBarTintColor: UIColor = UIColor.init(red: 0/255.0, green: 175/255.0, blue: 240/255.0, alpha: 1)
+        static var defNavBarTintColor: UIColor = UIColor.white
+        static var defStatusBarStyle: UIStatusBarStyle = UIStatusBarStyle.default
     }
+    class var defaultNavBarBarTintColor: UIColor {
+        get {
+            guard let def = objc_getAssociatedObject(self, &AssociatedKeys.defNavBarBarTintColor) as? UIColor else {
+                return AssociatedKeys.defNavBarBarTintColor
+            }
+            return def
+        }
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.defNavBarBarTintColor, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
     class var defaultNavBarTintColor: UIColor {
-        return UIColor.white
+        get {
+            guard let def = objc_getAssociatedObject(self, &AssociatedKeys.defNavBarTintColor) as? UIColor else {
+                return AssociatedKeys.defNavBarTintColor
+            }
+            return def
+        }
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.defNavBarTintColor, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    class var defaultStatusBarStyle: UIStatusBarStyle {
+        get {
+            guard let def = objc_getAssociatedObject(self, &AssociatedKeys.defStatusBarStyle) as? UIStatusBarStyle else {
+                return .default
+            }
+            return def
+        }
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.defStatusBarStyle, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
     }
 }

@@ -31,6 +31,8 @@ class SecondViewController: UIViewController
         view.backgroundColor = UIColor.red
         view.addSubview(tableView)
         tableView.tableHeaderView = imageView
+        navBarBarTintColor = .orange
+        navBarTintColor = .white
     }
 }
 
@@ -38,11 +40,6 @@ class SecondViewController: UIViewController
 // MARK: - viewWillAppear .. ScrollViewDidScroll
 extension SecondViewController
 {
-    override func viewWillAppear(_ animated: Bool)
-    {
-        super.viewWillAppear(animated)
-    }
-    
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
@@ -54,7 +51,6 @@ extension SecondViewController
         super.viewWillDisappear(animated)
         tableView.delegate = nil
         navigationController?.navigationBar.wr_setTranslationY(translationY: 0)
-        navigationController?.navigationBar.wr_clear()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView)

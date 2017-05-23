@@ -37,8 +37,7 @@ class FifthViewController: UIViewController
         view.backgroundColor = UIColor.red
         tableView.addSubview(imageView)
         view.addSubview(tableView)
-        navigationController?.navigationBar.barStyle = .black
-        navigationController?.navigationBar.wr_setBackgroundColor(color: .clear)
+        navBarBarTintColor = .clear
     }
 }
 
@@ -46,21 +45,6 @@ class FifthViewController: UIViewController
 // MARK: - viewWillAppear .. ScrollViewDidScroll
 extension FifthViewController
 {
-    override func viewWillAppear(_ animated: Bool)
-    {
-        super.viewWillAppear(animated)
-        tableView.delegate = self
-        navigationController?.navigationBar.barStyle = .black
-        navigationController?.navigationBar.wr_setBackgroundColor(color: .clear)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool)
-    {
-        super.viewWillDisappear(animated)
-        tableView.delegate = nil
-        navigationController?.navigationBar.wr_clear()
-    }
-    
     func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
         let offsetY = scrollView.contentOffset.y
@@ -68,11 +52,11 @@ extension FifthViewController
         if (offsetY > NAVBAR_COLORCHANGE_POINT)
         {
             let alpha = (offsetY - NAVBAR_COLORCHANGE_POINT) / CGFloat(kNavBarBottom)
-            navigationController?.navigationBar.wr_setBackgroundColor(color: MainNavBarColor.withAlphaComponent(alpha))
+            navBarBarTintColor = MainNavBarColor.withAlphaComponent(alpha)
         }
         else
         {
-            navigationController?.navigationBar.wr_setBackgroundColor(color: .clear)
+            navBarBarTintColor = .clear
         }
         
         // 限制下拉距离
@@ -120,7 +104,7 @@ extension FifthViewController: UITableViewDelegate,UITableViewDataSource
     {
         tableView.deselectRow(at: indexPath, animated: true)
         let vc:UIViewController = UIViewController()
-        vc.view.backgroundColor = UIColor.red
+        vc.view.backgroundColor = UIColor.gray
         let str = String(format: "WRNavigationBar %zd", indexPath.row)
         vc.title = str
         navigationController?.pushViewController(vc, animated: true)

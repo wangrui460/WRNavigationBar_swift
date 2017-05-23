@@ -21,8 +21,7 @@ class DemoListController: UIViewController
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
-        navBarBarTintColor = MainNavBarColor
-        navBarTintColor = .white
+        statusBarStyle = .default
     }
 }
 

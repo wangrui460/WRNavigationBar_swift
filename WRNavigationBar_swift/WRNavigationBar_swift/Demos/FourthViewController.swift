@@ -37,40 +37,20 @@ class FourthViewController: UIViewController
         view.backgroundColor = UIColor.red
         tableView.addSubview(imageView)
         view.addSubview(tableView)
-        navigationController?.navigationBar.barStyle = .black
-        navigationController?.navigationBar.wr_setBackgroundColor(color: .clear)
+        navBarBarTintColor = .clear
     }
 }
-
 
 // MARK: - viewWillAppear .. ScrollViewDidScroll
 extension FourthViewController
 {
-    override func viewWillAppear(_ animated: Bool)
-    {
-        super.viewWillAppear(animated)
-        tableView.delegate = self
-        navigationController?.navigationBar.barStyle = .black
-        navigationController?.navigationBar.wr_setBackgroundColor(color: .clear)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool)
-    {
-        super.viewWillDisappear(animated)
-        tableView.delegate = nil
-        navigationController?.navigationBar.wr_clear()
-    }
-    
     func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
         let offsetY = scrollView.contentOffset.y
         
-        if (offsetY > NAVBAR_COLORCHANGE_POINT)
-        {
+        if (offsetY > NAVBAR_COLORCHANGE_POINT) {
             changeNavBarAnimateWithIsClear(isClear: false)
-        }
-        else
-        {
+        } else {
             changeNavBarAnimateWithIsClear(isClear: true)
         }
         
@@ -95,10 +75,10 @@ extension FourthViewController
             if let weakSelf = self
             {
                 if (isClear == true) {
-                    weakSelf.navigationController?.navigationBar.wr_setBackgroundColor(color: .clear)
+                    weakSelf.navBarBarTintColor = .clear
                 }
                 else {
-                    weakSelf.navigationController?.navigationBar.wr_setBackgroundColor(color: MainNavBarColor)
+                    weakSelf.navBarBarTintColor = MainNavBarColor
                 }
             }
         })
