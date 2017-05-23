@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func setTabBarItems(tabBarVC:UITabBarController)
     {
-        let titles = ["普通",  "自定义导航栏", "没有系统返回按钮的情况"];
+        let titles = ["常用",  "自定义导航栏", "没有系统返回按钮的情况"];
         let normalImages = ["tabBar0",
                             "tabBar1",
                             "tabBar2"];

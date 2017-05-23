@@ -223,6 +223,9 @@ extension UINavigationController
     // swizzling system method: pushViewController
     func wr_pushViewController(_ viewController: UIViewController, animated: Bool)
     {
+        if viewControllers.count == 0 {
+            viewController.pushToCurrentVCFinished = true
+        }
         var displayLink:CADisplayLink? = CADisplayLink(target: self, selector: #selector(pushNeedDisplay))
         displayLink?.add(to: RunLoop.main, forMode: .defaultRunLoopMode)
         CATransaction.setCompletionBlock {
@@ -242,9 +245,6 @@ extension UINavigationController
     {
         guard let topViewController = topViewController,
               let coordinator       = topViewController.transitionCoordinator else {
-                // set rootVC navBarBarTintColor and navBarTintColor
-                setNeedsNavigationBarUpdate(barTintColor: navBarBarTintColor)
-                setNeedsNavigationBarUpdate(tintColor: navBarTintColor)
                 return
         }
         
@@ -439,7 +439,6 @@ extension UIViewController
                 return UIColor.defaultNavBarTintColor
             }
             return tintColor
-            
         }
         set {
             objc_setAssociatedObject(self, &AssociatedKeys.navBarTintColor, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)

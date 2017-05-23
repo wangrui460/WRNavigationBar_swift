@@ -27,7 +27,7 @@ class SecondViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        title = "丽人丽妆"
+        title = "浮动效果"
         view.backgroundColor = UIColor.red
         view.addSubview(tableView)
         tableView.tableHeaderView = imageView

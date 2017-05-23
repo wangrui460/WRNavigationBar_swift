@@ -16,12 +16,12 @@ class DemoListController: UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.green
-        title = "DemoList"
+        view.backgroundColor = UIColor.white
+        title = "案例"
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
-        statusBarStyle = .default
+        tableView.backgroundColor = UIColor.init(red: 255/255.0, green: 130/255.0, blue: 171/255.0, alpha: 1.0)
     }
 }
 
@@ -30,16 +30,17 @@ extension DemoListController: UITableViewDelegate, UITableViewDataSource
 {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return 6
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = UITableViewCell.init(style: .default, reuseIdentifier: nil)
+        cell.backgroundColor = UIColor.init(red: 255/255.0, green: 130/255.0, blue: 171/255.0, alpha: 1.0)
         var str:String? = nil
         switch indexPath.row {
         case 0:
-            str = "基本";
+            str = "主页";
         case 1:
             str = "超过临界点移动导航栏";
         case 2:
@@ -48,8 +49,6 @@ extension DemoListController: UITableViewDelegate, UITableViewDataSource
             str = "类似qq应用空间效果";
         case 4:
             str = "类似QQ空间效果";
-        case 5:
-            str = "解决问题";
         default:
             str = ""
         }
@@ -76,8 +75,6 @@ extension DemoListController: UITableViewDelegate, UITableViewDataSource
             navigationController?.pushViewController(FourthViewController(), animated: true)
         case 4:
             navigationController?.pushViewController(FifthViewController(), animated: true)
-        case 5:
-            navigationController?.pushViewController(ChangeFirstController(), animated: true)
         default:
            break
         }

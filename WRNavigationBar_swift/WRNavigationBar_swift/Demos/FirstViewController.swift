@@ -21,18 +21,28 @@ class FirstViewController: UIViewController
         return table
     }()
     lazy var imageView:UIImageView = {
-        let imgView = UIImageView(image: UIImage(named: "image1"))
-        imgView.frame = CGRect.init(x: 0, y: 0, width: kScreenWidth, height: IMAGE_HEIGHT)
+        let imgView = UIImageView(image: UIImage(named: "image4"))
+        imgView.frame.size = CGSize(width: 100, height: 100)
+        imgView.layer.cornerRadius = 50
+        imgView.layer.masksToBounds = true
         return imgView
+    }()
+    lazy var topView:UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: IMAGE_HEIGHT))
+        view.backgroundColor = UIColor.orange
+        return view
     }()
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        title = "熊猫美妆"
+        title = "个人中心"
         view.backgroundColor = UIColor.red
         view.addSubview(tableView)
-        tableView.tableHeaderView = imageView
+        topView.addSubview(imageView)
+        imageView.center = topView.center
+        tableView.tableHeaderView = topView
+        
         navBarBarTintColor = .clear
         navBarTintColor = .white
     }
@@ -77,7 +87,8 @@ extension FirstViewController:UITableViewDelegate,UITableViewDataSource
     {
         tableView.deselectRow(at: indexPath, animated: true)
         let vc:UIViewController = UIViewController()
-        vc.view.backgroundColor = UIColor.gray
+        vc.view.backgroundColor = .white
+        vc.navBarBarTintColor = .gray
         let str = String(format: "WRNavigationBar %zd", indexPath.row)
         vc.title = str
         navigationController?.pushViewController(vc, animated: true)
