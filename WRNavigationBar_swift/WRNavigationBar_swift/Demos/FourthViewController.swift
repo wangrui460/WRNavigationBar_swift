@@ -37,7 +37,8 @@ class FourthViewController: UIViewController
         view.backgroundColor = UIColor.red
         tableView.addSubview(imageView)
         view.addSubview(tableView)
-        navBarBarTintColor = .clear
+        
+        navBarEffectAlpha = 0
     }
 }
 
@@ -75,10 +76,10 @@ extension FourthViewController
             if let weakSelf = self
             {
                 if (isClear == true) {
-                    weakSelf.navBarBarTintColor = .clear
+                    weakSelf.navBarEffectAlpha = 0
                 }
                 else {
-                    weakSelf.navBarBarTintColor = MainNavBarColor
+                    weakSelf.navBarEffectAlpha = 1.0
                 }
             }
         })

@@ -31,8 +31,6 @@ class SecondViewController: UIViewController
         view.backgroundColor = UIColor.red
         view.addSubview(tableView)
         tableView.tableHeaderView = imageView
-        navBarBarTintColor = .orange
-        navBarTintColor = .white
     }
 }
 

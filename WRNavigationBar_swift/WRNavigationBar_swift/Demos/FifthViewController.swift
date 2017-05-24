@@ -37,7 +37,8 @@ class FifthViewController: UIViewController
         view.backgroundColor = UIColor.red
         tableView.addSubview(imageView)
         view.addSubview(tableView)
-        navBarBarTintColor = .clear
+        
+        navBarEffectAlpha = 0
     }
 }
 
@@ -52,11 +53,11 @@ extension FifthViewController
         if (offsetY > NAVBAR_COLORCHANGE_POINT)
         {
             let alpha = (offsetY - NAVBAR_COLORCHANGE_POINT) / CGFloat(kNavBarBottom)
-            navBarBarTintColor = MainNavBarColor.withAlphaComponent(alpha)
+            navBarEffectAlpha = alpha
         }
         else
         {
-            navBarBarTintColor = .clear
+            navBarEffectAlpha = 0
         }
         
         // 限制下拉距离

@@ -35,10 +35,12 @@ class CustomNavBarController: BaseViewController
         view.addSubview(tableView)
         tableView.tableHeaderView = imageView
         view.insertSubview(navBar, aboveSubview: tableView)
-        navigationController?.navigationBar.barStyle = .black
-        navBar.wr_setBackgroundColor(color: .clear)
         navItem.leftBarButtonItem = UIBarButtonItem(title: "star", style: .plain, target: self, action: nil)
         navItem.title = "自定义导航栏"
+        
+        navBar.wr_setBackgroundColor(color: .clear)
+        navBar.shadowImage = UIImage()
+//        navBarEffectAlpha = 0
     }
 }
 
@@ -51,7 +53,6 @@ extension CustomNavBarController
         super.viewWillAppear(animated)
         tableView.delegate = self
         scrollViewDidScroll(tableView)
-        navigationController?.navigationBar.barStyle = .black
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -68,10 +69,12 @@ extension CustomNavBarController
         {
             let alpha = (offsetY - NAVBAR_COLORCHANGE_POINT) / CGFloat(kNavBarBottom)
             navBar.wr_setBackgroundColor(color: MainNavBarColor.withAlphaComponent(alpha))
+//            navBarEffectAlpha = alpha
         }
         else
         {
             navBar.wr_setBackgroundColor(color: UIColor.clear)
+//            navBarEffectAlpha = 0
         }
     }
 }
