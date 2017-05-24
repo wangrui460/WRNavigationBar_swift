@@ -29,6 +29,7 @@ extension UINavigationBar
     // set navigationBar barTintColor
     func wr_setBackgroundColor(color:UIColor)
     {
+        barTintColor = color
         if (backgroundView == nil)
         {
             // 设置导航栏本身全透明
@@ -36,8 +37,6 @@ extension UINavigationBar
             backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: Int(bounds.width), height: 64))
             // _UIBarBackground是导航栏的第一个子控件
             subviews.first?.insertSubview(backgroundView ?? UIView(), at: 0)
-            // 隐藏导航栏底部默认黑线
-            shadowImage = UIImage()
         }
         backgroundView?.backgroundColor = color
     }
@@ -499,6 +498,7 @@ extension UIViewController
         }
         set {
             objc_setAssociatedObject(self, &AssociatedKeys.statusBarStyle, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            setNeedsStatusBarAppearanceUpdate()
         }
     }
     
@@ -544,6 +544,7 @@ extension UIViewController
     func wr_viewDidAppear(_ animated: Bool)
     {
         navigationController?.setNeedsNavigationBarUpdate(barTintColor: navBarBarTintColor)
+        navigationController?.setNeedsNavigationBarUpdate(effectAlpha: navBarEffectAlpha)
         navigationController?.setNeedsNavigationBarUpdate(tintColor: navBarTintColor)
         wr_viewDidAppear(animated)
     }
@@ -581,7 +582,7 @@ extension UIColor
 {
     fileprivate struct AssociatedKeys
     {
-        static var defNavBarBarTintColor: UIColor = UIColor.init(red: 0/255.0, green: 175/255.0, blue: 240/255.0, alpha: 1)
+        static var defNavBarBarTintColor: UIColor = UIColor.white // UIColor.init(red: 0/255.0, green: 175/255.0, blue: 240/255.0, alpha: 1)
         static var defNavBarTintColor: UIColor = UIColor.white
         static var defStatusBarStyle: UIStatusBarStyle = UIStatusBarStyle.default
     }

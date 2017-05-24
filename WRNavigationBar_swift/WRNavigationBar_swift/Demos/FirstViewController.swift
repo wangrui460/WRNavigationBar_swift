@@ -44,7 +44,7 @@ class FirstViewController: UIViewController
         tableView.tableHeaderView = topView
         
         // 设置导航栏颜色
-        navBarBarTintColor = MainNavBarColor
+        navBarBarTintColor = UIColor.init(red: 247/255.0, green: 247/255.0, blue: 247/255.0, alpha: 1.0)
         
         // 设置初始导航栏透明度
         navBarEffectAlpha = 0
@@ -65,10 +65,14 @@ extension FirstViewController
         {
             let alpha = (offsetY - NAVBAR_COLORCHANGE_POINT) / CGFloat(kNavBarBottom)
             navBarEffectAlpha = alpha
+            navBarTintColor = UIColor.black.withAlphaComponent(alpha)
+            statusBarStyle = .default
         }
         else
         {
             navBarEffectAlpha = 0
+            navBarTintColor = .white
+            statusBarStyle = .lightContent
         }
     }
 }
@@ -93,9 +97,8 @@ extension FirstViewController:UITableViewDelegate,UITableViewDataSource
     {
         tableView.deselectRow(at: indexPath, animated: true)
         let vc:UIViewController = UIViewController()
-        vc.view.backgroundColor = .white
-        vc.navBarBarTintColor = .gray
-        let str = String(format: "WRNavigationBar %zd", indexPath.row)
+        vc.view.backgroundColor = UIColor.white
+        let str = "WRNavigationBar"
         vc.title = str
         navigationController?.pushViewController(vc, animated: true)
     }

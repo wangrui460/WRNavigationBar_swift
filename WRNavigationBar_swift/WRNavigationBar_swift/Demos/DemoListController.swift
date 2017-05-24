@@ -23,9 +23,10 @@ class DemoListController: UIViewController
         tableView.delegate = self
         tableView.backgroundColor = UIColor.init(red: 254/255.0, green: 128/255.0, blue: 162/255.0, alpha: 1.0)
         
-        navBarBarTintColor = .white
+        navBarBarTintColor = UIColor.init(red: 247/255.0, green: 247/255.0, blue: 247/255.0, alpha: 1.0)
         navBarEffectAlpha = 1.0
         navBarTintColor = .black
+        statusBarStyle = .default
     }
 }
 
@@ -40,7 +41,6 @@ extension DemoListController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = UITableViewCell.init(style: .default, reuseIdentifier: nil)
-        cell.backgroundColor = UIColor.init(red: 255/255.0, green: 130/255.0, blue: 171/255.0, alpha: 1.0)
         var str:String? = nil
         switch indexPath.row {
         case 0:
