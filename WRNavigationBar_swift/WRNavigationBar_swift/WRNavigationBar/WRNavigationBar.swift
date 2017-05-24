@@ -14,7 +14,7 @@ extension UINavigationBar
         static var backgroundView:UIView = UIView()
     }
     
-    var backgroundView:UIView? {
+    fileprivate var backgroundView:UIView? {
         get {
             guard let bgView = objc_getAssociatedObject(self, &AssociatedKeys.backgroundView) as? UIView else {
                 return nil
@@ -40,6 +40,35 @@ extension UINavigationBar
             shadowImage = UIImage()
         }
         backgroundView?.backgroundColor = color
+    }
+    
+    // set navigationBar effectView alpha    设置导航栏毛玻璃的透明度
+    func wr_setBackgroundAlpha(alpha:CGFloat)
+    {
+        let barBackgroundView = subviews[0]
+        let valueForKey = barBackgroundView.value(forKey:)
+        
+        if let shadowView = valueForKey("_shadowView") as? UIView {
+            shadowView.alpha = alpha
+        }
+        
+        if isTranslucent {
+            if #available(iOS 10.0, *) {
+                if let backgroundEffectView = valueForKey("_backgroundEffectView") as? UIView, backgroundImage(for: .default) == nil {
+                    backgroundEffectView.alpha = alpha
+                    return
+                }
+                
+            } else {
+                if let adaptiveBackdrop = valueForKey("_adaptiveBackdrop") as? UIView ,
+                    let backdropEffectView = adaptiveBackdrop.value(forKey: "_backdropEffectView") as? UIView {
+                    backdropEffectView.alpha = alpha
+                    return
+                }
+            }
+        }
+        
+        barBackgroundView.alpha = alpha
     }
     
     /// 设置导航栏所有BarButtonItem的透明度
@@ -96,8 +125,18 @@ extension UINavigationController
         return topViewController?.statusBarStyle ?? UIColor.defaultStatusBarStyle
     }
     
-    fileprivate func setNeedsNavigationBarUpdate(barTintColor: UIColor) {
-        navigationBar.wr_setBackgroundColor(color: barTintColor)
+    fileprivate func setNeedsNavigationBarUpdate(barTintColor: UIColor)
+    {
+//        var originalAlpha:CGFloat = 0
+//        navBarBarTintColor.getRed(nil, green: nil, blue: nil, alpha: &originalAlpha)
+//        var curAlpha:CGFloat = 0
+//        barTintColor.getRed(nil, green: nil, blue: nil, alpha: &curAlpha)
+//        if curAlpha == originalAlpha {
+            navigationBar.wr_setBackgroundColor(color: barTintColor)
+////            navigationBar.barTintColor = navBarBarTintColor
+//        } else {
+//            navigationBar.wr_setBackgroundAlpha(alpha: curAlpha)
+//        }
     }
     
     fileprivate func setNeedsNavigationBarUpdate(tintColor: UIColor) {
@@ -181,9 +220,6 @@ extension UINavigationController
     {
         guard let topViewController = topViewController,
             let coordinator       = topViewController.transitionCoordinator else {
-                // set rootVC navBarBarTintColor and navBarTintColor
-                setNeedsNavigationBarUpdate(barTintColor: navBarBarTintColor)
-                setNeedsNavigationBarUpdate(tintColor: navBarTintColor)
                 return
         }
         
