@@ -127,16 +127,12 @@ extension UINavigationController
     
     fileprivate func setNeedsNavigationBarUpdate(barTintColor: UIColor)
     {
-//        var originalAlpha:CGFloat = 0
-//        navBarBarTintColor.getRed(nil, green: nil, blue: nil, alpha: &originalAlpha)
-//        var curAlpha:CGFloat = 0
-//        barTintColor.getRed(nil, green: nil, blue: nil, alpha: &curAlpha)
-//        if curAlpha == originalAlpha {
-            navigationBar.wr_setBackgroundColor(color: barTintColor)
-////            navigationBar.barTintColor = navBarBarTintColor
-//        } else {
-//            navigationBar.wr_setBackgroundAlpha(alpha: curAlpha)
-//        }
+        navigationBar.wr_setBackgroundColor(color: barTintColor)
+    }
+    
+    fileprivate func setNeedsNavigationBarUpdate(effectAlpha: CGFloat)
+    {
+        navigationBar.wr_setBackgroundAlpha(alpha: effectAlpha)
     }
     
     fileprivate func setNeedsNavigationBarUpdate(tintColor: UIColor) {
@@ -226,20 +222,26 @@ extension UINavigationController
         popProperties.displayCount += 1
         let popProgress = popProperties.popProgress
         // print("第\(popProperties.displayCount)次pop的进度：\(popProgress)")
-        let fromViewController = coordinator.viewController(forKey: .from)
-        let toViewController = coordinator.viewController(forKey: .to)
+        let fromVC = coordinator.viewController(forKey: .from)
+        let toVC = coordinator.viewController(forKey: .to)
         
         // change navBarBarTintColor
-        let fromBarTintColor = fromViewController?.navBarBarTintColor ?? .defaultNavBarBarTintColor
-        let toBarTintColor   = toViewController?.navBarBarTintColor ?? .defaultNavBarBarTintColor
-        let newBarTintColor  = middleColor(fromColor: fromBarTintColor, toColor: toBarTintColor, percent: popProgress)
+        let fromBarTintColor = fromVC?.navBarBarTintColor ?? .defaultNavBarBarTintColor
+        let toBarTintColor   = toVC?.navBarBarTintColor ?? .defaultNavBarBarTintColor
+        let newBarTintColor  = UIColor.middleColor(fromColor: fromBarTintColor, toColor: toBarTintColor, percent: popProgress)
         setNeedsNavigationBarUpdate(barTintColor: newBarTintColor)
         
         // change navBarTintColor
-        let fromTintColor = fromViewController?.navBarTintColor ?? .defaultNavBarTintColor
-        let toTintColor = toViewController?.navBarTintColor ?? .defaultNavBarTintColor
-        let newTintColor = middleColor(fromColor: fromTintColor, toColor: toTintColor, percent: popProgress)
+        let fromTintColor = fromVC?.navBarTintColor ?? .defaultNavBarTintColor
+        let toTintColor = toVC?.navBarTintColor ?? .defaultNavBarTintColor
+        let newTintColor = UIColor.middleColor(fromColor: fromTintColor, toColor: toTintColor, percent: popProgress)
         setNeedsNavigationBarUpdate(tintColor: newTintColor)
+        
+        // change navBar effectView alpha
+        let fromEffectAlpha = fromVC?.navBarEffectAlpha ?? UIColor.defaultEffectAlpha
+        let toEffectAlpha = toVC?.navBarEffectAlpha ?? UIColor.defaultEffectAlpha
+        let newEffectAlpha = UIColor.middleAlpha(fromAlpha: fromEffectAlpha, toAlpha: toEffectAlpha, percent: popProgress)
+        setNeedsNavigationBarUpdate(effectAlpha: newEffectAlpha)
     }
     
     
@@ -284,25 +286,31 @@ extension UINavigationController
         pushProperties.displayCount += 1
         let pushProgress = pushProperties.pushProgress
         // print("第\(pushProperties.displayCount)次push的进度：\(pushProgress)")
-        let fromViewController = coordinator.viewController(forKey: .from)
-        let toViewController = coordinator.viewController(forKey: .to)
+        let fromVC = coordinator.viewController(forKey: .from)
+        let toVC = coordinator.viewController(forKey: .to)
         
         // change navBarBarTintColor
-        let fromBarTintColor = fromViewController?.navBarBarTintColor ?? .defaultNavBarBarTintColor
-        let toBarTintColor   = toViewController?.navBarBarTintColor ?? .defaultNavBarBarTintColor
-        let newBarTintColor  = middleColor(fromColor: fromBarTintColor, toColor: toBarTintColor, percent: pushProgress)
+        let fromBarTintColor = fromVC?.navBarBarTintColor ?? .defaultNavBarBarTintColor
+        let toBarTintColor   = toVC?.navBarBarTintColor ?? .defaultNavBarBarTintColor
+        let newBarTintColor  = UIColor.middleColor(fromColor: fromBarTintColor, toColor: toBarTintColor, percent: pushProgress)
         setNeedsNavigationBarUpdate(barTintColor: newBarTintColor)
         
         // change navBarTintColor
-        let fromTintColor = fromViewController?.navBarTintColor ?? .defaultNavBarTintColor
-        let toTintColor = toViewController?.navBarTintColor ?? .defaultNavBarTintColor
-        let newTintColor = middleColor(fromColor: fromTintColor, toColor: toTintColor, percent: pushProgress)
+        let fromTintColor = fromVC?.navBarTintColor ?? .defaultNavBarTintColor
+        let toTintColor = toVC?.navBarTintColor ?? .defaultNavBarTintColor
+        let newTintColor = UIColor.middleColor(fromColor: fromTintColor, toColor: toTintColor, percent: pushProgress)
         setNeedsNavigationBarUpdate(tintColor: newTintColor)
+        
+        // change navBar effectView alpha
+        let fromEffectAlpha = fromVC?.navBarEffectAlpha ?? UIColor.defaultEffectAlpha
+        let toEffectAlpha = toVC?.navBarEffectAlpha ?? UIColor.defaultEffectAlpha
+        let newEffectAlpha = UIColor.middleAlpha(fromAlpha: fromEffectAlpha, toAlpha: toEffectAlpha, percent: pushProgress)
+        setNeedsNavigationBarUpdate(effectAlpha: newEffectAlpha)
     }
 }
 
 //==========================================================================
-// MARK: - notifyWhenInteractionChanges
+// MARK: - deal the gesture of return
 //==========================================================================
 extension UINavigationController: UINavigationBarDelegate
 {
@@ -335,7 +343,9 @@ extension UINavigationController: UINavigationBarDelegate
     {
         let animations: (UITransitionContextViewControllerKey) -> () = {
             let curColor = context.viewController(forKey: $0)?.navBarBarTintColor ?? UIColor.defaultNavBarBarTintColor
+            let curAlpha = context.viewController(forKey: $0)?.navBarEffectAlpha ?? UIColor.defaultEffectAlpha
             self.setNeedsNavigationBarUpdate(barTintColor: curColor)
+            self.setNeedsNavigationBarUpdate(effectAlpha: curAlpha)
         }
         
         // after that, cancel the gesture of return
@@ -371,41 +381,22 @@ extension UINavigationController: UINavigationBarDelegate
         // change navBarBarTintColor
         let fromBarTintColor = fromVC?.navBarBarTintColor ?? .defaultNavBarBarTintColor
         let toBarTintColor = toVC?.navBarBarTintColor ?? .defaultNavBarBarTintColor
-        let newBarTintColor = middleColor(fromColor: fromBarTintColor, toColor: toBarTintColor, percent: percentComplete)
+        let newBarTintColor = UIColor.middleColor(fromColor: fromBarTintColor, toColor: toBarTintColor, percent: percentComplete)
         setNeedsNavigationBarUpdate(barTintColor: newBarTintColor)
         
         // change navBarTintColor
         let fromTintColor = fromVC?.navBarTintColor ?? .defaultNavBarTintColor
         let toTintColor = toVC?.navBarTintColor ?? .defaultNavBarTintColor
-        let newTintColor = middleColor(fromColor: fromTintColor, toColor: toTintColor, percent: percentComplete)
+        let newTintColor = UIColor.middleColor(fromColor: fromTintColor, toColor: toTintColor, percent: percentComplete)
         setNeedsNavigationBarUpdate(tintColor: newTintColor)
         
+        // change navBar effectView alpha
+        let fromEffectAlpha = fromVC?.navBarEffectAlpha ?? UIColor.defaultEffectAlpha
+        let toEffectAlpha = toVC?.navBarEffectAlpha ?? UIColor.defaultEffectAlpha
+        let newEffectAlpha = UIColor.middleAlpha(fromAlpha: fromEffectAlpha, toAlpha: toEffectAlpha, percent: percentComplete)
+        setNeedsNavigationBarUpdate(effectAlpha: newEffectAlpha)
+        
         wr_updateInteractiveTransition(percentComplete)
-    }
-    
-    // Calculate the middle Color with translation percent
-    fileprivate func middleColor(fromColor: UIColor, toColor: UIColor, percent: CGFloat) -> UIColor
-    {
-        // get current color RGBA
-        var fromRed: CGFloat = 0
-        var fromGreen: CGFloat = 0
-        var fromBlue: CGFloat = 0
-        var fromAlpha: CGFloat = 0
-        fromColor.getRed(&fromRed, green: &fromGreen, blue: &fromBlue, alpha: &fromAlpha)
-        
-        // get to color RGBA
-        var toRed: CGFloat = 0
-        var toGreen: CGFloat = 0
-        var toBlue: CGFloat = 0
-        var toAlpha: CGFloat = 0
-        toColor.getRed(&toRed, green: &toGreen, blue: &toBlue, alpha: &toAlpha)
-        
-        // calculate middle color RGBA
-        let nowRed = fromRed + (toRed - fromRed) * percent
-        let nowGreen = fromGreen + (toGreen - fromGreen) * percent
-        let nowBlue = fromBlue + (toBlue - fromBlue) * percent
-        let nowAlpha = fromAlpha + (toAlpha - fromAlpha) * percent
-        return UIColor(red: nowRed, green: nowGreen, blue: nowBlue, alpha: nowAlpha)
     }
 }
 
@@ -419,11 +410,12 @@ extension UIViewController
         static var pushToCurrentVCFinished: Bool = false
         static var pushToNextVCFinished:Bool = false
         static var navBarBarTintColor: UIColor = UIColor.defaultNavBarBarTintColor
+        static var navBarEffectAlpha:CGFloat = 1.0
         static var navBarTintColor: UIColor = UIColor.defaultNavBarTintColor
         static var statusBarStyle: UIStatusBarStyle = UIStatusBarStyle.default
     }
     
-    // navigationBar barTintColor can change by current VC when fromVC push finished
+    // navigationBar barTintColor can not change by currentVC before fromVC push to currentVC finished
     var pushToCurrentVCFinished:Bool {
         get {
             guard let isFinished = objc_getAssociatedObject(self, &AssociatedKeys.pushToCurrentVCFinished) as? Bool else {
@@ -436,7 +428,7 @@ extension UIViewController
         }
     }
     
-    // navigationBar barTintColor cannot change by current VC when push finished
+    // navigationBar barTintColor can not change by currentVC when currentVC push to nextVC finished
     var pushToNextVCFinished:Bool {
         get {
             guard let isFinished = objc_getAssociatedObject(self, &AssociatedKeys.pushToNextVCFinished) as? Bool else {
@@ -461,6 +453,22 @@ extension UIViewController
             objc_setAssociatedObject(self, &AssociatedKeys.navBarBarTintColor, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             if pushToCurrentVCFinished == true && pushToNextVCFinished == false {
                 navigationController?.setNeedsNavigationBarUpdate(barTintColor: newValue)
+            }
+        }
+    }
+    
+    // navigationBar effectView alpha
+    var navBarEffectAlpha:CGFloat {
+        get {
+            guard let effectAlpha = objc_getAssociatedObject(self, &AssociatedKeys.navBarEffectAlpha) as? CGFloat else {
+                return 1.0
+            }
+            return effectAlpha
+        }
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.navBarEffectAlpha, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            if pushToCurrentVCFinished == true && pushToNextVCFinished == false {
+                navigationController?.setNeedsNavigationBarUpdate(effectAlpha: newValue)
             }
         }
     }
@@ -612,4 +620,48 @@ extension UIColor
             objc_setAssociatedObject(self, &AssociatedKeys.defStatusBarStyle, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
+    
+    class var defaultEffectAlpha: CGFloat {
+        get {
+            return 1.0
+        }
+    }
+    
+    // Calculate the middle Color with translation percent
+    class fileprivate func middleColor(fromColor: UIColor, toColor: UIColor, percent: CGFloat) -> UIColor
+    {
+        // get current color RGBA
+        var fromRed: CGFloat = 0
+        var fromGreen: CGFloat = 0
+        var fromBlue: CGFloat = 0
+        var fromAlpha: CGFloat = 0
+        fromColor.getRed(&fromRed, green: &fromGreen, blue: &fromBlue, alpha: &fromAlpha)
+        
+        // get to color RGBA
+        var toRed: CGFloat = 0
+        var toGreen: CGFloat = 0
+        var toBlue: CGFloat = 0
+        var toAlpha: CGFloat = 0
+        toColor.getRed(&toRed, green: &toGreen, blue: &toBlue, alpha: &toAlpha)
+        
+        // calculate middle color RGBA
+        let nowRed = fromRed + (toRed - fromRed) * percent
+        let nowGreen = fromGreen + (toGreen - fromGreen) * percent
+        let nowBlue = fromBlue + (toBlue - fromBlue) * percent
+        let nowAlpha = fromAlpha + (toAlpha - fromAlpha) * percent
+        return UIColor(red: nowRed, green: nowGreen, blue: nowBlue, alpha: nowAlpha)
+    }
+    
+    // Calculate the middle alpha
+    class fileprivate func middleAlpha(fromAlpha: CGFloat, toAlpha: CGFloat, percent: CGFloat) -> CGFloat
+    {
+        let newAlpha = fromAlpha + (toAlpha - fromAlpha) * percent
+        return newAlpha
+    }
 }
+
+
+
+
+
+
