@@ -22,6 +22,8 @@ class DemoListController: UIViewController
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = UIColor.init(red: 255/255.0, green: 130/255.0, blue: 171/255.0, alpha: 1.0)
+//        navBarBarTintColor = .white
+//        navBarTintColor = .black
     }
 }
 

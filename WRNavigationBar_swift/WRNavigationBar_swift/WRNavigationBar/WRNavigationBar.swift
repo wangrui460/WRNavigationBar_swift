@@ -223,9 +223,6 @@ extension UINavigationController
     // swizzling system method: pushViewController
     func wr_pushViewController(_ viewController: UIViewController, animated: Bool)
     {
-        if viewControllers.count == 0 {
-            viewController.pushToCurrentVCFinished = true
-        }
         var displayLink:CADisplayLink? = CADisplayLink(target: self, selector: #selector(pushNeedDisplay))
         displayLink?.add(to: RunLoop.main, forMode: .defaultRunLoopMode)
         CATransaction.setCompletionBlock {
