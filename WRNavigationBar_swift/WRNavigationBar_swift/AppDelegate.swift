@@ -41,13 +41,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func setTabBarItems(tabBarVC:UITabBarController)
     {
         let titles = ["常用",  "自定义导航栏", "移动导航栏"];
-        let normalImages = ["tabBar0",
-                            "tabBar1",
-                            "tabBar2"];
+        let normalImages = ["mine",
+                            "mine",
+                            "mine"];
+        let highlightImages = ["mineHighlight",
+                               "mineHighlight",
+                               "mineHighlight"];
         for (index, item) in tabBarVC.tabBar.items!.enumerated()
         {
             item.title = titles[index]
             item.image = UIImage(named: normalImages[index])?.withRenderingMode(.alwaysOriginal)
+            item.selectedImage = UIImage(named: highlightImages[index])?.withRenderingMode(.alwaysOriginal)
         }
     }
     

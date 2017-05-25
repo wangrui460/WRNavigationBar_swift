@@ -1,5 +1,5 @@
 //
-//  UINavigationBar+WRAddition.swift
+//  WRNavigationBar.swift
 //  WRNavigationBar_swift
 //
 //  Created by wangrui on 2017/4/19.
