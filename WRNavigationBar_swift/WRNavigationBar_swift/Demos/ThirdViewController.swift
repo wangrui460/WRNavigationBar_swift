@@ -27,7 +27,7 @@ class ThirdViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        title = "你妹的"
+        title = "WR"
         view.backgroundColor = UIColor.red
         view.addSubview(tableView)
         tableView.tableHeaderView = imageView

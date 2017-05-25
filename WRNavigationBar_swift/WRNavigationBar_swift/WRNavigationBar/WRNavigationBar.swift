@@ -69,7 +69,7 @@ extension UINavigationBar
         barBackgroundView.alpha = alpha
     }
     
-    /// 设置导航栏所有BarButtonItem的透明度
+    // 设置导航栏所有BarButtonItem的透明度
     func wr_setBarButtonItemsAlpha(alpha:CGFloat, hasSystemBackIndicator:Bool)
     {
         for view in subviews
@@ -411,6 +411,7 @@ extension UIViewController
         static var navBarEffectAlpha:CGFloat = 1.0
         static var navBarTintColor: UIColor = UIColor.defaultNavBarTintColor
         static var statusBarStyle: UIStatusBarStyle = UIStatusBarStyle.default
+        static var customNavBar: UINavigationBar = UINavigationBar()
     }
     
     // navigationBar barTintColor can not change by currentVC before fromVC push to currentVC finished
@@ -449,8 +450,16 @@ extension UIViewController
         }
         set {
             objc_setAssociatedObject(self, &AssociatedKeys.navBarBarTintColor, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            if pushToCurrentVCFinished == true && pushToNextVCFinished == false {
-                navigationController?.setNeedsNavigationBarUpdate(barTintColor: newValue)
+            
+            if customNavBar.isKind(of: UINavigationBar.self) {
+                let navBar = customNavBar as! UINavigationBar
+                navBar.wr_setBackgroundColor(color: newValue)
+            }
+            else
+            {
+                if pushToCurrentVCFinished == true && pushToNextVCFinished == false {
+                    navigationController?.setNeedsNavigationBarUpdate(barTintColor: newValue)
+                }
             }
         }
     }
@@ -465,8 +474,16 @@ extension UIViewController
         }
         set {
             objc_setAssociatedObject(self, &AssociatedKeys.navBarEffectAlpha, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            if pushToCurrentVCFinished == true && pushToNextVCFinished == false {
-                navigationController?.setNeedsNavigationBarUpdate(effectAlpha: newValue)
+            
+            if customNavBar.isKind(of: UINavigationBar.self) {
+                let navBar = customNavBar as! UINavigationBar
+                navBar.wr_setBackgroundAlpha(alpha: newValue)
+            }
+            else
+            {
+                if pushToCurrentVCFinished == true && pushToNextVCFinished == false {
+                    navigationController?.setNeedsNavigationBarUpdate(effectAlpha: newValue)
+                }
             }
         }
     }
@@ -481,8 +498,17 @@ extension UIViewController
         }
         set {
             objc_setAssociatedObject(self, &AssociatedKeys.navBarTintColor, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            if pushToNextVCFinished == false {
-                navigationController?.setNeedsNavigationBarUpdate(tintColor: newValue)
+            
+            if customNavBar.isKind(of: UINavigationBar.self) {
+                let navBar = customNavBar as! UINavigationBar
+                navBar.tintColor = newValue
+                navBar.titleTextAttributes = [NSForegroundColorAttributeName:newValue]
+            }
+            else
+            {
+                if pushToNextVCFinished == false {
+                    navigationController?.setNeedsNavigationBarUpdate(tintColor: newValue)
+                }
             }
         }
     }
@@ -498,6 +524,19 @@ extension UIViewController
         set {
             objc_setAssociatedObject(self, &AssociatedKeys.statusBarStyle, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             setNeedsStatusBarAppearanceUpdate()
+        }
+    }
+    
+    // custom navigationBar
+    var customNavBar: UIView {
+        get {
+            guard let navBar = objc_getAssociatedObject(self, &AssociatedKeys.customNavBar) as? UINavigationBar else {
+                return UIView()
+            }
+            return navBar
+        }
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.customNavBar, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     

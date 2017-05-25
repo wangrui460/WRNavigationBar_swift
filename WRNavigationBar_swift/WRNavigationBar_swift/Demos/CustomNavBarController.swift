@@ -38,7 +38,9 @@ class CustomNavBarController: BaseViewController
         navItem.leftBarButtonItem = UIBarButtonItem(title: "star", style: .plain, target: self, action: nil)
         navItem.title = "自定义导航栏"
         
-        navBar.wr_setBackgroundAlpha(alpha: 0)
+        customNavBar = navBar
+        navBarEffectAlpha = 0
+//        navBar.wr_setBackgroundAlpha(alpha: 0)
     }
 }
 
@@ -52,11 +54,13 @@ extension CustomNavBarController
         if (offsetY > NAVBAR_COLORCHANGE_POINT)
         {
             let alpha = (offsetY - NAVBAR_COLORCHANGE_POINT) / CGFloat(kNavBarBottom)
-            navBar.wr_setBackgroundAlpha(alpha: alpha)
+//            navBar.wr_setBackgroundAlpha(alpha: alpha)
+            navBarEffectAlpha = alpha
         }
         else
         {
-            navBar.wr_setBackgroundAlpha(alpha: 0)
+//            navBar.wr_setBackgroundAlpha(alpha: 0)
+            navBarEffectAlpha = 0
         }
     }
 }

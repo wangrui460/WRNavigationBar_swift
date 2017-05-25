@@ -12,13 +12,15 @@
 		1A0DF7821EA7176500191349 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A0DF7811EA7176500191349 /* Assets.xcassets */; };
 		1A0DF7851EA7176500191349 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A0DF7831EA7176500191349 /* LaunchScreen.storyboard */; };
 		1A0DF7901EA7176500191349 /* WRNavigationBar_swiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0DF78F1EA7176500191349 /* WRNavigationBar_swiftTests.swift */; };
-		1A0DF7B31EA7372800191349 /* DemoListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0DF7B21EA7372800191349 /* DemoListController.swift */; };
+		1A0DF7B31EA7372800191349 /* NormalListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0DF7B21EA7372800191349 /* NormalListController.swift */; };
 		1A0DF7B51EA7380600191349 /* SixthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0DF7B41EA7380600191349 /* SixthViewController.swift */; };
 		1A0DF7B71EA7471B00191349 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0DF7B61EA7471B00191349 /* FirstViewController.swift */; };
 		1A0DF7B91EA7521C00191349 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0DF7B81EA7521C00191349 /* BaseNavigationController.swift */; };
 		1A0DF7BE1EA7545900191349 /* WRNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0DF7BD1EA7545900191349 /* WRNavigationBar.swift */; };
 		1A869EDD1ECAA0C1006D96F8 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A869EDC1ECAA0C1006D96F8 /* BaseViewController.swift */; };
 		1A869EDF1ECAA36B006D96F8 /* CustomNavBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A869EDE1ECAA36B006D96F8 /* CustomNavBarController.swift */; };
+		1A96559C1ED6B64F00A89E30 /* CustomListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A96559B1ED6B64F00A89E30 /* CustomListController.swift */; };
+		1A96559E1ED6B8C600A89E30 /* MoveListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A96559D1ED6B8C600A89E30 /* MoveListController.swift */; };
 		1AB702661EA9A43C006DBA79 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB702651EA9A43C006DBA79 /* SecondViewController.swift */; };
 		1AB702681EA9A9BC006DBA79 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB702671EA9A9BC006DBA79 /* ThirdViewController.swift */; };
 		1AB7026A1EA9AC7A006DBA79 /* FourthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB702691EA9AC7A006DBA79 /* FourthViewController.swift */; };
@@ -45,13 +47,15 @@
 		1A0DF78B1EA7176500191349 /* WRNavigationBar_swiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WRNavigationBar_swiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A0DF78F1EA7176500191349 /* WRNavigationBar_swiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WRNavigationBar_swiftTests.swift; sourceTree = "<group>"; };
 		1A0DF7911EA7176500191349 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1A0DF7B21EA7372800191349 /* DemoListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoListController.swift; sourceTree = "<group>"; };
+		1A0DF7B21EA7372800191349 /* NormalListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalListController.swift; sourceTree = "<group>"; };
 		1A0DF7B41EA7380600191349 /* SixthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SixthViewController.swift; sourceTree = "<group>"; };
 		1A0DF7B61EA7471B00191349 /* FirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		1A0DF7B81EA7521C00191349 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseNavigationController.swift; path = Demos/BaseNavigationController.swift; sourceTree = "<group>"; };
 		1A0DF7BD1EA7545900191349 /* WRNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WRNavigationBar.swift; sourceTree = "<group>"; };
 		1A869EDC1ECAA0C1006D96F8 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		1A869EDE1ECAA36B006D96F8 /* CustomNavBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomNavBarController.swift; sourceTree = "<group>"; };
+		1A96559B1ED6B64F00A89E30 /* CustomListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomListController.swift; sourceTree = "<group>"; };
+		1A96559D1ED6B8C600A89E30 /* MoveListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveListController.swift; sourceTree = "<group>"; };
 		1AB702651EA9A43C006DBA79 /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		1AB702671EA9A9BC006DBA79 /* ThirdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
 		1AB702691EA9AC7A006DBA79 /* FourthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FourthViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +105,8 @@
 				1A0DF7B81EA7521C00191349 /* BaseNavigationController.swift */,
 				1A0DF79A1EA7179500191349 /* WRNavigationBar */,
 				1A0DF7B11EA7370000191349 /* 普通 */,
+				1A6FB6F51ED023EE0098622A /* 自定义导航栏 */,
+				1A96559A1ED6B5AB00A89E30 /* 移动导航栏 */,
 				1A0DF77E1EA7176500191349 /* Main.storyboard */,
 				1A0DF7811EA7176500191349 /* Assets.xcassets */,
 				1A0DF7831EA7176500191349 /* LaunchScreen.storyboard */,
@@ -129,14 +135,10 @@
 		1A0DF7B11EA7370000191349 /* 普通 */ = {
 			isa = PBXGroup;
 			children = (
-				1A0DF7B21EA7372800191349 /* DemoListController.swift */,
+				1A0DF7B21EA7372800191349 /* NormalListController.swift */,
 				1A0DF7B61EA7471B00191349 /* FirstViewController.swift */,
-				1AB702651EA9A43C006DBA79 /* SecondViewController.swift */,
-				1AB702671EA9A9BC006DBA79 /* ThirdViewController.swift */,
 				1AB702691EA9AC7A006DBA79 /* FourthViewController.swift */,
 				1AB7026B1EA9B753006DBA79 /* FifthViewController.swift */,
-				1A0DF7B41EA7380600191349 /* SixthViewController.swift */,
-				1A6FB6F51ED023EE0098622A /* 自定义导航栏 */,
 			);
 			name = "普通";
 			path = Demos;
@@ -146,9 +148,23 @@
 			isa = PBXGroup;
 			children = (
 				1A869EDC1ECAA0C1006D96F8 /* BaseViewController.swift */,
+				1A96559B1ED6B64F00A89E30 /* CustomListController.swift */,
 				1A869EDE1ECAA36B006D96F8 /* CustomNavBarController.swift */,
 			);
 			name = "自定义导航栏";
+			path = Demos;
+			sourceTree = "<group>";
+		};
+		1A96559A1ED6B5AB00A89E30 /* 移动导航栏 */ = {
+			isa = PBXGroup;
+			children = (
+				1A96559D1ED6B8C600A89E30 /* MoveListController.swift */,
+				1AB702651EA9A43C006DBA79 /* SecondViewController.swift */,
+				1AB702671EA9A9BC006DBA79 /* ThirdViewController.swift */,
+				1A0DF7B41EA7380600191349 /* SixthViewController.swift */,
+			);
+			name = "移动导航栏";
+			path = Demos;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,12 +274,14 @@
 			files = (
 				1A869EDF1ECAA36B006D96F8 /* CustomNavBarController.swift in Sources */,
 				1AB7026C1EA9B753006DBA79 /* FifthViewController.swift in Sources */,
+				1A96559E1ED6B8C600A89E30 /* MoveListController.swift in Sources */,
 				1A0DF7BE1EA7545900191349 /* WRNavigationBar.swift in Sources */,
 				1A869EDD1ECAA0C1006D96F8 /* BaseViewController.swift in Sources */,
-				1A0DF7B31EA7372800191349 /* DemoListController.swift in Sources */,
+				1A0DF7B31EA7372800191349 /* NormalListController.swift in Sources */,
 				1A0DF7B51EA7380600191349 /* SixthViewController.swift in Sources */,
 				1AB7026A1EA9AC7A006DBA79 /* FourthViewController.swift in Sources */,
 				1A0DF77B1EA7176500191349 /* AppDelegate.swift in Sources */,
+				1A96559C1ED6B64F00A89E30 /* CustomListController.swift in Sources */,
 				1AB702661EA9A43C006DBA79 /* SecondViewController.swift in Sources */,
 				1A0DF7B91EA7521C00191349 /* BaseNavigationController.swift in Sources */,
 				1AB702681EA9A9BC006DBA79 /* ThirdViewController.swift in Sources */,

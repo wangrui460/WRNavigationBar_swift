@@ -24,9 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow.init(frame: UIScreen.main.bounds)
         window?.backgroundColor = UIColor.white
         
-        let firstNav = BaseNavigationController.init(rootViewController: DemoListController())
-        let secondNav = BaseNavigationController.init(rootViewController: CustomNavBarController())
-        let thirdNav = BaseNavigationController.init(rootViewController: SixthViewController())
+        let firstNav = BaseNavigationController.init(rootViewController: NormalListController())
+        let secondNav = BaseNavigationController.init(rootViewController: CustomListController())
+        let thirdNav = BaseNavigationController.init(rootViewController: MoveListController())
         let tabBarVC = UITabBarController.init()
         tabBarVC.viewControllers = [firstNav, secondNav, thirdNav]
         setTabBarItems(tabBarVC: tabBarVC)
@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func setTabBarItems(tabBarVC:UITabBarController)
     {
-        let titles = ["常用",  "自定义导航栏", "没有系统返回按钮的情况"];
+        let titles = ["常用",  "自定义导航栏", "移动导航栏"];
         let normalImages = ["tabBar0",
                             "tabBar1",
                             "tabBar2"];
