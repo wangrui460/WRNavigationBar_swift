@@ -21,7 +21,8 @@ class DemoListController: UIViewController
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.backgroundColor = UIColor.init(red: 254/255.0, green: 128/255.0, blue: 162/255.0, alpha: 1.0)
+//        tableView.backgroundColor = UIColor.init(red: 254/255.0, green: 128/255.0, blue: 162/255.0, alpha: 1.0)
+        tableView.backgroundColor = UIColor.white
         
         navBarBarTintColor = UIColor.init(red: 247/255.0, green: 247/255.0, blue: 247/255.0, alpha: 1.0)
         navBarEffectAlpha = 1.0

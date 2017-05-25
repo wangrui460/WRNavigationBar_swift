@@ -29,7 +29,6 @@ extension UINavigationBar
     // set navigationBar barTintColor
     func wr_setBackgroundColor(color:UIColor)
     {
-        barTintColor = color
         if (backgroundView == nil)
         {
             // 设置导航栏本身全透明

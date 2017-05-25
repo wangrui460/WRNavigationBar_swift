@@ -38,9 +38,7 @@ class CustomNavBarController: BaseViewController
         navItem.leftBarButtonItem = UIBarButtonItem(title: "star", style: .plain, target: self, action: nil)
         navItem.title = "自定义导航栏"
         
-        navBar.wr_setBackgroundColor(color: .clear)
-        navBar.shadowImage = UIImage()
-//        navBarEffectAlpha = 0
+        navBar.wr_setBackgroundAlpha(alpha: 0)
     }
 }
 
@@ -48,33 +46,17 @@ class CustomNavBarController: BaseViewController
 // MARK: - viewWillAppear .. ScrollViewDidScroll
 extension CustomNavBarController
 {
-    override func viewWillAppear(_ animated: Bool)
-    {
-        super.viewWillAppear(animated)
-        tableView.delegate = self
-        scrollViewDidScroll(tableView)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        // 如果不取消代理的话，跳转到下一个页面后，还会调用 scrollViewDidScroll 方法
-        tableView.delegate = nil
-        navBar.wr_clear()
-    }
-    
     func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
         let offsetY = scrollView.contentOffset.y
         if (offsetY > NAVBAR_COLORCHANGE_POINT)
         {
             let alpha = (offsetY - NAVBAR_COLORCHANGE_POINT) / CGFloat(kNavBarBottom)
-            navBar.wr_setBackgroundColor(color: MainNavBarColor.withAlphaComponent(alpha))
-//            navBarEffectAlpha = alpha
+            navBar.wr_setBackgroundAlpha(alpha: alpha)
         }
         else
         {
-            navBar.wr_setBackgroundColor(color: UIColor.clear)
-//            navBarEffectAlpha = 0
+            navBar.wr_setBackgroundAlpha(alpha: 0)
         }
     }
 }
@@ -100,7 +82,7 @@ extension CustomNavBarController:UITableViewDelegate,UITableViewDataSource
         tableView.deselectRow(at: indexPath, animated: true)
         let vc:BaseViewController = BaseViewController()
         vc.view.backgroundColor = UIColor.red
-        let str = String(format: "WRNavigationBar %zd", indexPath.row)
+        let str = String(format: "右滑返回查看效果 ", indexPath.row)
         vc.navItem.title = str
         vc.navItem.leftBarButtonItem = UIBarButtonItem(title: "返回", style: .plain, target: self, action: #selector(back))
         navigationController?.pushViewController(vc, animated: true)
