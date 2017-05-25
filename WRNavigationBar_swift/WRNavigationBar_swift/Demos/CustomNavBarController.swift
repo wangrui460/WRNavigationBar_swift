@@ -22,30 +22,43 @@ class CustomNavBarController: BaseViewController
         return table
     }()
     lazy var imageView:UIImageView = {
-        let imgView = UIImageView(image: UIImage(named: "image1"))
-        imgView.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: IMAGE_HEIGHT)
+        let imgView = UIImageView(image: UIImage(named: "image4"))
+        imgView.frame.size = CGSize(width: 100, height: 100)
+        imgView.layer.cornerRadius = 50
+        imgView.layer.masksToBounds = true
         return imgView
+    }()
+    lazy var topView:UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: IMAGE_HEIGHT))
+        view.backgroundColor = UIColor.orange
+        return view
     }()
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        title = "自定义导航栏"
         view.backgroundColor = UIColor.red
         view.addSubview(tableView)
-        tableView.tableHeaderView = imageView
+        topView.addSubview(imageView)
+        imageView.center = topView.center
+        tableView.tableHeaderView = topView
         view.insertSubview(navBar, aboveSubview: tableView)
-        navItem.leftBarButtonItem = UIBarButtonItem(title: "star", style: .plain, target: self, action: nil)
-        navItem.title = "自定义导航栏"
+        navItem.leftBarButtonItem = UIBarButtonItem(title: "<<", style: .plain, target: self, action: #selector(back))
+        navItem.title = "个人中心"
         
-        customNavBar = navBar
+        // 设置导航栏颜色
+        navBarBarTintColor = UIColor.init(red: 247/255.0, green: 247/255.0, blue: 247/255.0, alpha: 1.0)
+        
+        // 设置初始导航栏透明度
         navBarEffectAlpha = 0
-//        navBar.wr_setBackgroundAlpha(alpha: 0)
+        
+        // 设置导航栏按钮和标题颜色
+        navBarTintColor = .white
     }
 }
 
 
-// MARK: - viewWillAppear .. ScrollViewDidScroll
+// MARK: - ScrollViewDidScroll
 extension CustomNavBarController
 {
     func scrollViewDidScroll(_ scrollView: UIScrollView)
@@ -54,13 +67,15 @@ extension CustomNavBarController
         if (offsetY > NAVBAR_COLORCHANGE_POINT)
         {
             let alpha = (offsetY - NAVBAR_COLORCHANGE_POINT) / CGFloat(kNavBarBottom)
-//            navBar.wr_setBackgroundAlpha(alpha: alpha)
             navBarEffectAlpha = alpha
+            navBarTintColor =  UIColor.black.withAlphaComponent(alpha)
+            statusBarStyle = .default
         }
         else
         {
-//            navBar.wr_setBackgroundAlpha(alpha: 0)
             navBarEffectAlpha = 0
+            navBarTintColor = .white
+            statusBarStyle = .lightContent
         }
     }
 }

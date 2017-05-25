@@ -27,7 +27,7 @@ extension UINavigationBar
     }
     
     // set navigationBar barTintColor
-    func wr_setBackgroundColor(color:UIColor)
+    fileprivate func wr_setBackgroundColor(color:UIColor)
     {
         if (backgroundView == nil)
         {
@@ -41,7 +41,7 @@ extension UINavigationBar
     }
     
     // set navigationBar effectView alpha    设置导航栏毛玻璃的透明度
-    func wr_setBackgroundAlpha(alpha:CGFloat)
+    fileprivate func wr_setBackgroundAlpha(alpha:CGFloat)
     {
         let barBackgroundView = subviews[0]
         let valueForKey = barBackgroundView.value(forKey:)

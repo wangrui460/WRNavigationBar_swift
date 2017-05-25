@@ -22,14 +22,8 @@ class CustomListController: BaseViewController
         tableView.delegate = self
         tableView.backgroundColor = UIColor.white
         view.insertSubview(navBar, aboveSubview: tableView)
-        navItem.title = "案例"
+        navItem.title = "自定义导航栏"
         
-        
-//        navBar.barTintColor = UIColor.init(red: 247/255.0, green: 247/255.0, blue: 247/255.0, alpha: 1.0)
-//        navBar.tintColor = .black
-//        navBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.black]
-        
-        customNavBar = navBar
         navBarBarTintColor = UIColor.init(red: 247/255.0, green: 247/255.0, blue: 247/255.0, alpha: 1.0)
         navBarTintColor = .black
         statusBarStyle = .default

@@ -16,7 +16,7 @@ class MoveListController: UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
-        title = "案例"
+        title = "移动导航栏"
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
@@ -44,15 +44,9 @@ extension MoveListController: UITableViewDelegate, UITableViewDataSource
         var str:String? = nil
         switch indexPath.row {
         case 0:
-            str = "主页";
-        case 1:
             str = "超过临界点移动导航栏";
-        case 2:
+        case 1:
             str = "超过临界点多少，移动导航栏多少(不会超过44)";
-        case 3:
-            str = "类似qq应用空间效果";
-        case 4:
-            str = "类似QQ空间效果";
         default:
             str = ""
         }
@@ -70,15 +64,9 @@ extension MoveListController: UITableViewDelegate, UITableViewDataSource
         tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.row {
         case 0:
-            navigationController?.pushViewController(FirstViewController(), animated: true)
-        case 1:
             navigationController?.pushViewController(SecondViewController(), animated: true)
-        case 2:
+        case 1:
             navigationController?.pushViewController(ThirdViewController(), animated: true)
-        case 3:
-            navigationController?.pushViewController(FourthViewController(), animated: true)
-        case 4:
-            navigationController?.pushViewController(FifthViewController(), animated: true)
         default:
            break
         }

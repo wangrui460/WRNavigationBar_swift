@@ -24,6 +24,9 @@ class BaseViewController: UIViewController
 
     fileprivate func setupNavBar()
     {
+        // 自定义导航栏必须设置这个属性
+        customNavBar = navBar
+        
         view.addSubview(navBar)
         navBar.items = [navItem]
         // 导航条背景颜色
