@@ -619,9 +619,9 @@ extension DispatchQueue {
 extension UIColor
 {
     fileprivate struct AssociatedKeys
-    {
-        static var defNavBarBarTintColor: UIColor = UIColor.white // UIColor.init(red: 0/255.0, green: 175/255.0, blue: 240/255.0, alpha: 1)
-        static var defNavBarTintColor: UIColor = UIColor.white
+    {   // default is system attributes
+        static var defNavBarBarTintColor: UIColor = UIColor.white
+        static var defNavBarTintColor: UIColor = UIColor(red: 0, green: 0.478431, blue: 1, alpha: 1.0)
         static var defStatusBarStyle: UIStatusBarStyle = UIStatusBarStyle.default
     }
     class var defaultNavBarBarTintColor: UIColor {
