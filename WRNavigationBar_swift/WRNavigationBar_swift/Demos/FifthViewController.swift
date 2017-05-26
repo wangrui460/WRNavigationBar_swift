@@ -38,7 +38,7 @@ class FifthViewController: UIViewController
         tableView.addSubview(imageView)
         view.addSubview(tableView)
         
-        navBarEffectAlpha = 0
+        navBarBackgroundAlpha = 0
     }
 }
 
@@ -53,11 +53,11 @@ extension FifthViewController
         if (offsetY > NAVBAR_COLORCHANGE_POINT)
         {
             let alpha = (offsetY - NAVBAR_COLORCHANGE_POINT) / CGFloat(kNavBarBottom)
-            navBarEffectAlpha = alpha
+            navBarBackgroundAlpha = alpha
         }
         else
         {
-            navBarEffectAlpha = 0
+            navBarBackgroundAlpha = 0
         }
         
         // 限制下拉距离

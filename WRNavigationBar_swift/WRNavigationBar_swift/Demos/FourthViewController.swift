@@ -38,7 +38,7 @@ class FourthViewController: UIViewController
         tableView.addSubview(imageView)
         view.addSubview(tableView)
         
-        navBarEffectAlpha = 0
+        navBarBackgroundAlpha = 0
     }
 }
 
@@ -76,10 +76,10 @@ extension FourthViewController
             if let weakSelf = self
             {
                 if (isClear == true) {
-                    weakSelf.navBarEffectAlpha = 0
+                    weakSelf.navBarBackgroundAlpha = 0
                 }
                 else {
-                    weakSelf.navBarEffectAlpha = 1.0
+                    weakSelf.navBarBackgroundAlpha = 1.0
                 }
             }
         })

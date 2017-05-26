@@ -50,7 +50,7 @@ class CustomNavBarController: BaseViewController
         navBarBarTintColor = UIColor.init(red: 247/255.0, green: 247/255.0, blue: 247/255.0, alpha: 1.0)
         
         // 设置初始导航栏透明度
-        navBarEffectAlpha = 0
+        navBarBackgroundAlpha = 0
         
         // 设置导航栏按钮和标题颜色
         navBarTintColor = .white
@@ -67,13 +67,13 @@ extension CustomNavBarController
         if (offsetY > NAVBAR_COLORCHANGE_POINT)
         {
             let alpha = (offsetY - NAVBAR_COLORCHANGE_POINT) / CGFloat(kNavBarBottom)
-            navBarEffectAlpha = alpha
+            navBarBackgroundAlpha = alpha
             navBarTintColor =  UIColor.black.withAlphaComponent(alpha)
             statusBarStyle = .default
         }
         else
         {
-            navBarEffectAlpha = 0
+            navBarBackgroundAlpha = 0
             navBarTintColor = .white
             statusBarStyle = .lightContent
         }
