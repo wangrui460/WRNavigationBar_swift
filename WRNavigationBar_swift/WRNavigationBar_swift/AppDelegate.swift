@@ -32,9 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setTabBarItems(tabBarVC: tabBarVC)
         
         window?.rootViewController = tabBarVC
+        setNavBarAppearence()
         window?.makeKeyAndVisible()
         
-        setNavBarAppearence()
         return true
     }
 
@@ -57,9 +57,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func setNavBarAppearence()
     {
-        // 修改导航栏默认的背景颜色
+        // 设置导航栏默认的背景颜色
         UIColor.defaultNavBarBarTintColor = UIColor.init(red: 0/255.0, green: 175/255.0, blue: 240/255.0, alpha: 1)
-        // 修改导航栏中间标题和所有按钮的默认颜色
+        // 设置导航栏标题和所有按钮的默认颜色
         UIColor.defaultNavBarTintColor = .white
         // 统一设置状态栏样式
         UIColor.defaultStatusBarStyle = .lightContent

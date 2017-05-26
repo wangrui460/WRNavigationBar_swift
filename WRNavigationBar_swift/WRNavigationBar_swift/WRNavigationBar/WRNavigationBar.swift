@@ -29,6 +29,7 @@ extension UINavigationBar
     // set navigationBar barTintColor
     fileprivate func wr_setBackgroundColor(color:UIColor)
     {
+//        barTintColor = color
         if (backgroundView == nil)
         {
             // 设置导航栏本身全透明
@@ -104,14 +105,14 @@ extension UINavigationBar
         transform = CGAffineTransform.init(translationX: 0, y: translationY)
     }
     
-    /// 清除在导航栏上设置的背景颜色、透明度、位移距离等属性
-    func wr_clear()
-    {
-        // 设置导航栏不透明
-        setBackgroundImage(nil, for: .default)
-        backgroundView?.removeFromSuperview()
-        backgroundView = nil
-    }
+//    /// 清除在导航栏上设置的背景颜色、透明度、位移距离等属性
+//    func wr_clear()
+//    {
+//        // 设置导航栏不透明
+//        setBackgroundImage(nil, for: .default)
+//        backgroundView?.removeFromSuperview()
+//        backgroundView = nil
+//    }
 }
 
 //==========================================================================
@@ -684,11 +685,11 @@ extension UIColor
         toColor.getRed(&toRed, green: &toGreen, blue: &toBlue, alpha: &toAlpha)
         
         // calculate middle color RGBA
-        let nowRed = fromRed + (toRed - fromRed) * percent
-        let nowGreen = fromGreen + (toGreen - fromGreen) * percent
-        let nowBlue = fromBlue + (toBlue - fromBlue) * percent
-        let nowAlpha = fromAlpha + (toAlpha - fromAlpha) * percent
-        return UIColor(red: nowRed, green: nowGreen, blue: nowBlue, alpha: nowAlpha)
+        let newRed = fromRed + (toRed - fromRed) * percent
+        let newGreen = fromGreen + (toGreen - fromGreen) * percent
+        let newBlue = fromBlue + (toBlue - fromBlue) * percent
+        let newAlpha = fromAlpha + (toAlpha - fromAlpha) * percent
+        return UIColor(red: newRed, green: newGreen, blue: newBlue, alpha: newAlpha)
     }
     
     // Calculate the middle alpha
