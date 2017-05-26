@@ -1,3 +1,5 @@
+![image](https://github.com/wangrui460/WRNavigationBar/raw/master/screenshots/WRNavigationBar.png)
+
 # WRNavigationBar_swift
 
 [OC 版本](https://github.com/wangrui460/WRNavigationBar)
