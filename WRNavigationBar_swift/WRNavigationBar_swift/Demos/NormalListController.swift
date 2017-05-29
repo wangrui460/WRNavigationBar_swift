@@ -41,11 +41,13 @@ extension NormalListController: UITableViewDelegate, UITableViewDataSource
         var str:String? = nil
         switch indexPath.row {
         case 0:
-            str = "主页";
+            str = "主页"
         case 1:
-            str = "类似qq应用空间效果";
+            str = "类似qq应用空间效果"
         case 2:
-            str = "类似QQ空间效果";
+            str = "类似QQ空间效果"
+        case 3:
+            str = "知乎日报"
         default:
             str = ""
         }
@@ -68,6 +70,8 @@ extension NormalListController: UITableViewDelegate, UITableViewDataSource
             navigationController?.pushViewController(FourthViewController(), animated: true)
         case 2:
             navigationController?.pushViewController(FifthViewController(), animated: true)
+        case 3:
+            navigationController?.pushViewController(ZhiHuController(), animated: true)
         default:
            break
         }

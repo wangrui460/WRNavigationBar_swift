@@ -25,6 +25,11 @@
 		1AB702681EA9A9BC006DBA79 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB702671EA9A9BC006DBA79 /* ThirdViewController.swift */; };
 		1AB7026A1EA9AC7A006DBA79 /* FourthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB702691EA9AC7A006DBA79 /* FourthViewController.swift */; };
 		1AB7026C1EA9B753006DBA79 /* FifthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB7026B1EA9B753006DBA79 /* FifthViewController.swift */; };
+		1AD0140A1EDBFB4500A6893C /* ZhiHuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD014091EDBFB4500A6893C /* ZhiHuController.swift */; };
+		1AD0140F1EDBFEAC00A6893C /* WRCycleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD0140C1EDBFEAC00A6893C /* WRCycleCell.swift */; };
+		1AD014101EDBFEAC00A6893C /* WRCycleScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD0140D1EDBFEAC00A6893C /* WRCycleScrollView.swift */; };
+		1AD014111EDBFEAC00A6893C /* WRProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD0140E1EDBFEAC00A6893C /* WRProxy.swift */; };
+		BA823A4F29CFCD6EEC3B52B9 /* Pods_WRNavigationBar_swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C8A182323696F064D8660C /* Pods_WRNavigationBar_swift.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +65,13 @@
 		1AB702671EA9A9BC006DBA79 /* ThirdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
 		1AB702691EA9AC7A006DBA79 /* FourthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FourthViewController.swift; sourceTree = "<group>"; };
 		1AB7026B1EA9B753006DBA79 /* FifthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FifthViewController.swift; sourceTree = "<group>"; };
+		1AD014091EDBFB4500A6893C /* ZhiHuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZhiHuController.swift; sourceTree = "<group>"; };
+		1AD0140C1EDBFEAC00A6893C /* WRCycleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WRCycleCell.swift; sourceTree = "<group>"; };
+		1AD0140D1EDBFEAC00A6893C /* WRCycleScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WRCycleScrollView.swift; sourceTree = "<group>"; };
+		1AD0140E1EDBFEAC00A6893C /* WRProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WRProxy.swift; sourceTree = "<group>"; };
+		272C2A7862DC39DA91D57781 /* Pods-WRNavigationBar_swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WRNavigationBar_swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-WRNavigationBar_swift/Pods-WRNavigationBar_swift.release.xcconfig"; sourceTree = "<group>"; };
+		63C8A182323696F064D8660C /* Pods_WRNavigationBar_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WRNavigationBar_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D76868588A082EB7E7777210 /* Pods-WRNavigationBar_swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WRNavigationBar_swift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WRNavigationBar_swift/Pods-WRNavigationBar_swift.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA823A4F29CFCD6EEC3B52B9 /* Pods_WRNavigationBar_swift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +99,8 @@
 				1A0DF7791EA7176500191349 /* WRNavigationBar_swift */,
 				1A0DF78E1EA7176500191349 /* WRNavigationBar_swiftTests */,
 				1A0DF7781EA7176500191349 /* Products */,
+				3DD6CC0BB5CD77C87CA6E111 /* Pods */,
+				C0FFEBF49771A4C61FC2F583 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,6 +118,7 @@
 			children = (
 				1A0DF77A1EA7176500191349 /* AppDelegate.swift */,
 				1A0DF7B81EA7521C00191349 /* BaseNavigationController.swift */,
+				1AD0140B1EDBFEAC00A6893C /* WRCycleScrollView */,
 				1A0DF79A1EA7179500191349 /* WRNavigationBar */,
 				1A0DF7B11EA7370000191349 /* 普通 */,
 				1A6FB6F51ED023EE0098622A /* 自定义导航栏 */,
@@ -139,6 +155,7 @@
 				1A0DF7B61EA7471B00191349 /* FirstViewController.swift */,
 				1AB702691EA9AC7A006DBA79 /* FourthViewController.swift */,
 				1AB7026B1EA9B753006DBA79 /* FifthViewController.swift */,
+				1AD014091EDBFB4500A6893C /* ZhiHuController.swift */,
 			);
 			name = "普通";
 			path = Demos;
@@ -167,6 +184,34 @@
 			path = Demos;
 			sourceTree = "<group>";
 		};
+		1AD0140B1EDBFEAC00A6893C /* WRCycleScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				1AD0140C1EDBFEAC00A6893C /* WRCycleCell.swift */,
+				1AD0140D1EDBFEAC00A6893C /* WRCycleScrollView.swift */,
+				1AD0140E1EDBFEAC00A6893C /* WRProxy.swift */,
+			);
+			name = WRCycleScrollView;
+			path = WRNavigationBar/WRCycleScrollView;
+			sourceTree = "<group>";
+		};
+		3DD6CC0BB5CD77C87CA6E111 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D76868588A082EB7E7777210 /* Pods-WRNavigationBar_swift.debug.xcconfig */,
+				272C2A7862DC39DA91D57781 /* Pods-WRNavigationBar_swift.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C0FFEBF49771A4C61FC2F583 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				63C8A182323696F064D8660C /* Pods_WRNavigationBar_swift.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -174,9 +219,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1A0DF7941EA7176500191349 /* Build configuration list for PBXNativeTarget "WRNavigationBar_swift" */;
 			buildPhases = (
+				8B07B81DC9245E9840A20E2B /* [CP] Check Pods Manifest.lock */,
 				1A0DF7731EA7176500191349 /* Sources */,
 				1A0DF7741EA7176500191349 /* Frameworks */,
 				1A0DF7751EA7176500191349 /* Resources */,
+				D52EBFEB66FB9C860C432F23 /* [CP] Embed Pods Frameworks */,
+				4D703F4092429718B46E9B6D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -267,6 +315,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4D703F4092429718B46E9B6D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WRNavigationBar_swift/Pods-WRNavigationBar_swift-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8B07B81DC9245E9840A20E2B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D52EBFEB66FB9C860C432F23 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WRNavigationBar_swift/Pods-WRNavigationBar_swift-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1A0DF7731EA7176500191349 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -275,9 +371,13 @@
 				1A869EDF1ECAA36B006D96F8 /* CustomNavBarController.swift in Sources */,
 				1AB7026C1EA9B753006DBA79 /* FifthViewController.swift in Sources */,
 				1A96559E1ED6B8C600A89E30 /* MoveListController.swift in Sources */,
+				1AD014111EDBFEAC00A6893C /* WRProxy.swift in Sources */,
 				1A0DF7BE1EA7545900191349 /* WRNavigationBar.swift in Sources */,
+				1AD0140A1EDBFB4500A6893C /* ZhiHuController.swift in Sources */,
+				1AD0140F1EDBFEAC00A6893C /* WRCycleCell.swift in Sources */,
 				1A869EDD1ECAA0C1006D96F8 /* BaseViewController.swift in Sources */,
 				1A0DF7B31EA7372800191349 /* NormalListController.swift in Sources */,
+				1AD014101EDBFEAC00A6893C /* WRCycleScrollView.swift in Sources */,
 				1A0DF7B51EA7380600191349 /* SixthViewController.swift in Sources */,
 				1AB7026A1EA9AC7A006DBA79 /* FourthViewController.swift in Sources */,
 				1A0DF77B1EA7176500191349 /* AppDelegate.swift in Sources */,
@@ -422,10 +522,12 @@
 		};
 		1A0DF7951EA7176500191349 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D76868588A082EB7E7777210 /* Pods-WRNavigationBar_swift.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 652U6LDTX4;
 				INFOPLIST_FILE = WRNavigationBar_swift/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "video.wangrui.com.WRNavigationBar-swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -436,10 +538,12 @@
 		};
 		1A0DF7961EA7176500191349 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 272C2A7862DC39DA91D57781 /* Pods-WRNavigationBar_swift.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 652U6LDTX4;
 				INFOPLIST_FILE = WRNavigationBar_swift/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "video.wangrui.com.WRNavigationBar-swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
