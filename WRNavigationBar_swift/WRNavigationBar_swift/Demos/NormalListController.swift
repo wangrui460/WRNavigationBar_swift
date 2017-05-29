@@ -48,6 +48,8 @@ extension NormalListController: UITableViewDelegate, UITableViewDataSource
             str = "类似QQ空间效果"
         case 3:
             str = "知乎日报"
+        case 4:
+            str = "QQ我的资料页"
         default:
             str = ""
         }
@@ -72,6 +74,8 @@ extension NormalListController: UITableViewDelegate, UITableViewDataSource
             navigationController?.pushViewController(FifthViewController(), animated: true)
         case 3:
             navigationController?.pushViewController(ZhiHuController(), animated: true)
+        case 4:
+            navigationController?.pushViewController(QQMineController(), animated: true)
         default:
            break
         }
