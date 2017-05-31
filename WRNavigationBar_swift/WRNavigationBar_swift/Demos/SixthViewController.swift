@@ -31,6 +31,16 @@ class SixthViewController: UIViewController
         view.backgroundColor = UIColor.red
         view.addSubview(tableView)
         tableView.tableHeaderView = imageView
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "自定义返回", style: .done, target: self, action: #selector(back))
+    }
+    
+    func back() {
+        _ = self.navigationController?.popViewController(animated: true)
+    }
+    
+    deinit {
+        tableView.delegate = nil
+        print("SixthVC deinit")
     }
 }
 
@@ -79,8 +89,8 @@ extension SixthViewController
     func setNavigationBarTransformProgress(progress:CGFloat)
     {
         navigationController?.navigationBar.wr_setTranslationY(translationY: -CGFloat(kNavBarHeight) * progress)
-        // 没有系统返回按钮，所以 hasSystemBackIndicator = NO
-        // 如果这里不设置为NO，你会发现，导航栏无缘无故多出来一个返回按钮
+        // 没有系统返回按钮，所以 hasSystemBackIndicator = false
+        // 如果这里不设置为false，你会发现，导航栏无缘无故多出来一个返回按钮
         navigationController?.navigationBar.wr_setBarButtonItemsAlpha(alpha: 1 - progress, hasSystemBackIndicator: false)
     }
 }

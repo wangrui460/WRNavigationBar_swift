@@ -55,10 +55,17 @@ extension UINavigationBar
         {
             if (hasSystemBackIndicator == true)
             {
-                // _UIBarBackground对应的view是系统导航栏，不需要改变其透明度
+                // _UIBarBackground/_UINavigationBarBackground对应的view是系统导航栏，不需要改变其透明度
                 if let _UIBarBackgroundClass = NSClassFromString("_UIBarBackground")
                 {
-                    if (view.isKind(of: _UIBarBackgroundClass) == false) {
+                    if view.isKind(of: _UIBarBackgroundClass) == false {
+                        view.alpha = alpha
+                    }
+                }
+                
+                if let _UINavigationBarBackground = NSClassFromString("_UINavigationBarBackground")
+                {
+                    if view.isKind(of: _UINavigationBarBackground) == false {
                         view.alpha = alpha
                     }
                 }
@@ -67,10 +74,20 @@ extension UINavigationBar
             {
                 // 这里如果不做判断的话，会显示 backIndicatorImage(系统返回按钮)
                 if let _UINavigationBarBackIndicatorViewClass = NSClassFromString("_UINavigationBarBackIndicatorView"),
-                   let _UIBarBackgroundClass                  = NSClassFromString("_UIBarBackground")
+                    view.isKind(of: _UINavigationBarBackIndicatorViewClass) == false
                 {
-                    if (view.isKind(of: _UINavigationBarBackIndicatorViewClass) == false && view.isKind(of: _UIBarBackgroundClass) == false) {
-                        view.alpha = alpha
+                    if let _UIBarBackgroundClass = NSClassFromString("_UIBarBackground")
+                    {
+                        if view.isKind(of: _UIBarBackgroundClass) == false {
+                            view.alpha = alpha
+                        }
+                    }
+                    
+                    if let _UINavigationBarBackground = NSClassFromString("_UINavigationBarBackground")
+                    {
+                        if view.isKind(of: _UINavigationBarBackground) == false {
+                            view.alpha = alpha
+                        }
                     }
                 }
             }

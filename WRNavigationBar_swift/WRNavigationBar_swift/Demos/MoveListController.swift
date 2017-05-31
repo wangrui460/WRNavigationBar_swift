@@ -47,6 +47,8 @@ extension MoveListController: UITableViewDelegate, UITableViewDataSource
             str = "超过临界点移动导航栏";
         case 1:
             str = "超过临界点多少，移动导航栏多少(不会超过44)";
+        case 2:
+            str = "没有系统返回按钮的情况";
         default:
             str = ""
         }
@@ -67,6 +69,8 @@ extension MoveListController: UITableViewDelegate, UITableViewDataSource
             navigationController?.pushViewController(SecondViewController(), animated: true)
         case 1:
             navigationController?.pushViewController(ThirdViewController(), animated: true)
+        case 2:
+            navigationController?.pushViewController(SixthViewController(), animated: true)
         default:
            break
         }

@@ -185,6 +185,7 @@ class WRCycleScrollView: UIView
     }
     
     deinit {
+        collectionView?.delegate = nil
         print("WRCycleScrollView  deinit")
     }
     

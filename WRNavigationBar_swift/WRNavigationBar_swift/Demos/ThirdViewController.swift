@@ -32,6 +32,11 @@ class ThirdViewController: UIViewController
         view.addSubview(tableView)
         tableView.tableHeaderView = imageView
     }
+    
+    deinit {
+        tableView.delegate = nil
+        print("ThirdVC deinit")
+    }
 }
 
 

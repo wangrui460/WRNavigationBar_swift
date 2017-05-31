@@ -32,6 +32,11 @@ class SecondViewController: UIViewController
         view.addSubview(tableView)
         tableView.tableHeaderView = imageView
     }
+    
+    deinit {
+        tableView.delegate = nil
+        print("SecondVC deinit")
+    }
 }
 
 
