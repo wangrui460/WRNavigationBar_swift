@@ -40,6 +40,11 @@ class FourthViewController: UIViewController
         
         navBarBackgroundAlpha = 0
     }
+    
+    deinit {
+        tableView.delegate = nil
+        print("FourthVC deinit")
+    }
 }
 
 // MARK: - viewWillAppear .. ScrollViewDidScroll

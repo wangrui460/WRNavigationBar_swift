@@ -49,6 +49,11 @@ class ZhiHuController: UIViewController
         navBarBackgroundAlpha = 0
         navBarTintColor = .white
     }
+    
+    deinit {
+        tableView.delegate = nil
+        print("ZhiHuVC deinit")
+    }
 }
 
 // MARK: - viewWillAppear .. ScrollViewDidScroll

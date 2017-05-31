@@ -378,10 +378,12 @@ extension UIViewController
     {
         static var pushToCurrentVCFinished: Bool = false
         static var pushToNextVCFinished:Bool = false
+        
         static var navBarBarTintColor: UIColor = UIColor.defaultNavBarBarTintColor
         static var navBarBackgroundAlpha:CGFloat = 1.0
         static var navBarTintColor: UIColor = UIColor.defaultNavBarTintColor
         static var statusBarStyle: UIStatusBarStyle = UIStatusBarStyle.default
+        
         static var customNavBar: UINavigationBar = UINavigationBar()
     }
     

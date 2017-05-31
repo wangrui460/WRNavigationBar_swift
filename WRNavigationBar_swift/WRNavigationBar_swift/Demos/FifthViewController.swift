@@ -40,6 +40,11 @@ class FifthViewController: UIViewController
         
         navBarBackgroundAlpha = 0
     }
+    
+    deinit {
+        tableView.delegate = nil
+        print("FifthVC deinit")
+    }
 }
 
 

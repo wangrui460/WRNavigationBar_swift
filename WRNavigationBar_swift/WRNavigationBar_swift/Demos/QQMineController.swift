@@ -74,6 +74,11 @@ class QQMineController: UIViewController
         // 设置导航栏按钮和标题颜色
         navBarTintColor = .white
     }
+    
+    deinit {
+        tableView.delegate = nil
+        print("QQMineVC deinit")
+    }
 }
 
 
