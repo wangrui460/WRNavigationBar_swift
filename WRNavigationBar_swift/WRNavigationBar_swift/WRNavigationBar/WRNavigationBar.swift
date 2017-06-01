@@ -128,6 +128,33 @@ extension UINavigationController
         navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:titleColor]
     }
     
+    fileprivate func updateNavigationBar(fromVC: UIViewController?, toVC: UIViewController?, progress: CGFloat)
+    {
+        // change navBarBarTintColor
+        let fromBarTintColor = fromVC?.navBarBarTintColor ?? .defaultNavBarBarTintColor
+        let toBarTintColor   = toVC?.navBarBarTintColor ?? .defaultNavBarBarTintColor
+        let newBarTintColor  = UIColor.middleColor(fromColor: fromBarTintColor, toColor: toBarTintColor, percent: progress)
+        setNeedsNavigationBarUpdate(barTintColor: newBarTintColor)
+        
+        // change navBarTintColor
+        let fromTintColor = fromVC?.navBarTintColor ?? .defaultNavBarTintColor
+        let toTintColor = toVC?.navBarTintColor ?? .defaultNavBarTintColor
+        let newTintColor = UIColor.middleColor(fromColor: fromTintColor, toColor: toTintColor, percent: progress)
+        setNeedsNavigationBarUpdate(tintColor: newTintColor)
+        
+        // change navBarTitleColor
+        let fromTitleColor = fromVC?.navBarTitleColor ?? .defaultNavBarTitleColor
+        let toTitleColor = toVC?.navBarTitleColor ?? .defaultNavBarTitleColor
+        let newTitleColor = UIColor.middleColor(fromColor: fromTitleColor, toColor: toTitleColor, percent: progress)
+        setNeedsNavigationBarUpdate(titleColor: newTitleColor)
+        
+        // change navBar _UIBarBackground alpha
+        let fromBarBackgroundAlpha = fromVC?.navBarBackgroundAlpha ?? UIColor.defaultBackgroundAlpha
+        let toBarBackgroundAlpha = toVC?.navBarBackgroundAlpha ?? UIColor.defaultBackgroundAlpha
+        let newBarBackgroundAlpha = UIColor.middleAlpha(fromAlpha: fromBarBackgroundAlpha, toAlpha: toBarBackgroundAlpha, percent: progress)
+        setNeedsNavigationBarUpdate(barBackgroundAlpha: newBarBackgroundAlpha)
+    }
+    
     // call swizzling methods active 主动调用交换方法
     private static let onceToken = UUID().uuidString
     open override class func initialize()
@@ -212,30 +239,7 @@ extension UINavigationController
         // print("第\(popProperties.displayCount)次pop的进度：\(popProgress)")
         let fromVC = coordinator.viewController(forKey: .from)
         let toVC = coordinator.viewController(forKey: .to)
-        
-        // change navBarBarTintColor
-        let fromBarTintColor = fromVC?.navBarBarTintColor ?? .defaultNavBarBarTintColor
-        let toBarTintColor   = toVC?.navBarBarTintColor ?? .defaultNavBarBarTintColor
-        let newBarTintColor  = UIColor.middleColor(fromColor: fromBarTintColor, toColor: toBarTintColor, percent: popProgress)
-        setNeedsNavigationBarUpdate(barTintColor: newBarTintColor)
-        
-        // change navBarTintColor
-        let fromTintColor = fromVC?.navBarTintColor ?? .defaultNavBarTintColor
-        let toTintColor = toVC?.navBarTintColor ?? .defaultNavBarTintColor
-        let newTintColor = UIColor.middleColor(fromColor: fromTintColor, toColor: toTintColor, percent: popProgress)
-        setNeedsNavigationBarUpdate(tintColor: newTintColor)
-        
-        // change navBarTitleColor
-        let fromTitleColor = fromVC?.navBarTitleColor ?? .defaultNavBarTitleColor
-        let toTitleColor = toVC?.navBarTitleColor ?? .defaultNavBarTitleColor
-        let newTitleColor = UIColor.middleColor(fromColor: fromTitleColor, toColor: toTitleColor, percent: popProgress)
-        setNeedsNavigationBarUpdate(titleColor: newTitleColor)
-        
-        // change navBar _UIBarBackground alpha
-        let fromBarBackgroundAlpha = fromVC?.navBarBackgroundAlpha ?? UIColor.defaultBackgroundAlpha
-        let toBarBackgroundAlpha = toVC?.navBarBackgroundAlpha ?? UIColor.defaultBackgroundAlpha
-        let newBarBackgroundAlpha = UIColor.middleAlpha(fromAlpha: fromBarBackgroundAlpha, toAlpha: toBarBackgroundAlpha, percent: popProgress)
-        setNeedsNavigationBarUpdate(barBackgroundAlpha: newBarBackgroundAlpha)
+        updateNavigationBar(fromVC: fromVC, toVC: toVC, progress: popProgress)
     }
     
     
@@ -282,30 +286,7 @@ extension UINavigationController
         // print("第\(pushProperties.displayCount)次push的进度：\(pushProgress)")
         let fromVC = coordinator.viewController(forKey: .from)
         let toVC = coordinator.viewController(forKey: .to)
-        
-        // change navBarBarTintColor
-        let fromBarTintColor = fromVC?.navBarBarTintColor ?? .defaultNavBarBarTintColor
-        let toBarTintColor   = toVC?.navBarBarTintColor ?? .defaultNavBarBarTintColor
-        let newBarTintColor  = UIColor.middleColor(fromColor: fromBarTintColor, toColor: toBarTintColor, percent: pushProgress)
-        setNeedsNavigationBarUpdate(barTintColor: newBarTintColor)
-        
-        // change navBarTintColor
-        let fromTintColor = fromVC?.navBarTintColor ?? .defaultNavBarTintColor
-        let toTintColor = toVC?.navBarTintColor ?? .defaultNavBarTintColor
-        let newTintColor = UIColor.middleColor(fromColor: fromTintColor, toColor: toTintColor, percent: pushProgress)
-        setNeedsNavigationBarUpdate(tintColor: newTintColor)
-        
-        // change navBarTitleColor
-        let fromTitleColor = fromVC?.navBarTitleColor ?? .defaultNavBarTitleColor
-        let toTitleColor = toVC?.navBarTitleColor ?? .defaultNavBarTitleColor
-        let newTitleColor = UIColor.middleColor(fromColor: fromTitleColor, toColor: toTitleColor, percent: pushProgress)
-        setNeedsNavigationBarUpdate(titleColor: newTitleColor)
-        
-        // change navBar _UIBarBackground alpha
-        let fromBarBackgroundAlpha = fromVC?.navBarBackgroundAlpha ?? UIColor.defaultBackgroundAlpha
-        let toBarBackgroundAlpha = toVC?.navBarBackgroundAlpha ?? UIColor.defaultBackgroundAlpha
-        let newBarBackgroundAlpha = UIColor.middleAlpha(fromAlpha: fromBarBackgroundAlpha, toAlpha: toBarBackgroundAlpha, percent: pushProgress)
-        setNeedsNavigationBarUpdate(barBackgroundAlpha: newBarBackgroundAlpha)
+        updateNavigationBar(fromVC: fromVC, toVC: toVC, progress: pushProgress)
     }
 }
 
@@ -378,30 +359,7 @@ extension UINavigationController: UINavigationBarDelegate
         
         let fromVC = coordinator.viewController(forKey: .from)
         let toVC = coordinator.viewController(forKey: .to)
-        
-        // change navBarBarTintColor
-        let fromBarTintColor = fromVC?.navBarBarTintColor ?? .defaultNavBarBarTintColor
-        let toBarTintColor = toVC?.navBarBarTintColor ?? .defaultNavBarBarTintColor
-        let newBarTintColor = UIColor.middleColor(fromColor: fromBarTintColor, toColor: toBarTintColor, percent: percentComplete)
-        setNeedsNavigationBarUpdate(barTintColor: newBarTintColor)
-        
-        // change navBarTintColor
-        let fromTintColor = fromVC?.navBarTintColor ?? .defaultNavBarTintColor
-        let toTintColor = toVC?.navBarTintColor ?? .defaultNavBarTintColor
-        let newTintColor = UIColor.middleColor(fromColor: fromTintColor, toColor: toTintColor, percent: percentComplete)
-        setNeedsNavigationBarUpdate(tintColor: newTintColor)
-        
-        // change navBarTitleColor 
-        let fromTitleColor = fromVC?.navBarTitleColor ?? .defaultNavBarTitleColor
-        let toTitleColor = toVC?.navBarTitleColor ?? .defaultNavBarTitleColor
-        let newTitleColor = UIColor.middleColor(fromColor: fromTitleColor, toColor: toTitleColor, percent: percentComplete)
-        setNeedsNavigationBarUpdate(titleColor: newTitleColor)
-        
-        // change navBar _UIBarBackground alpha
-        let fromBarBackgroundAlpha = fromVC?.navBarBackgroundAlpha ?? UIColor.defaultBackgroundAlpha
-        let toBarBackgroundAlpha = toVC?.navBarBackgroundAlpha ?? UIColor.defaultBackgroundAlpha
-        let newBarBackgroundAlpha = UIColor.middleAlpha(fromAlpha: fromBarBackgroundAlpha, toAlpha: toBarBackgroundAlpha, percent: percentComplete)
-        setNeedsNavigationBarUpdate(barBackgroundAlpha: newBarBackgroundAlpha)
+        updateNavigationBar(fromVC: fromVC, toVC: toVC, progress: percentComplete)
         
         wr_updateInteractiveTransition(percentComplete)
     }
