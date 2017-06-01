@@ -50,6 +50,8 @@ extension NormalListController: UITableViewDelegate, UITableViewDataSource
             str = "知乎日报"
         case 4:
             str = "QQ我的资料页"
+        case 5:
+            str = "蚂蚁森林"
         default:
             str = ""
         }
@@ -76,6 +78,8 @@ extension NormalListController: UITableViewDelegate, UITableViewDataSource
             navigationController?.pushViewController(ZhiHuController(), animated: true)
         case 4:
             navigationController?.pushViewController(QQMineController(), animated: true)
+        case 5:
+            navigationController?.pushViewController(AntForestController(), animated: true)
         default:
            break
         }
