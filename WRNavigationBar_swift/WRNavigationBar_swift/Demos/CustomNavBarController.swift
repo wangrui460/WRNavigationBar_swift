@@ -69,12 +69,14 @@ extension CustomNavBarController
             let alpha = (offsetY - NAVBAR_COLORCHANGE_POINT) / CGFloat(kNavBarBottom)
             navBarBackgroundAlpha = alpha
             navBarTintColor =  UIColor.black.withAlphaComponent(alpha)
+            navBarTitleColor = UIColor.black.withAlphaComponent(alpha)
             statusBarStyle = .default
         }
         else
         {
             navBarBackgroundAlpha = 0
             navBarTintColor = .white
+            navBarTitleColor = .white
             statusBarStyle = .lightContent
         }
     }

@@ -122,7 +122,10 @@ extension UINavigationController
     
     fileprivate func setNeedsNavigationBarUpdate(tintColor: UIColor) {
         navigationBar.tintColor = tintColor
-        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:tintColor]
+    }
+    
+    fileprivate func setNeedsNavigationBarUpdate(titleColor: UIColor) {
+        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:titleColor]
     }
     
     // call swizzling methods active 主动调用交换方法
@@ -222,6 +225,12 @@ extension UINavigationController
         let newTintColor = UIColor.middleColor(fromColor: fromTintColor, toColor: toTintColor, percent: popProgress)
         setNeedsNavigationBarUpdate(tintColor: newTintColor)
         
+        // change navBarTitleColor
+        let fromTitleColor = fromVC?.navBarTitleColor ?? .defaultNavBarTitleColor
+        let toTitleColor = toVC?.navBarTitleColor ?? .defaultNavBarTitleColor
+        let newTitleColor = UIColor.middleColor(fromColor: fromTitleColor, toColor: toTitleColor, percent: popProgress)
+        setNeedsNavigationBarUpdate(titleColor: newTitleColor)
+        
         // change navBar _UIBarBackground alpha
         let fromBarBackgroundAlpha = fromVC?.navBarBackgroundAlpha ?? UIColor.defaultBackgroundAlpha
         let toBarBackgroundAlpha = toVC?.navBarBackgroundAlpha ?? UIColor.defaultBackgroundAlpha
@@ -285,6 +294,12 @@ extension UINavigationController
         let toTintColor = toVC?.navBarTintColor ?? .defaultNavBarTintColor
         let newTintColor = UIColor.middleColor(fromColor: fromTintColor, toColor: toTintColor, percent: pushProgress)
         setNeedsNavigationBarUpdate(tintColor: newTintColor)
+        
+        // change navBarTitleColor
+        let fromTitleColor = fromVC?.navBarTitleColor ?? .defaultNavBarTitleColor
+        let toTitleColor = toVC?.navBarTitleColor ?? .defaultNavBarTitleColor
+        let newTitleColor = UIColor.middleColor(fromColor: fromTitleColor, toColor: toTitleColor, percent: pushProgress)
+        setNeedsNavigationBarUpdate(titleColor: newTitleColor)
         
         // change navBar _UIBarBackground alpha
         let fromBarBackgroundAlpha = fromVC?.navBarBackgroundAlpha ?? UIColor.defaultBackgroundAlpha
@@ -376,6 +391,12 @@ extension UINavigationController: UINavigationBarDelegate
         let newTintColor = UIColor.middleColor(fromColor: fromTintColor, toColor: toTintColor, percent: percentComplete)
         setNeedsNavigationBarUpdate(tintColor: newTintColor)
         
+        // change navBarTitleColor 
+        let fromTitleColor = fromVC?.navBarTitleColor ?? .defaultNavBarTitleColor
+        let toTitleColor = toVC?.navBarTitleColor ?? .defaultNavBarTitleColor
+        let newTitleColor = UIColor.middleColor(fromColor: fromTitleColor, toColor: toTitleColor, percent: percentComplete)
+        setNeedsNavigationBarUpdate(titleColor: newTitleColor)
+        
         // change navBar _UIBarBackground alpha
         let fromBarBackgroundAlpha = fromVC?.navBarBackgroundAlpha ?? UIColor.defaultBackgroundAlpha
         let toBarBackgroundAlpha = toVC?.navBarBackgroundAlpha ?? UIColor.defaultBackgroundAlpha
@@ -399,6 +420,7 @@ extension UIViewController
         static var navBarBarTintColor: UIColor = UIColor.defaultNavBarBarTintColor
         static var navBarBackgroundAlpha:CGFloat = 1.0
         static var navBarTintColor: UIColor = UIColor.defaultNavBarTintColor
+        static var navBarTitleColor: UIColor = UIColor.defaultNavBarTitleColor
         static var statusBarStyle: UIStatusBarStyle = UIStatusBarStyle.default
         
         static var customNavBar: UINavigationBar = UINavigationBar()
@@ -492,12 +514,35 @@ extension UIViewController
             if customNavBar.isKind(of: UINavigationBar.self) {
                 let navBar = customNavBar as! UINavigationBar
                 navBar.tintColor = newValue
-                navBar.titleTextAttributes = [NSForegroundColorAttributeName:newValue]
             }
             else
             {
                 if pushToNextVCFinished == false {
                     navigationController?.setNeedsNavigationBarUpdate(tintColor: newValue)
+                }
+            }
+        }
+    }
+    
+    // navigationBar titleColor
+    var navBarTitleColor: UIColor {
+        get {
+            guard let titleColor = objc_getAssociatedObject(self, &AssociatedKeys.navBarTitleColor) as? UIColor else {
+                return UIColor.defaultNavBarTitleColor
+            }
+            return titleColor
+        }
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.navBarTitleColor, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            
+            if customNavBar.isKind(of: UINavigationBar.self) {
+                let navBar = customNavBar as! UINavigationBar
+                navBar.titleTextAttributes = [NSForegroundColorAttributeName:newValue]
+            }
+            else
+            {
+                if pushToNextVCFinished == false {
+                    navigationController?.setNeedsNavigationBarUpdate(titleColor: newValue)
                 }
             }
         }
@@ -560,6 +605,7 @@ extension UIViewController
     {
         pushToNextVCFinished = false
         navigationController?.setNeedsNavigationBarUpdate(tintColor: navBarTintColor)
+        navigationController?.setNeedsNavigationBarUpdate(titleColor: navBarTitleColor)
         wr_viewWillAppear(animated)
     }
     
@@ -574,6 +620,7 @@ extension UIViewController
         navigationController?.setNeedsNavigationBarUpdate(barTintColor: navBarBarTintColor)
         navigationController?.setNeedsNavigationBarUpdate(barBackgroundAlpha: navBarBackgroundAlpha)
         navigationController?.setNeedsNavigationBarUpdate(tintColor: navBarTintColor)
+        navigationController?.setNeedsNavigationBarUpdate(titleColor: navBarTitleColor)
         wr_viewDidAppear(animated)
     }
 }
@@ -612,6 +659,7 @@ extension UIColor
     {   // default is system attributes
         static var defNavBarBarTintColor: UIColor = UIColor.white
         static var defNavBarTintColor: UIColor = UIColor(red: 0, green: 0.478431, blue: 1, alpha: 1.0)
+        static var defNavBarTitleColor: UIColor = UIColor.black
         static var defStatusBarStyle: UIStatusBarStyle = UIStatusBarStyle.default
     }
     class var defaultNavBarBarTintColor: UIColor {
@@ -635,6 +683,18 @@ extension UIColor
         }
         set {
             objc_setAssociatedObject(self, &AssociatedKeys.defNavBarTintColor, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    class var defaultNavBarTitleColor: UIColor {
+        get {
+            guard let def = objc_getAssociatedObject(self, &AssociatedKeys.defNavBarTitleColor) as? UIColor else {
+                return AssociatedKeys.defNavBarTitleColor
+            }
+            return def
+        }
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.defNavBarTitleColor, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
