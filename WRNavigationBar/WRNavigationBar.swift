@@ -5,6 +5,7 @@
 //  Created by wangrui on 2017/4/19.
 //  Copyright © 2017年 wangrui. All rights reserved.
 //
+//  Github地址：https://github.com/wangrui460/WRNavigationBar_swift
 
 import UIKit
 
@@ -31,41 +32,19 @@ extension UINavigationBar
     {
         if (backgroundView == nil)
         {
-            // 设置导航栏本身全透明
+            // add a image(nil color) to _UIBarBackground make it clear
             setBackgroundImage(UIImage(), for: .default)
             backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: Int(bounds.width), height: 64))
-            // _UIBarBackground是导航栏的第一个子控件
+            // _UIBarBackground is first subView for navigationBar
             subviews.first?.insertSubview(backgroundView ?? UIView(), at: 0)
         }
         backgroundView?.backgroundColor = color
     }
     
-    // set navigationBar effectView alpha    设置导航栏毛玻璃的透明度
+    // set _UIBarBackground alpha (_UIBarBackground subviews alpha <= _UIBarBackground alpha)
     fileprivate func wr_setBackgroundAlpha(alpha:CGFloat)
     {
         let barBackgroundView = subviews[0]
-        let valueForKey = barBackgroundView.value(forKey:)
-        
-        if let shadowView = valueForKey("_shadowView") as? UIView {
-            shadowView.alpha = alpha
-        }
-        
-        if isTranslucent {
-            if #available(iOS 10.0, *) {
-                if let backgroundEffectView = valueForKey("_backgroundEffectView") as? UIView, backgroundImage(for: .default) == nil {
-                    backgroundEffectView.alpha = alpha
-                    return
-                }
-                
-            } else {
-                if let adaptiveBackdrop = valueForKey("_adaptiveBackdrop") as? UIView ,
-                    let backdropEffectView = adaptiveBackdrop.value(forKey: "_backdropEffectView") as? UIView {
-                    backdropEffectView.alpha = alpha
-                    return
-                }
-            }
-        }
-        
         barBackgroundView.alpha = alpha
     }
     
@@ -76,10 +55,17 @@ extension UINavigationBar
         {
             if (hasSystemBackIndicator == true)
             {
-                // _UIBarBackground对应的view是系统导航栏，不需要改变其透明度
+                // _UIBarBackground/_UINavigationBarBackground对应的view是系统导航栏，不需要改变其透明度
                 if let _UIBarBackgroundClass = NSClassFromString("_UIBarBackground")
                 {
-                    if (view.isKind(of: _UIBarBackgroundClass) == false) {
+                    if view.isKind(of: _UIBarBackgroundClass) == false {
+                        view.alpha = alpha
+                    }
+                }
+                
+                if let _UINavigationBarBackground = NSClassFromString("_UINavigationBarBackground")
+                {
+                    if view.isKind(of: _UINavigationBarBackground) == false {
                         view.alpha = alpha
                     }
                 }
@@ -88,10 +74,20 @@ extension UINavigationBar
             {
                 // 这里如果不做判断的话，会显示 backIndicatorImage(系统返回按钮)
                 if let _UINavigationBarBackIndicatorViewClass = NSClassFromString("_UINavigationBarBackIndicatorView"),
-                   let _UIBarBackgroundClass                  = NSClassFromString("_UIBarBackground")
+                    view.isKind(of: _UINavigationBarBackIndicatorViewClass) == false
                 {
-                    if (view.isKind(of: _UINavigationBarBackIndicatorViewClass) == false && view.isKind(of: _UIBarBackgroundClass) == false) {
-                        view.alpha = alpha
+                    if let _UIBarBackgroundClass = NSClassFromString("_UIBarBackground")
+                    {
+                        if view.isKind(of: _UIBarBackgroundClass) == false {
+                            view.alpha = alpha
+                        }
+                    }
+                    
+                    if let _UINavigationBarBackground = NSClassFromString("_UINavigationBarBackground")
+                    {
+                        if view.isKind(of: _UINavigationBarBackground) == false {
+                            view.alpha = alpha
+                        }
                     }
                 }
             }
@@ -102,15 +98,6 @@ extension UINavigationBar
     func wr_setTranslationY(translationY:CGFloat)
     {
         transform = CGAffineTransform.init(translationX: 0, y: translationY)
-    }
-    
-    /// 清除在导航栏上设置的背景颜色、透明度、位移距离等属性
-    func wr_clear()
-    {
-        // 设置导航栏不透明
-        setBackgroundImage(nil, for: .default)
-        backgroundView?.removeFromSuperview()
-        backgroundView = nil
     }
 }
 
@@ -128,9 +115,9 @@ extension UINavigationController
         navigationBar.wr_setBackgroundColor(color: barTintColor)
     }
     
-    fileprivate func setNeedsNavigationBarUpdate(effectAlpha: CGFloat)
+    fileprivate func setNeedsNavigationBarUpdate(barBackgroundAlpha: CGFloat)
     {
-        navigationBar.wr_setBackgroundAlpha(alpha: effectAlpha)
+        navigationBar.wr_setBackgroundAlpha(alpha: barBackgroundAlpha)
     }
     
     fileprivate func setNeedsNavigationBarUpdate(tintColor: UIColor) {
@@ -235,11 +222,11 @@ extension UINavigationController
         let newTintColor = UIColor.middleColor(fromColor: fromTintColor, toColor: toTintColor, percent: popProgress)
         setNeedsNavigationBarUpdate(tintColor: newTintColor)
         
-        // change navBar effectView alpha
-        let fromEffectAlpha = fromVC?.navBarEffectAlpha ?? UIColor.defaultEffectAlpha
-        let toEffectAlpha = toVC?.navBarEffectAlpha ?? UIColor.defaultEffectAlpha
-        let newEffectAlpha = UIColor.middleAlpha(fromAlpha: fromEffectAlpha, toAlpha: toEffectAlpha, percent: popProgress)
-        setNeedsNavigationBarUpdate(effectAlpha: newEffectAlpha)
+        // change navBar _UIBarBackground alpha
+        let fromBarBackgroundAlpha = fromVC?.navBarBackgroundAlpha ?? UIColor.defaultBackgroundAlpha
+        let toBarBackgroundAlpha = toVC?.navBarBackgroundAlpha ?? UIColor.defaultBackgroundAlpha
+        let newBarBackgroundAlpha = UIColor.middleAlpha(fromAlpha: fromBarBackgroundAlpha, toAlpha: toBarBackgroundAlpha, percent: popProgress)
+        setNeedsNavigationBarUpdate(barBackgroundAlpha: newBarBackgroundAlpha)
     }
     
     
@@ -299,11 +286,11 @@ extension UINavigationController
         let newTintColor = UIColor.middleColor(fromColor: fromTintColor, toColor: toTintColor, percent: pushProgress)
         setNeedsNavigationBarUpdate(tintColor: newTintColor)
         
-        // change navBar effectView alpha
-        let fromEffectAlpha = fromVC?.navBarEffectAlpha ?? UIColor.defaultEffectAlpha
-        let toEffectAlpha = toVC?.navBarEffectAlpha ?? UIColor.defaultEffectAlpha
-        let newEffectAlpha = UIColor.middleAlpha(fromAlpha: fromEffectAlpha, toAlpha: toEffectAlpha, percent: pushProgress)
-        setNeedsNavigationBarUpdate(effectAlpha: newEffectAlpha)
+        // change navBar _UIBarBackground alpha
+        let fromBarBackgroundAlpha = fromVC?.navBarBackgroundAlpha ?? UIColor.defaultBackgroundAlpha
+        let toBarBackgroundAlpha = toVC?.navBarBackgroundAlpha ?? UIColor.defaultBackgroundAlpha
+        let newBarBackgroundAlpha = UIColor.middleAlpha(fromAlpha: fromBarBackgroundAlpha, toAlpha: toBarBackgroundAlpha, percent: pushProgress)
+        setNeedsNavigationBarUpdate(barBackgroundAlpha: newBarBackgroundAlpha)
     }
 }
 
@@ -341,9 +328,10 @@ extension UINavigationController: UINavigationBarDelegate
     {
         let animations: (UITransitionContextViewControllerKey) -> () = {
             let curColor = context.viewController(forKey: $0)?.navBarBarTintColor ?? UIColor.defaultNavBarBarTintColor
-            let curAlpha = context.viewController(forKey: $0)?.navBarEffectAlpha ?? UIColor.defaultEffectAlpha
+            let curAlpha = context.viewController(forKey: $0)?.navBarBackgroundAlpha ?? UIColor.defaultBackgroundAlpha
+            
             self.setNeedsNavigationBarUpdate(barTintColor: curColor)
-            self.setNeedsNavigationBarUpdate(effectAlpha: curAlpha)
+            self.setNeedsNavigationBarUpdate(barBackgroundAlpha: curAlpha)
         }
         
         // after that, cancel the gesture of return
@@ -388,11 +376,11 @@ extension UINavigationController: UINavigationBarDelegate
         let newTintColor = UIColor.middleColor(fromColor: fromTintColor, toColor: toTintColor, percent: percentComplete)
         setNeedsNavigationBarUpdate(tintColor: newTintColor)
         
-        // change navBar effectView alpha
-        let fromEffectAlpha = fromVC?.navBarEffectAlpha ?? UIColor.defaultEffectAlpha
-        let toEffectAlpha = toVC?.navBarEffectAlpha ?? UIColor.defaultEffectAlpha
-        let newEffectAlpha = UIColor.middleAlpha(fromAlpha: fromEffectAlpha, toAlpha: toEffectAlpha, percent: percentComplete)
-        setNeedsNavigationBarUpdate(effectAlpha: newEffectAlpha)
+        // change navBar _UIBarBackground alpha
+        let fromBarBackgroundAlpha = fromVC?.navBarBackgroundAlpha ?? UIColor.defaultBackgroundAlpha
+        let toBarBackgroundAlpha = toVC?.navBarBackgroundAlpha ?? UIColor.defaultBackgroundAlpha
+        let newBarBackgroundAlpha = UIColor.middleAlpha(fromAlpha: fromBarBackgroundAlpha, toAlpha: toBarBackgroundAlpha, percent: percentComplete)
+        setNeedsNavigationBarUpdate(barBackgroundAlpha: newBarBackgroundAlpha)
         
         wr_updateInteractiveTransition(percentComplete)
     }
@@ -407,10 +395,12 @@ extension UIViewController
     {
         static var pushToCurrentVCFinished: Bool = false
         static var pushToNextVCFinished:Bool = false
+        
         static var navBarBarTintColor: UIColor = UIColor.defaultNavBarBarTintColor
-        static var navBarEffectAlpha:CGFloat = 1.0
+        static var navBarBackgroundAlpha:CGFloat = 1.0
         static var navBarTintColor: UIColor = UIColor.defaultNavBarTintColor
         static var statusBarStyle: UIStatusBarStyle = UIStatusBarStyle.default
+        
         static var customNavBar: UINavigationBar = UINavigationBar()
     }
     
@@ -464,16 +454,16 @@ extension UIViewController
         }
     }
     
-    // navigationBar effectView alpha
-    var navBarEffectAlpha:CGFloat {
+    // navigationBar _UIBarBackground alpha
+    var navBarBackgroundAlpha:CGFloat {
         get {
-            guard let effectAlpha = objc_getAssociatedObject(self, &AssociatedKeys.navBarEffectAlpha) as? CGFloat else {
+            guard let barBackgroundAlpha = objc_getAssociatedObject(self, &AssociatedKeys.navBarBackgroundAlpha) as? CGFloat else {
                 return 1.0
             }
-            return effectAlpha
+            return barBackgroundAlpha
         }
         set {
-            objc_setAssociatedObject(self, &AssociatedKeys.navBarEffectAlpha, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &AssociatedKeys.navBarBackgroundAlpha, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             
             if customNavBar.isKind(of: UINavigationBar.self) {
                 let navBar = customNavBar as! UINavigationBar
@@ -482,7 +472,7 @@ extension UIViewController
             else
             {
                 if pushToCurrentVCFinished == true && pushToNextVCFinished == false {
-                    navigationController?.setNeedsNavigationBarUpdate(effectAlpha: newValue)
+                    navigationController?.setNeedsNavigationBarUpdate(barBackgroundAlpha: newValue)
                 }
             }
         }
@@ -582,7 +572,7 @@ extension UIViewController
     func wr_viewDidAppear(_ animated: Bool)
     {
         navigationController?.setNeedsNavigationBarUpdate(barTintColor: navBarBarTintColor)
-        navigationController?.setNeedsNavigationBarUpdate(effectAlpha: navBarEffectAlpha)
+        navigationController?.setNeedsNavigationBarUpdate(barBackgroundAlpha: navBarBackgroundAlpha)
         navigationController?.setNeedsNavigationBarUpdate(tintColor: navBarTintColor)
         wr_viewDidAppear(animated)
     }
@@ -619,9 +609,9 @@ extension DispatchQueue {
 extension UIColor
 {
     fileprivate struct AssociatedKeys
-    {
-        static var defNavBarBarTintColor: UIColor = UIColor.white // UIColor.init(red: 0/255.0, green: 175/255.0, blue: 240/255.0, alpha: 1)
-        static var defNavBarTintColor: UIColor = UIColor.white
+    {   // default is system attributes
+        static var defNavBarBarTintColor: UIColor = UIColor.white
+        static var defNavBarTintColor: UIColor = UIColor(red: 0, green: 0.478431, blue: 1, alpha: 1.0)
         static var defStatusBarStyle: UIStatusBarStyle = UIStatusBarStyle.default
     }
     class var defaultNavBarBarTintColor: UIColor {
@@ -660,7 +650,7 @@ extension UIColor
         }
     }
     
-    class var defaultEffectAlpha: CGFloat {
+    class var defaultBackgroundAlpha: CGFloat {
         get {
             return 1.0
         }
@@ -684,11 +674,11 @@ extension UIColor
         toColor.getRed(&toRed, green: &toGreen, blue: &toBlue, alpha: &toAlpha)
         
         // calculate middle color RGBA
-        let nowRed = fromRed + (toRed - fromRed) * percent
-        let nowGreen = fromGreen + (toGreen - fromGreen) * percent
-        let nowBlue = fromBlue + (toBlue - fromBlue) * percent
-        let nowAlpha = fromAlpha + (toAlpha - fromAlpha) * percent
-        return UIColor(red: nowRed, green: nowGreen, blue: nowBlue, alpha: nowAlpha)
+        let newRed = fromRed + (toRed - fromRed) * percent
+        let newGreen = fromGreen + (toGreen - fromGreen) * percent
+        let newBlue = fromBlue + (toBlue - fromBlue) * percent
+        let newAlpha = fromAlpha + (toAlpha - fromAlpha) * percent
+        return UIColor(red: newRed, green: newGreen, blue: newBlue, alpha: newAlpha)
     }
     
     // Calculate the middle alpha
