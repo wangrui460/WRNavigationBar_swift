@@ -60,7 +60,7 @@ class FirstViewController: UIViewController
 }
 
 
-// MARK: - 滑动改变导航栏透明度
+// MARK: - 滑动改变导航栏透明度、标题颜色、左右按钮颜色、状态栏颜色
 extension FirstViewController
 {
     func scrollViewDidScroll(_ scrollView: UIScrollView)
