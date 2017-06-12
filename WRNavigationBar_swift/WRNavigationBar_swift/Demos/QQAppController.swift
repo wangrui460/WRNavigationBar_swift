@@ -1,5 +1,5 @@
 //
-//  FourthViewController.swift
+//  QQAppController.swift
 //  WRNavigationBar_swift
 //
 //  Created by wangrui on 2017/4/21.
@@ -13,7 +13,7 @@ private let IMAGE_HEIGHT:CGFloat = 260
 private let SCROLL_DOWN_LIMIT:CGFloat = 100
 private let LIMIT_OFFSET_Y:CGFloat = -(IMAGE_HEIGHT + SCROLL_DOWN_LIMIT)
 
-class FourthViewController: UIViewController
+class QQAppController: UIViewController
 {
     lazy var tableView:UITableView = {
         let table:UITableView = UITableView(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: self.view.bounds.height), style: .plain)
@@ -48,7 +48,7 @@ class FourthViewController: UIViewController
 }
 
 // MARK: - viewWillAppear .. ScrollViewDidScroll
-extension FourthViewController
+extension QQAppController
 {
     func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
@@ -102,7 +102,7 @@ extension FourthViewController
 }
 
 
-extension FourthViewController: UITableViewDelegate,UITableViewDataSource
+extension QQAppController: UITableViewDelegate,UITableViewDataSource
 {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 15

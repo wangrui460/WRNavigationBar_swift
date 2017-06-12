@@ -69,11 +69,11 @@ extension NormalListController: UITableViewDelegate, UITableViewDataSource
         tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.row {
         case 0:
-            navigationController?.pushViewController(FirstViewController(), animated: true)
+            navigationController?.pushViewController(MineInfoController(), animated: true)
         case 1:
-            navigationController?.pushViewController(FourthViewController(), animated: true)
+            navigationController?.pushViewController(QQAppController(), animated: true)
         case 2:
-            navigationController?.pushViewController(FifthViewController(), animated: true)
+            navigationController?.pushViewController(QQZoneController(), animated: true)
         case 3:
             navigationController?.pushViewController(ZhiHuController(), animated: true)
         case 4:

@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  MineInfoController.swift
 //  WRNavigationBar_swift
 //
 //  Created by wangrui on 2017/4/19.
@@ -11,7 +11,7 @@ import UIKit
 private let IMAGE_HEIGHT:CGFloat = 260
 private let NAVBAR_COLORCHANGE_POINT:CGFloat = IMAGE_HEIGHT - CGFloat(kNavBarBottom * 2)
 
-class FirstViewController: UIViewController
+class MineInfoController: UIViewController
 {    
     lazy var tableView:UITableView = {
         let table:UITableView = UITableView(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: self.view.bounds.height), style: .plain)
@@ -61,7 +61,7 @@ class FirstViewController: UIViewController
 
 
 // MARK: - 滑动改变导航栏透明度、标题颜色、左右按钮颜色、状态栏颜色
-extension FirstViewController
+extension MineInfoController
 {
     func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
@@ -85,7 +85,7 @@ extension FirstViewController
 }
 
 
-extension FirstViewController:UITableViewDelegate,UITableViewDataSource
+extension MineInfoController:UITableViewDelegate,UITableViewDataSource
 {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 15

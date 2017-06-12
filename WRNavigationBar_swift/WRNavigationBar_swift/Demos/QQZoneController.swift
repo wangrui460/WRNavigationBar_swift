@@ -1,5 +1,5 @@
 //
-//  FifthViewController.swift
+//  QQZoneController.swift
 //  WRNavigationBar_swift
 //
 //  Created by wangrui on 2017/4/21.
@@ -13,7 +13,7 @@ private let IMAGE_HEIGHT:CGFloat = 260
 private let SCROLL_DOWN_LIMIT:CGFloat = 100
 private let LIMIT_OFFSET_Y:CGFloat = -(IMAGE_HEIGHT + SCROLL_DOWN_LIMIT)
 
-class FifthViewController: UIViewController
+class QQZoneController: UIViewController
 {
     lazy var tableView:UITableView = {
         let table:UITableView = UITableView(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: self.view.bounds.height), style: .plain)
@@ -49,7 +49,7 @@ class FifthViewController: UIViewController
 
 
 // MARK: - viewWillAppear .. ScrollViewDidScroll
-extension FifthViewController
+extension QQZoneController
 {
     func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
@@ -91,7 +91,7 @@ extension FifthViewController
 }
 
 
-extension FifthViewController: UITableViewDelegate,UITableViewDataSource
+extension QQZoneController: UITableViewDelegate,UITableViewDataSource
 {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 15

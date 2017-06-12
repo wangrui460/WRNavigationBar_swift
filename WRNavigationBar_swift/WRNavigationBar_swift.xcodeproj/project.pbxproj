@@ -14,7 +14,7 @@
 		1A0DF7901EA7176500191349 /* WRNavigationBar_swiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0DF78F1EA7176500191349 /* WRNavigationBar_swiftTests.swift */; };
 		1A0DF7B31EA7372800191349 /* NormalListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0DF7B21EA7372800191349 /* NormalListController.swift */; };
 		1A0DF7B51EA7380600191349 /* SixthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0DF7B41EA7380600191349 /* SixthViewController.swift */; };
-		1A0DF7B71EA7471B00191349 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0DF7B61EA7471B00191349 /* FirstViewController.swift */; };
+		1A0DF7B71EA7471B00191349 /* MineInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0DF7B61EA7471B00191349 /* MineInfoController.swift */; };
 		1A0DF7B91EA7521C00191349 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0DF7B81EA7521C00191349 /* BaseNavigationController.swift */; };
 		1A0DF7BE1EA7545900191349 /* WRNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0DF7BD1EA7545900191349 /* WRNavigationBar.swift */; };
 		1A869EDD1ECAA0C1006D96F8 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A869EDC1ECAA0C1006D96F8 /* BaseViewController.swift */; };
@@ -24,8 +24,8 @@
 		1A966E8D1EE048F60045FCB8 /* AntForestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A966E8C1EE048F60045FCB8 /* AntForestController.swift */; };
 		1AB702661EA9A43C006DBA79 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB702651EA9A43C006DBA79 /* SecondViewController.swift */; };
 		1AB702681EA9A9BC006DBA79 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB702671EA9A9BC006DBA79 /* ThirdViewController.swift */; };
-		1AB7026A1EA9AC7A006DBA79 /* FourthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB702691EA9AC7A006DBA79 /* FourthViewController.swift */; };
-		1AB7026C1EA9B753006DBA79 /* FifthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB7026B1EA9B753006DBA79 /* FifthViewController.swift */; };
+		1AB7026A1EA9AC7A006DBA79 /* QQAppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB702691EA9AC7A006DBA79 /* QQAppController.swift */; };
+		1AB7026C1EA9B753006DBA79 /* QQZoneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB7026B1EA9B753006DBA79 /* QQZoneController.swift */; };
 		1AD0140A1EDBFB4500A6893C /* ZhiHuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD014091EDBFB4500A6893C /* ZhiHuController.swift */; };
 		1AD0140F1EDBFEAC00A6893C /* WRCycleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD0140C1EDBFEAC00A6893C /* WRCycleCell.swift */; };
 		1AD014101EDBFEAC00A6893C /* WRCycleScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD0140D1EDBFEAC00A6893C /* WRCycleScrollView.swift */; };
@@ -56,7 +56,7 @@
 		1A0DF7911EA7176500191349 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A0DF7B21EA7372800191349 /* NormalListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalListController.swift; sourceTree = "<group>"; };
 		1A0DF7B41EA7380600191349 /* SixthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SixthViewController.swift; sourceTree = "<group>"; };
-		1A0DF7B61EA7471B00191349 /* FirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		1A0DF7B61EA7471B00191349 /* MineInfoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineInfoController.swift; sourceTree = "<group>"; };
 		1A0DF7B81EA7521C00191349 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseNavigationController.swift; path = Demos/BaseNavigationController.swift; sourceTree = "<group>"; };
 		1A0DF7BD1EA7545900191349 /* WRNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WRNavigationBar.swift; sourceTree = "<group>"; };
 		1A869EDC1ECAA0C1006D96F8 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -66,8 +66,8 @@
 		1A966E8C1EE048F60045FCB8 /* AntForestController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AntForestController.swift; sourceTree = "<group>"; };
 		1AB702651EA9A43C006DBA79 /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		1AB702671EA9A9BC006DBA79 /* ThirdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
-		1AB702691EA9AC7A006DBA79 /* FourthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FourthViewController.swift; sourceTree = "<group>"; };
-		1AB7026B1EA9B753006DBA79 /* FifthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FifthViewController.swift; sourceTree = "<group>"; };
+		1AB702691EA9AC7A006DBA79 /* QQAppController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QQAppController.swift; sourceTree = "<group>"; };
+		1AB7026B1EA9B753006DBA79 /* QQZoneController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QQZoneController.swift; sourceTree = "<group>"; };
 		1AD014091EDBFB4500A6893C /* ZhiHuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZhiHuController.swift; sourceTree = "<group>"; };
 		1AD0140C1EDBFEAC00A6893C /* WRCycleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WRCycleCell.swift; sourceTree = "<group>"; };
 		1AD0140D1EDBFEAC00A6893C /* WRCycleScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WRCycleScrollView.swift; sourceTree = "<group>"; };
@@ -156,9 +156,9 @@
 			isa = PBXGroup;
 			children = (
 				1A0DF7B21EA7372800191349 /* NormalListController.swift */,
-				1A0DF7B61EA7471B00191349 /* FirstViewController.swift */,
-				1AB702691EA9AC7A006DBA79 /* FourthViewController.swift */,
-				1AB7026B1EA9B753006DBA79 /* FifthViewController.swift */,
+				1A0DF7B61EA7471B00191349 /* MineInfoController.swift */,
+				1AB702691EA9AC7A006DBA79 /* QQAppController.swift */,
+				1AB7026B1EA9B753006DBA79 /* QQZoneController.swift */,
 				1AD014091EDBFB4500A6893C /* ZhiHuController.swift */,
 				1AD014121EDC091F00A6893C /* QQMineController.swift */,
 				1A966E8C1EE048F60045FCB8 /* AntForestController.swift */,
@@ -376,7 +376,7 @@
 			files = (
 				1A869EDF1ECAA36B006D96F8 /* CustomNavBarController.swift in Sources */,
 				1AD014131EDC091F00A6893C /* QQMineController.swift in Sources */,
-				1AB7026C1EA9B753006DBA79 /* FifthViewController.swift in Sources */,
+				1AB7026C1EA9B753006DBA79 /* QQZoneController.swift in Sources */,
 				1A96559E1ED6B8C600A89E30 /* MoveListController.swift in Sources */,
 				1AD014111EDBFEAC00A6893C /* WRProxy.swift in Sources */,
 				1A0DF7BE1EA7545900191349 /* WRNavigationBar.swift in Sources */,
@@ -386,14 +386,14 @@
 				1A0DF7B31EA7372800191349 /* NormalListController.swift in Sources */,
 				1AD014101EDBFEAC00A6893C /* WRCycleScrollView.swift in Sources */,
 				1A0DF7B51EA7380600191349 /* SixthViewController.swift in Sources */,
-				1AB7026A1EA9AC7A006DBA79 /* FourthViewController.swift in Sources */,
+				1AB7026A1EA9AC7A006DBA79 /* QQAppController.swift in Sources */,
 				1A0DF77B1EA7176500191349 /* AppDelegate.swift in Sources */,
 				1A966E8D1EE048F60045FCB8 /* AntForestController.swift in Sources */,
 				1A96559C1ED6B64F00A89E30 /* CustomListController.swift in Sources */,
 				1AB702661EA9A43C006DBA79 /* SecondViewController.swift in Sources */,
 				1A0DF7B91EA7521C00191349 /* BaseNavigationController.swift in Sources */,
 				1AB702681EA9A9BC006DBA79 /* ThirdViewController.swift in Sources */,
-				1A0DF7B71EA7471B00191349 /* FirstViewController.swift in Sources */,
+				1A0DF7B71EA7471B00191349 /* MineInfoController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
