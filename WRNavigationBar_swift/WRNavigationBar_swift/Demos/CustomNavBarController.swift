@@ -52,8 +52,11 @@ class CustomNavBarController: BaseViewController
         // 设置初始导航栏透明度
         navBarBackgroundAlpha = 0
         
-        // 设置导航栏按钮和标题颜色
+        // 设置导航栏按钮
         navBarTintColor = .white
+        
+        // 设置标题文字颜色
+        navBarTitleColor = .white
     }
 }
 

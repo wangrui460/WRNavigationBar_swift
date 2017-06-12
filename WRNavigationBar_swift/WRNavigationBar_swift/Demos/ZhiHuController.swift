@@ -56,7 +56,7 @@ class ZhiHuController: UIViewController
     }
 }
 
-// MARK: - viewWillAppear .. ScrollViewDidScroll
+// MARK: - ScrollViewDidScroll
 extension ZhiHuController
 {
     func scrollViewDidScroll(_ scrollView: UIScrollView)
