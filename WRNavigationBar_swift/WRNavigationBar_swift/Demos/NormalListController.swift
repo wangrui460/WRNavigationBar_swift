@@ -70,7 +70,7 @@ extension NormalListController: UITableViewDelegate, UITableViewDataSource
         tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.row {
         case 0:
-            navigationController?.pushViewController(MineInfoController(), animated: true)
+            navigationController?.pushViewController(WeiBoMineController(), animated: true)
         case 1:
             navigationController?.pushViewController(QQAppController(), animated: true)
         case 2:

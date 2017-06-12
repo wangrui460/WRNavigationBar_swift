@@ -14,7 +14,7 @@
 		1A0DF7901EA7176500191349 /* WRNavigationBar_swiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0DF78F1EA7176500191349 /* WRNavigationBar_swiftTests.swift */; };
 		1A0DF7B31EA7372800191349 /* NormalListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0DF7B21EA7372800191349 /* NormalListController.swift */; };
 		1A0DF7B51EA7380600191349 /* SixthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0DF7B41EA7380600191349 /* SixthViewController.swift */; };
-		1A0DF7B71EA7471B00191349 /* MineInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0DF7B61EA7471B00191349 /* MineInfoController.swift */; };
+		1A0DF7B71EA7471B00191349 /* WeiBoMineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0DF7B61EA7471B00191349 /* WeiBoMineController.swift */; };
 		1A0DF7B91EA7521C00191349 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0DF7B81EA7521C00191349 /* BaseNavigationController.swift */; };
 		1A0DF7BE1EA7545900191349 /* WRNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0DF7BD1EA7545900191349 /* WRNavigationBar.swift */; };
 		1A869EDD1ECAA0C1006D96F8 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A869EDC1ECAA0C1006D96F8 /* BaseViewController.swift */; };
@@ -56,7 +56,7 @@
 		1A0DF7911EA7176500191349 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A0DF7B21EA7372800191349 /* NormalListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalListController.swift; sourceTree = "<group>"; };
 		1A0DF7B41EA7380600191349 /* SixthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SixthViewController.swift; sourceTree = "<group>"; };
-		1A0DF7B61EA7471B00191349 /* MineInfoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineInfoController.swift; sourceTree = "<group>"; };
+		1A0DF7B61EA7471B00191349 /* WeiBoMineController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeiBoMineController.swift; sourceTree = "<group>"; };
 		1A0DF7B81EA7521C00191349 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseNavigationController.swift; path = Demos/BaseNavigationController.swift; sourceTree = "<group>"; };
 		1A0DF7BD1EA7545900191349 /* WRNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WRNavigationBar.swift; sourceTree = "<group>"; };
 		1A869EDC1ECAA0C1006D96F8 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -156,7 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				1A0DF7B21EA7372800191349 /* NormalListController.swift */,
-				1A0DF7B61EA7471B00191349 /* MineInfoController.swift */,
+				1A0DF7B61EA7471B00191349 /* WeiBoMineController.swift */,
 				1AB702691EA9AC7A006DBA79 /* QQAppController.swift */,
 				1AB7026B1EA9B753006DBA79 /* QQZoneController.swift */,
 				1AD014091EDBFB4500A6893C /* ZhiHuController.swift */,
@@ -393,7 +393,7 @@
 				1AB702661EA9A43C006DBA79 /* SecondViewController.swift in Sources */,
 				1A0DF7B91EA7521C00191349 /* BaseNavigationController.swift in Sources */,
 				1AB702681EA9A9BC006DBA79 /* ThirdViewController.swift in Sources */,
-				1A0DF7B71EA7471B00191349 /* MineInfoController.swift in Sources */,
+				1A0DF7B71EA7471B00191349 /* WeiBoMineController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

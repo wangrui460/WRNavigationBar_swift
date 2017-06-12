@@ -1,5 +1,5 @@
 //
-//  MineInfoController.swift
+//  WeiBoMineController.swift
 //  WRNavigationBar_swift
 //
 //  Created by wangrui on 2017/4/19.
@@ -12,7 +12,7 @@ import UIKit
 private let IMAGE_HEIGHT:CGFloat = 220
 private let NAVBAR_COLORCHANGE_POINT:CGFloat = IMAGE_HEIGHT - CGFloat(kNavBarBottom * 2)
 
-class MineInfoController: UIViewController
+class WeiBoMineController: UIViewController
 {    
     lazy var tableView:UITableView = {
         let table:UITableView = UITableView(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: self.view.bounds.height), style: .plain)
@@ -100,7 +100,7 @@ class MineInfoController: UIViewController
 
 
 // MARK: - 滑动改变导航栏透明度、标题颜色、左右按钮颜色、状态栏颜色
-extension MineInfoController
+extension WeiBoMineController
 {
     func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
@@ -126,7 +126,7 @@ extension MineInfoController
 }
 
 
-extension MineInfoController:UITableViewDelegate,UITableViewDataSource
+extension WeiBoMineController:UITableViewDelegate,UITableViewDataSource
 {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 15
