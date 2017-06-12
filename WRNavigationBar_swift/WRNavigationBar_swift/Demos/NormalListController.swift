@@ -42,7 +42,7 @@ extension NormalListController: UITableViewDelegate, UITableViewDataSource
         var str:String? = nil
         switch indexPath.row {
         case 0:
-            str = "主页"
+            str = "新浪微博个人中心"
         case 1:
             str = "类似qq应用空间效果"
         case 2:
