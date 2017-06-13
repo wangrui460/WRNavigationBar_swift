@@ -87,10 +87,12 @@ statusBarStyle = .default
 </code></pre>
 
 4 . 说了这么多，看看几句代码能否实现我们需要的效果吧
+
 ![image](https://github.com/wangrui460/WRNavigationBar_swift/raw/master/screenshots/mysl.gif)
 
 5 . 有人可能会问：这只是在一个界面里面，但是涉及到push、pop、右滑手势怎么办呢？
 答：没关闭，我已经给你处理好了，你不用写一句代码！！！那么看看效果吧
+
 ![image](https://github.com/wangrui460/WRNavigationBar_swift/raw/master/screenshots/mysl滑动.gif)
 
 
