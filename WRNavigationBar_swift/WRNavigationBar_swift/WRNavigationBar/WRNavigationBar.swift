@@ -114,16 +114,16 @@ extension UINavigationController
     {
         navigationBar.wr_setBackgroundColor(color: barTintColor)
     }
-    
+
     fileprivate func setNeedsNavigationBarUpdate(barBackgroundAlpha: CGFloat)
     {
         navigationBar.wr_setBackgroundAlpha(alpha: barBackgroundAlpha)
     }
-    
+
     fileprivate func setNeedsNavigationBarUpdate(tintColor: UIColor) {
         navigationBar.tintColor = tintColor
     }
-    
+
     fileprivate func setNeedsNavigationBarUpdate(titleColor: UIColor) {
         navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:titleColor]
     }
@@ -348,7 +348,7 @@ extension UINavigationController: UINavigationBarDelegate
         }
     }
     
-    // swizzling system method: updateInteractiveTransition
+    // swizzling system method: _updateInteractiveTransition
     func wr_updateInteractiveTransition(_ percentComplete: CGFloat)
     {
         guard let topViewController = topViewController,
@@ -433,7 +433,7 @@ extension UIViewController
             }
         }
     }
-    
+
     // navigationBar _UIBarBackground alpha
     var navBarBackgroundAlpha:CGFloat {
         get {
