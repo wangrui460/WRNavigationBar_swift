@@ -27,7 +27,7 @@ class QQZoneController: UIViewController
         let imgView = UIImageView(frame: CGRect(x: 0, y: -IMAGE_HEIGHT, width: kScreenWidth, height: IMAGE_HEIGHT))
         imgView.contentMode = UIViewContentMode.scaleAspectFill
         imgView.clipsToBounds = true
-        imgView.image = self.imageScaledToSize(image: UIImage(named: "image3")!, newSize: CGSize(width: kScreenWidth, height: IMAGE_HEIGHT+SCROLL_DOWN_LIMIT))
+        imgView.image = self.imageScaledToSize(image: UIImage(named: "image6")!, newSize: CGSize(width: kScreenWidth, height: IMAGE_HEIGHT+SCROLL_DOWN_LIMIT))
         return imgView
     }()
     
