@@ -196,8 +196,10 @@ extension UINavigationController
     func wr_popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]?
     {
         var displayLink:CADisplayLink? = CADisplayLink(target: self, selector: #selector(popNeedDisplay))
-        displayLink?.add(to: RunLoop.main, forMode: .defaultRunLoopMode)
-        CATransaction.setCompletionBlock { 
+        // UITrackingRunLoopMode: 界面跟踪 Mode，用于 ScrollView 追踪触摸滑动，保证界面滑动时不受其他 Mode 影响
+        // NSRunLoopCommonModes contains kCFRunLoopDefaultMode and UITrackingRunLoopMode
+        displayLink?.add(to: RunLoop.main, forMode: .commonModes)
+        CATransaction.setCompletionBlock {
             displayLink?.invalidate()
             displayLink = nil
             popProperties.displayCount = 0
@@ -213,7 +215,7 @@ extension UINavigationController
     func wr_popToRootViewControllerAnimated(_ animated: Bool) -> [UIViewController]?
     {
         var displayLink:CADisplayLink? = CADisplayLink(target: self, selector: #selector(popNeedDisplay))
-        displayLink?.add(to: RunLoop.main, forMode: .defaultRunLoopMode)
+        displayLink?.add(to: RunLoop.main, forMode: .commonModes)
         CATransaction.setCompletionBlock {
             displayLink?.invalidate()
             displayLink = nil
@@ -229,6 +231,7 @@ extension UINavigationController
     // change navigationBar barTintColor smooth before pop to current VC finished
     func popNeedDisplay()
     {
+        print("popNeedDisplay")
         guard let topViewController = topViewController,
             let coordinator       = topViewController.transitionCoordinator else {
                 return
