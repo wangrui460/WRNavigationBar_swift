@@ -9,10 +9,12 @@
 
 import UIKit
 
-private let NAVBAR_TRANSLATION_POINT:CGFloat = 0
 
 class ThirdViewController: UIViewController
 {
+    fileprivate var NAVBAR_TRANSLATION_POINT:CGFloat = 0
+    fileprivate var lastOffsetY:CGFloat = 0
+    
     lazy var tableView:UITableView = {
         let table:UITableView = UITableView(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: self.view.bounds.height), style: .plain)
         table.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0);
@@ -78,48 +80,62 @@ extension ThirdViewController
         {   // 超过导航栏高度的一半，只显示状态栏
             UIView.animate(withDuration: 0.3, animations: { [weak self] in
                 if let weakSelf = self {
-                    weakSelf.setNavigationBarTransformProgress(progress: 1)
+                    weakSelf.setNavigationBarTransform(scrollUpHeight: 44)
                 }
             })
+            print("point:\(NAVBAR_TRANSLATION_POINT)")
         }
         else
         {   // 没有超过导航栏高度的一半，导航栏全部显示
             UIView.animate(withDuration: 0.3, animations: { [weak self] in
                 if let weakSelf = self {
-                    weakSelf.setNavigationBarTransformProgress(progress: 0)
+                    weakSelf.setNavigationBarTransform(scrollUpHeight: 0)
                 }
             })
+            print("point:\(NAVBAR_TRANSLATION_POINT)")
         }
+        NAVBAR_TRANSLATION_POINT = offsetY
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
         let offsetY = scrollView.contentOffset.y
         // 向上滑动的距离
-        let scrollUpHeight = offsetY - NAVBAR_TRANSLATION_POINT
-        // 除数表示 -> 导航栏从完全不透明到完全透明的过渡距离
-        let progress = scrollUpHeight / CGFloat(kNavBarHeight)
-        if (offsetY > NAVBAR_TRANSLATION_POINT)
-        {
-            if (scrollUpHeight > CGFloat(kNavBarHeight)) {
-                setNavigationBarTransformProgress(progress: 1)
+        let isScrollup = (offsetY - lastOffsetY) > 0 ? true : false
+        let scrollUpHeight = (offsetY - NAVBAR_TRANSLATION_POINT) > 44 ? 44 : (offsetY - NAVBAR_TRANSLATION_POINT)
+        let curTransformY = navigationController?.navigationBar.wr_getTranslationY()
+        
+        
+        if isScrollup == true
+        {   // 上滑
+            if curTransformY == -44 {
+                return
             }
-            else {
-                setNavigationBarTransformProgress(progress: progress)
+            else
+            {
+                if offsetY > 0 {
+                    setNavigationBarTransform(scrollUpHeight: scrollUpHeight)
+                }
             }
         }
         else
-        {
-            self.setNavigationBarTransformProgress(progress: 0)
+        {   // 下滑
+            UIView.animate(withDuration: 0.3, animations: { [weak self] in
+                if let weakSelf = self {
+                    weakSelf.setNavigationBarTransform(scrollUpHeight: 0)
+                }
+            })
         }
+        
+        lastOffsetY = offsetY
     }
-    
-    // private
-    func setNavigationBarTransformProgress(progress:CGFloat)
+
+    func setNavigationBarTransform(scrollUpHeight:CGFloat)
     {
-        navigationController?.navigationBar.wr_setTranslationY(translationY: -CGFloat(kNavBarHeight) * progress)
+        navigationController?.navigationBar.wr_setTranslationY(translationY: -scrollUpHeight)
         // 有系统的返回按钮，所以 hasSystemBackIndicator = YES
-        navigationController?.navigationBar.wr_setBarButtonItemsAlpha(alpha: 1 - progress, hasSystemBackIndicator: true)
+        let curTransformY = navigationController?.navigationBar.wr_getTranslationY() ?? 0
+        navigationController?.navigationBar.wr_setBarButtonItemsAlpha(alpha: 1 - (-curTransformY / 44.0), hasSystemBackIndicator: true)
     }
 }
 

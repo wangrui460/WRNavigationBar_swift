@@ -99,6 +99,11 @@ extension UINavigationBar
     {
         transform = CGAffineTransform.init(translationX: 0, y: translationY)
     }
+    
+    func wr_getTranslationY() -> CGFloat
+    {
+        return transform.ty
+    }
 }
 
 //==========================================================================
@@ -231,7 +236,6 @@ extension UINavigationController
     // change navigationBar barTintColor smooth before pop to current VC finished
     func popNeedDisplay()
     {
-        print("popNeedDisplay")
         guard let topViewController = topViewController,
             let coordinator       = topViewController.transitionCoordinator else {
                 return
