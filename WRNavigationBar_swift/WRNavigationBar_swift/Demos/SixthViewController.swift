@@ -52,8 +52,6 @@ extension SixthViewController
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
-        // 必须在view完全加载好再调用这个方法，否则就会出现白块的状况
-        scrollViewDidScroll(self.tableView)
         tableView.delegate = self;
     }
     

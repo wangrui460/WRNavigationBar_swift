@@ -47,8 +47,6 @@ extension ThirdViewController
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
-        // 必须在view完全加载好再调用这个方法，否则就会出现白块的状况
-        scrollViewDidScroll(self.tableView)
         tableView.delegate = self;
     }
     
@@ -57,6 +55,41 @@ extension ThirdViewController
         super.viewWillDisappear(animated)
         tableView.delegate = nil
         navigationController?.navigationBar.wr_setTranslationY(translationY: 0)
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView)
+    {
+        stopScroll(scrollView)
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
+    {
+        if decelerate == false {
+            stopScroll(scrollView)
+        }
+    }
+    
+    func stopScroll(_ scrollView: UIScrollView)
+    {
+        let offsetY = scrollView.contentOffset.y
+        // 向上滑动的距离
+        let scrollUpHeight = offsetY - NAVBAR_TRANSLATION_POINT
+        if (scrollUpHeight >= 22)
+        {   // 超过导航栏高度的一半，只显示状态栏
+            UIView.animate(withDuration: 0.3, animations: { [weak self] in
+                if let weakSelf = self {
+                    weakSelf.setNavigationBarTransformProgress(progress: 1)
+                }
+            })
+        }
+        else
+        {   // 没有超过导航栏高度的一半，导航栏全部显示
+            UIView.animate(withDuration: 0.3, animations: { [weak self] in
+                if let weakSelf = self {
+                    weakSelf.setNavigationBarTransformProgress(progress: 0)
+                }
+            })
+        }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView)
