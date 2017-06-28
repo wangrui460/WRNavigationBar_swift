@@ -104,6 +104,59 @@ extension UINavigationBar
     {
         return transform.ty
     }
+    
+    // call swizzling methods active 主动调用交换方法
+    private static let onceToken = UUID().uuidString
+    open override class func initialize()
+    {
+        guard self == UINavigationBar.self else { return }
+        DispatchQueue.once(token: onceToken)
+        {
+            let needSwizzleSelectorArr = [
+                #selector(setter: titleTextAttributes)
+            ]
+            
+            for selector in needSwizzleSelectorArr {
+                let str = ("wr_" + selector.description)
+                let originalMethod = class_getInstanceMethod(self, selector)
+                let swizzledMethod = class_getInstanceMethod(self, Selector(str))
+                method_exchangeImplementations(originalMethod, swizzledMethod)
+            }
+        }
+    }
+    
+    //==========================================================================
+    // MARK: swizzling pop
+    //==========================================================================
+    func wr_setTitleTextAttributes(_ newTitleTextAttributes:[String : Any]?)
+    {
+        guard var attributes = newTitleTextAttributes else {
+            return
+        }
+        
+        guard let originTitleTextAttributes = titleTextAttributes else {
+            wr_setTitleTextAttributes(attributes)
+            return
+        }
+        
+        var titleColor:UIColor?
+        for attribute in originTitleTextAttributes {
+            let attributeName = attribute.key as NSString
+            if attributeName.isEqual(to: "NSForegroundColorAttributeName") {
+                titleColor = attribute.value as? UIColor
+            }
+        }
+        
+        guard let originTitleColor = titleColor else {
+            wr_setTitleTextAttributes(attributes)
+            return
+        }
+
+        if attributes["NSForegroundColorAttributeName"] == nil {
+            attributes["NSForegroundColorAttributeName"] = originTitleColor
+        }
+        wr_setTitleTextAttributes(attributes)
+    }
 }
 
 //==========================================================================
@@ -129,8 +182,16 @@ extension UINavigationController
         navigationBar.tintColor = tintColor
     }
 
-    fileprivate func setNeedsNavigationBarUpdate(titleColor: UIColor) {
-        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:titleColor]
+    fileprivate func setNeedsNavigationBarUpdate(titleColor: UIColor)
+    {
+        guard let titleTextAttributes = navigationBar.titleTextAttributes else {
+            navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:titleColor]
+            return
+        }
+        
+        var newTitleTextAttributes = titleTextAttributes
+        newTitleTextAttributes.updateValue(titleColor, forKey: NSForegroundColorAttributeName)
+        navigationBar.titleTextAttributes = newTitleTextAttributes
     }
     
     fileprivate func updateNavigationBar(fromVC: UIViewController?, toVC: UIViewController?, progress: CGFloat)
