@@ -23,6 +23,9 @@ class NormalListController: UIViewController
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = UIColor.white
+        
+        // 改变标题文字大小
+        // navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName:UIFont.systemFont(ofSize: 22)]
     }
 }
 
