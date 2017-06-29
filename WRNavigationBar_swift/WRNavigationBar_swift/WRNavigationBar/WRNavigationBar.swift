@@ -141,8 +141,7 @@ extension UINavigationBar
         
         var titleColor:UIColor?
         for attribute in originTitleTextAttributes {
-            let attributeName = attribute.key as NSString
-            if attributeName.isEqual(to: "NSForegroundColorAttributeName") {
+            if attribute.key == NSForegroundColorAttributeName {
                 titleColor = attribute.value as? UIColor
             }
         }
@@ -152,8 +151,8 @@ extension UINavigationBar
             return
         }
 
-        if attributes["NSForegroundColorAttributeName"] == nil {
-            attributes["NSForegroundColorAttributeName"] = originTitleColor
+        if attributes[NSForegroundColorAttributeName] == nil {
+            attributes.updateValue(originTitleColor, forKey: NSForegroundColorAttributeName)
         }
         wr_setTitleTextAttributes(attributes)
     }
