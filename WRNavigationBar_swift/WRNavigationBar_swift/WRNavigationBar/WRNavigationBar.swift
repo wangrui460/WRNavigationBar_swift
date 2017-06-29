@@ -143,6 +143,7 @@ extension UINavigationBar
         for attribute in originTitleTextAttributes {
             if attribute.key == NSForegroundColorAttributeName {
                 titleColor = attribute.value as? UIColor
+                break
             }
         }
         
