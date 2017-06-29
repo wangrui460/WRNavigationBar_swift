@@ -23,7 +23,6 @@
 		1A96559E1ED6B8C600A89E30 /* MoveListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A96559D1ED6B8C600A89E30 /* MoveListController.swift */; };
 		1A966E8D1EE048F60045FCB8 /* AntForestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A966E8C1EE048F60045FCB8 /* AntForestController.swift */; };
 		1AB702661EA9A43C006DBA79 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB702651EA9A43C006DBA79 /* SecondViewController.swift */; };
-		1AB702681EA9A9BC006DBA79 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB702671EA9A9BC006DBA79 /* ThirdViewController.swift */; };
 		1AB7026A1EA9AC7A006DBA79 /* QQAppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB702691EA9AC7A006DBA79 /* QQAppController.swift */; };
 		1AB7026C1EA9B753006DBA79 /* QQZoneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB7026B1EA9B753006DBA79 /* QQZoneController.swift */; };
 		1AD0140A1EDBFB4500A6893C /* ZhiHuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD014091EDBFB4500A6893C /* ZhiHuController.swift */; };
@@ -65,7 +64,6 @@
 		1A96559D1ED6B8C600A89E30 /* MoveListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveListController.swift; sourceTree = "<group>"; };
 		1A966E8C1EE048F60045FCB8 /* AntForestController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AntForestController.swift; sourceTree = "<group>"; };
 		1AB702651EA9A43C006DBA79 /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
-		1AB702671EA9A9BC006DBA79 /* ThirdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
 		1AB702691EA9AC7A006DBA79 /* QQAppController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QQAppController.swift; sourceTree = "<group>"; };
 		1AB7026B1EA9B753006DBA79 /* QQZoneController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QQZoneController.swift; sourceTree = "<group>"; };
 		1AD014091EDBFB4500A6893C /* ZhiHuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZhiHuController.swift; sourceTree = "<group>"; };
@@ -183,7 +181,6 @@
 			children = (
 				1A96559D1ED6B8C600A89E30 /* MoveListController.swift */,
 				1AB702651EA9A43C006DBA79 /* SecondViewController.swift */,
-				1AB702671EA9A9BC006DBA79 /* ThirdViewController.swift */,
 				1A0DF7B41EA7380600191349 /* SixthViewController.swift */,
 			);
 			name = "移动导航栏";
@@ -392,7 +389,6 @@
 				1A96559C1ED6B64F00A89E30 /* CustomListController.swift in Sources */,
 				1AB702661EA9A43C006DBA79 /* SecondViewController.swift in Sources */,
 				1A0DF7B91EA7521C00191349 /* BaseNavigationController.swift in Sources */,
-				1AB702681EA9A9BC006DBA79 /* ThirdViewController.swift in Sources */,
 				1A0DF7B71EA7471B00191349 /* WeiBoMineController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

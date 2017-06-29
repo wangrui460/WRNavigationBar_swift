@@ -453,7 +453,7 @@ extension UIViewController
         static var navBarTintColor: UIColor = UIColor.defaultNavBarTintColor
         static var navBarTitleColor: UIColor = UIColor.defaultNavBarTitleColor
         static var statusBarStyle: UIStatusBarStyle = UIStatusBarStyle.default
-        static var navBarHideShadowImage: Bool = false
+        static var navBarShadowImageHidden: Bool = false
         
         static var customNavBar: UINavigationBar = UINavigationBar()
     }
@@ -595,15 +595,15 @@ extension UIViewController
     }
     
     // if you want shadowImage hidden,you can via hideShadowImage = true
-    var navBarHideShadowImage:Bool {
+    var navBarShadowImageHidden:Bool {
         get {
-            guard let isHidden = objc_getAssociatedObject(self, &AssociatedKeys.navBarHideShadowImage) as? Bool else {
+            guard let isHidden = objc_getAssociatedObject(self, &AssociatedKeys.navBarShadowImageHidden) as? Bool else {
                 return UIColor.defaultShadowImageHidden
             }
             return isHidden
         }
         set {
-            objc_setAssociatedObject(self, &AssociatedKeys.navBarHideShadowImage, newValue, .OBJC_ASSOCIATION_ASSIGN)
+            objc_setAssociatedObject(self, &AssociatedKeys.navBarShadowImageHidden, newValue, .OBJC_ASSOCIATION_ASSIGN)
             navigationController?.setNeedsNavigationBarUpdate(hideShadowImage: newValue)
         }
     }
@@ -667,7 +667,7 @@ extension UIViewController
         navigationController?.setNeedsNavigationBarUpdate(barBackgroundAlpha: navBarBackgroundAlpha)
         navigationController?.setNeedsNavigationBarUpdate(tintColor: navBarTintColor)
         navigationController?.setNeedsNavigationBarUpdate(titleColor: navBarTitleColor)
-        navigationController?.setNeedsNavigationBarUpdate(hideShadowImage: navBarHideShadowImage)
+        navigationController?.setNeedsNavigationBarUpdate(hideShadowImage: navBarShadowImageHidden)
         wr_viewDidAppear(animated)
     }
 }
