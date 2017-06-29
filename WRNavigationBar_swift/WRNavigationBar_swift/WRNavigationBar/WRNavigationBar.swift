@@ -181,6 +181,11 @@ extension UINavigationController
     fileprivate func setNeedsNavigationBarUpdate(tintColor: UIColor) {
         navigationBar.tintColor = tintColor
     }
+    
+    fileprivate func setNeedsNavigationBarUpdate(hideShadowImage: Bool)
+    {
+        navigationBar.shadowImage = (hideShadowImage == true) ? UIImage() : nil
+    }
 
     fileprivate func setNeedsNavigationBarUpdate(titleColor: UIColor)
     {
@@ -295,7 +300,7 @@ extension UINavigationController
     }
     
     // change navigationBar barTintColor smooth before pop to current VC finished
-    func popNeedDisplay()
+    @objc fileprivate func popNeedDisplay()
     {
         guard let topViewController = topViewController,
             let coordinator       = topViewController.transitionCoordinator else {
@@ -342,7 +347,7 @@ extension UINavigationController
     }
     
     // change navigationBar barTintColor smooth before push to current VC finished or before pop to current VC finished
-    func pushNeedDisplay()
+    @objc fileprivate func pushNeedDisplay()
     {
         guard let topViewController = topViewController,
               let coordinator       = topViewController.transitionCoordinator else {
@@ -448,12 +453,13 @@ extension UIViewController
         static var navBarTintColor: UIColor = UIColor.defaultNavBarTintColor
         static var navBarTitleColor: UIColor = UIColor.defaultNavBarTitleColor
         static var statusBarStyle: UIStatusBarStyle = UIStatusBarStyle.default
+        static var navBarHideShadowImage: Bool = false
         
         static var customNavBar: UINavigationBar = UINavigationBar()
     }
     
     // navigationBar barTintColor can not change by currentVC before fromVC push to currentVC finished
-    var pushToCurrentVCFinished:Bool {
+    fileprivate var pushToCurrentVCFinished:Bool {
         get {
             guard let isFinished = objc_getAssociatedObject(self, &AssociatedKeys.pushToCurrentVCFinished) as? Bool else {
                 return false
@@ -466,7 +472,7 @@ extension UIViewController
     }
     
     // navigationBar barTintColor can not change by currentVC when currentVC push to nextVC finished
-    var pushToNextVCFinished:Bool {
+    fileprivate var pushToNextVCFinished:Bool {
         get {
             guard let isFinished = objc_getAssociatedObject(self, &AssociatedKeys.pushToNextVCFinished) as? Bool else {
                 return false
@@ -588,6 +594,20 @@ extension UIViewController
         }
     }
     
+    // if you want shadowImage hidden,you can via hideShadowImage = true
+    var navBarHideShadowImage:Bool {
+        get {
+            guard let isHidden = objc_getAssociatedObject(self, &AssociatedKeys.navBarHideShadowImage) as? Bool else {
+                return UIColor.defaultShadowImageHidden
+            }
+            return isHidden
+        }
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.navBarHideShadowImage, newValue, .OBJC_ASSOCIATION_ASSIGN)
+            navigationController?.setNeedsNavigationBarUpdate(hideShadowImage: newValue)
+        }
+    }
+    
     // custom navigationBar
     var customNavBar: UIView {
         get {
@@ -647,6 +667,7 @@ extension UIViewController
         navigationController?.setNeedsNavigationBarUpdate(barBackgroundAlpha: navBarBackgroundAlpha)
         navigationController?.setNeedsNavigationBarUpdate(tintColor: navBarTintColor)
         navigationController?.setNeedsNavigationBarUpdate(titleColor: navBarTitleColor)
+        navigationController?.setNeedsNavigationBarUpdate(hideShadowImage: navBarHideShadowImage)
         wr_viewDidAppear(animated)
     }
 }
@@ -687,6 +708,7 @@ extension UIColor
         static var defNavBarTintColor: UIColor = UIColor(red: 0, green: 0.478431, blue: 1, alpha: 1.0)
         static var defNavBarTitleColor: UIColor = UIColor.black
         static var defStatusBarStyle: UIStatusBarStyle = UIStatusBarStyle.default
+        static var defShadowImageHidden: Bool = false
     }
     class var defaultNavBarBarTintColor: UIColor {
         get {
@@ -733,6 +755,18 @@ extension UIColor
         }
         set {
             objc_setAssociatedObject(self, &AssociatedKeys.defStatusBarStyle, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    class var defaultShadowImageHidden: Bool {
+        get {
+            guard let def = objc_getAssociatedObject(self, &AssociatedKeys.defShadowImageHidden) as? Bool else {
+                return false
+            }
+            return def
+        }
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.defShadowImageHidden, newValue, .OBJC_ASSOCIATION_ASSIGN)
         }
     }
     

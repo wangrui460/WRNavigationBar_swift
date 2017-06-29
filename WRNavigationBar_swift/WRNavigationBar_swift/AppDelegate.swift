@@ -66,6 +66,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIColor.defaultNavBarTitleColor = .white
         // 统一设置状态栏样式
         UIColor.defaultStatusBarStyle = .lightContent
+        // 如果需要设置导航栏底部分割线隐藏，可以在这里统一设置
+        // UIColor.defaultShadowImageHidden = true
     }
 }
 

@@ -90,6 +90,9 @@ class WeiBoMineController: UIViewController
         
         // 设置导航栏按钮和标题颜色
         navBarTintColor = .white
+        
+        // 如果需要隐藏导航栏底部分割线，设置 hideShadowImage 为true
+        // hideShadowImage = true
     }
     
     deinit {
