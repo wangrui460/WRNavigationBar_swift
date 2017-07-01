@@ -12,6 +12,10 @@
 
 ## Demo 
 
+![导航栏显示渐变色](https://github.com/wangrui460/WRNavigationBar_swift/raw/master/screenshots/导航栏显示渐变色.gif)
+
+![导航栏显示图片](https://github.com/wangrui460/WRNavigationBar_swift/raw/master/screenshots/导航栏显示图片.gif)
+
 ![新浪微博个人中心](https://github.com/wangrui460/WRNavigationBar_swift/raw/master/screenshots/新浪微博个人中心.gif)
 
 ![qq空间](https://github.com/wangrui460/WRNavigationBar_swift/raw/master/screenshots/qq空间.gif)
@@ -35,6 +39,8 @@
 ## How To Use
 
 <pre><code>
+// 一行代码搞定导航栏显示图片
+navBarBackgroundImage = UIImage(named: "imageNav")
 // 一行代码搞定导航栏颜色
 navBarBarTintColor = .white
 // 一行代码搞定导航栏透明度
