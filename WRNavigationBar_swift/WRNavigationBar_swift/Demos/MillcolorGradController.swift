@@ -12,7 +12,7 @@ import UIKit
 private let IMAGE_HEIGHT:CGFloat = 220
 private let NAVBAR_COLORCHANGE_POINT:CGFloat = IMAGE_HEIGHT - CGFloat(kNavBarBottom * 2)
 
-class ImageNavController: UIViewController
+class MillcolorGradController: UIViewController
 {    
     lazy var tableView:UITableView = {
         let table:UITableView = UITableView(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: self.view.bounds.height), style: .plain)
@@ -22,7 +22,7 @@ class ImageNavController: UIViewController
         return table
     }()
     lazy var topView:UIImageView = {
-        let imgView = UIImageView(image: UIImage(named: "image7"))
+        let imgView = UIImageView(image: UIImage(named: "image8"))
         imgView.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: IMAGE_HEIGHT)
         imgView.contentMode = UIViewContentMode.scaleAspectFill
         imgView.clipsToBounds = true
@@ -32,13 +32,13 @@ class ImageNavController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        title = "玛丽莲·梦露"
+        title = "奥黛丽·赫本"
         view.backgroundColor = UIColor.red
         view.addSubview(tableView)
         tableView.tableHeaderView = topView
         
         // 设置导航栏显示图片
-        navBarBackgroundImage = UIImage(named: "imageNav")
+        navBarBackgroundImage = UIImage(named: "millcolorGrad")
         
         // 设置初始导航栏透明度
         navBarBackgroundAlpha = 0
@@ -58,7 +58,7 @@ class ImageNavController: UIViewController
 
 
 // MARK: - 滑动改变导航栏透明度、标题颜色、左右按钮颜色、状态栏颜色
-extension ImageNavController
+extension MillcolorGradController
 {
     func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
@@ -76,7 +76,7 @@ extension ImageNavController
 }
 
 
-extension ImageNavController:UITableViewDelegate,UITableViewDataSource
+extension MillcolorGradController:UITableViewDelegate,UITableViewDataSource
 {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 40

@@ -10,6 +10,7 @@
 		1A05B4741F07FA9C001D7B64 /* WRNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B4731F07FA9C001D7B64 /* WRNavigationBar.swift */; };
 		1A05B4761F07FAB4001D7B64 /* NormalListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B4751F07FAB4001D7B64 /* NormalListController.swift */; };
 		1A05B4781F07FAD7001D7B64 /* ImageNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B4771F07FAD7001D7B64 /* ImageNavController.swift */; };
+		1A05B47A1F080D0B001D7B64 /* MillcolorGradController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B4791F080D0B001D7B64 /* MillcolorGradController.swift */; };
 		1A0DF77B1EA7176500191349 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0DF77A1EA7176500191349 /* AppDelegate.swift */; };
 		1A0DF7801EA7176500191349 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A0DF77E1EA7176500191349 /* Main.storyboard */; };
 		1A0DF7821EA7176500191349 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A0DF7811EA7176500191349 /* Assets.xcassets */; };
@@ -48,6 +49,7 @@
 		1A05B4731F07FA9C001D7B64 /* WRNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WRNavigationBar.swift; sourceTree = "<group>"; };
 		1A05B4751F07FAB4001D7B64 /* NormalListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalListController.swift; sourceTree = "<group>"; };
 		1A05B4771F07FAD7001D7B64 /* ImageNavController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageNavController.swift; sourceTree = "<group>"; };
+		1A05B4791F080D0B001D7B64 /* MillcolorGradController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MillcolorGradController.swift; sourceTree = "<group>"; };
 		1A0DF7771EA7176500191349 /* WRNavigationBar_swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WRNavigationBar_swift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A0DF77A1EA7176500191349 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1A0DF77F1EA7176500191349 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				1AD014121EDC091F00A6893C /* QQMineController.swift */,
 				1A966E8C1EE048F60045FCB8 /* AntForestController.swift */,
 				1A05B4771F07FAD7001D7B64 /* ImageNavController.swift */,
+				1A05B4791F080D0B001D7B64 /* MillcolorGradController.swift */,
 			);
 			name = "普通";
 			path = Demos;
@@ -377,6 +380,7 @@
 				1A869EDF1ECAA36B006D96F8 /* CustomNavBarController.swift in Sources */,
 				1AD014131EDC091F00A6893C /* QQMineController.swift in Sources */,
 				1AB7026C1EA9B753006DBA79 /* QQZoneController.swift in Sources */,
+				1A05B47A1F080D0B001D7B64 /* MillcolorGradController.swift in Sources */,
 				1A05B4781F07FAD7001D7B64 /* ImageNavController.swift in Sources */,
 				1A96559E1ED6B8C600A89E30 /* MoveListController.swift in Sources */,
 				1AD014111EDBFEAC00A6893C /* WRProxy.swift in Sources */,
