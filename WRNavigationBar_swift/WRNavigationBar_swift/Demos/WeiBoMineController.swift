@@ -43,7 +43,7 @@ class WeiBoMineController: UIViewController
         let label = UILabel()
         label.backgroundColor = UIColor.clear
         label.textColor = UIColor.white
-        label.text = "关注 121  |  粉丝 17"
+        label.text = "关注 121  |  粉丝 891"
         label.textAlignment = .center
         label.font = .boldSystemFont(ofSize: 14)
         return label

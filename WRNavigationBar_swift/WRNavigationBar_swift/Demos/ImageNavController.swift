@@ -21,44 +21,8 @@ class ImageNavController: UIViewController
         table.dataSource = self
         return table
     }()
-    lazy var iconView:UIImageView = {
-        let imgView = UIImageView(image: UIImage(named: "image5"))
-        imgView.frame.size = CGSize(width: 80, height: 80)
-        imgView.layer.borderColor = UIColor.white.cgColor
-        imgView.layer.borderWidth = 2
-        imgView.layer.cornerRadius = 40
-        imgView.layer.masksToBounds = true
-        return imgView
-    }()
-    lazy var nameLabel:UILabel = {
-        let label = UILabel()
-        label.backgroundColor = UIColor.clear
-        label.textColor = UIColor.white
-        label.text = "wangrui460"
-        label.textAlignment = .center
-        label.font = .systemFont(ofSize: 17)
-        return label
-    }()
-    lazy var fansLabel:UILabel = {
-        let label = UILabel()
-        label.backgroundColor = UIColor.clear
-        label.textColor = UIColor.white
-        label.text = "关注 121  |  粉丝 17"
-        label.textAlignment = .center
-        label.font = .boldSystemFont(ofSize: 14)
-        return label
-    }()
-    lazy var detailLabel:UILabel = {
-        let label = UILabel()
-        label.backgroundColor = UIColor.clear
-        label.textColor = UIColor.white
-        label.text = "简介:丽人丽妆公司，熊猫美妆APP iOS工程师"
-        label.textAlignment = .center
-        label.font = .systemFont(ofSize: 13)
-        return label
-    }()
     lazy var topView:UIImageView = {
-        let imgView = UIImageView(image: UIImage(named: "wbBg"))
+        let imgView = UIImageView(image: UIImage(named: "image7"))
         imgView.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: IMAGE_HEIGHT)
         imgView.contentMode = UIViewContentMode.scaleAspectFill
         imgView.clipsToBounds = true
@@ -68,17 +32,9 @@ class ImageNavController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        title = ""
+        title = "玛丽莲·梦露"
         view.backgroundColor = UIColor.red
         view.addSubview(tableView)
-        topView.addSubview(iconView)
-        iconView.center = CGPoint(x: topView.center.x, y: topView.center.y - 10)
-        topView.addSubview(nameLabel)
-        nameLabel.frame = CGRect(x: 0, y: iconView.frame.size.height+iconView.frame.origin.y+6, width: kScreenWidth, height: 19)
-        topView.addSubview(fansLabel)
-        fansLabel.frame = CGRect(x: 0, y: nameLabel.frame.origin.y+19+5, width: kScreenWidth, height: 16)
-        topView.addSubview(detailLabel)
-        detailLabel.frame = CGRect(x: 0, y: fansLabel.frame.origin.y+16+5, width: kScreenWidth, height: 15)
         tableView.tableHeaderView = topView
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "··· ", style: .done, target: nil, action: nil)
         
@@ -91,8 +47,8 @@ class ImageNavController: UIViewController
         // 设置导航栏按钮和标题颜色
         navBarTintColor = .white
         
-        // 如果需要隐藏导航栏底部分割线，设置 hideShadowImage 为true
-        // hideShadowImage = true
+        // 设置状态栏style
+        statusBarStyle = .lightContent
     }
     
     deinit {
@@ -112,18 +68,10 @@ extension ImageNavController
         {
             let alpha = (offsetY - NAVBAR_COLORCHANGE_POINT) / CGFloat(kNavBarBottom)
             navBarBackgroundAlpha = alpha
-            navBarTintColor = UIColor.black.withAlphaComponent(alpha)
-            navBarTitleColor = UIColor.black.withAlphaComponent(alpha)
-            statusBarStyle = .default
-            title = "wangrui460"
         }
         else
         {
             navBarBackgroundAlpha = 0
-            navBarTintColor = .white
-            navBarTitleColor = .white
-            statusBarStyle = .lightContent
-            title = ""
         }
     }
 }
