@@ -9,7 +9,7 @@
 
 import UIKit
 
-private let IMAGE_HEIGHT:CGFloat = 220
+private let IMAGE_HEIGHT:CGFloat = 250
 private let NAVBAR_COLORCHANGE_POINT:CGFloat = IMAGE_HEIGHT - CGFloat(kNavBarBottom * 2)
 
 class MillcolorGradController: UIViewController
