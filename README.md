@@ -105,7 +105,7 @@ UIColor.defaultShadowImageHidden = true
 
 
 # Contact me
-- Weibo: [@wangrui460](http://weibo.com/u/5145779726?is_all=1)
+- Weibo: [@wangrui460](http://weibo.com/wangrui460)
 - Email:  wangruidev@gmail.com
 - QQ：1204607318
 
