@@ -12,7 +12,8 @@ import UIKit
 extension UINavigationBar
 {
     fileprivate struct AssociatedKeys {
-        static var backgroundView:UIView = UIView()
+        static var backgroundView: UIView = UIView()
+        static var backgroundImageView: UIImageView = UIImageView()
     }
     
     fileprivate var backgroundView:UIView? {
@@ -27,9 +28,39 @@ extension UINavigationBar
         }
     }
     
+    fileprivate var backgroundImageView:UIImageView? {
+        get {
+            guard let bgImageView = objc_getAssociatedObject(self, &AssociatedKeys.backgroundImageView) as? UIImageView else {
+                return nil
+            }
+            return bgImageView
+        }
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.backgroundImageView, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    // set navigationBar backgroundImage
+    fileprivate func wr_setBackgroundImage(image:UIImage)
+    {
+        backgroundView?.removeFromSuperview()
+        backgroundView = nil
+        if (backgroundImageView == nil)
+        {
+            // add a image(nil color) to _UIBarBackground make it clear
+            setBackgroundImage(UIImage(), for: .default)
+            backgroundImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: Int(bounds.width), height: 64))
+            // _UIBarBackground is first subView for navigationBar
+            subviews.first?.insertSubview(backgroundImageView ?? UIImageView(), at: 0)
+        }
+        backgroundImageView?.image = image
+    }
+    
     // set navigationBar barTintColor
     fileprivate func wr_setBackgroundColor(color:UIColor)
     {
+        backgroundImageView?.removeFromSuperview()
+        backgroundImageView = nil
         if (backgroundView == nil)
         {
             // add a image(nil color) to _UIBarBackground make it clear
@@ -166,6 +197,11 @@ extension UINavigationController
 {
     override open var preferredStatusBarStyle: UIStatusBarStyle {
         return topViewController?.statusBarStyle ?? UIColor.defaultStatusBarStyle
+    }
+    
+    fileprivate func setNeedsNavigationBarUpdate(backgroundImage: UIImage)
+    {
+        navigationBar.wr_setBackgroundImage(image: backgroundImage)
     }
     
     fileprivate func setNeedsNavigationBarUpdate(barTintColor: UIColor)
@@ -448,6 +484,8 @@ extension UIViewController
         static var pushToCurrentVCFinished: Bool = false
         static var pushToNextVCFinished:Bool = false
         
+        static var navBarBackgroundImage: UIImage = UIImage()
+        
         static var navBarBarTintColor: UIColor = UIColor.defaultNavBarBarTintColor
         static var navBarBackgroundAlpha:CGFloat = 1.0
         static var navBarTintColor: UIColor = UIColor.defaultNavBarTintColor
@@ -481,6 +519,19 @@ extension UIViewController
         }
         set {
             objc_setAssociatedObject(self, &AssociatedKeys.pushToNextVCFinished, newValue, .OBJC_ASSOCIATION_ASSIGN)
+        }
+    }
+    
+    // you can set navigationBar backgroundImage
+    var navBarBackgroundImage: UIImage? {
+        get {
+            guard let bgImage = objc_getAssociatedObject(self, &AssociatedKeys.navBarBackgroundImage) as? UIImage else {
+                return nil
+            }
+            return bgImage
+        }
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.navBarBackgroundImage, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
@@ -663,7 +714,11 @@ extension UIViewController
     
     func wr_viewDidAppear(_ animated: Bool)
     {
-        navigationController?.setNeedsNavigationBarUpdate(barTintColor: navBarBarTintColor)
+        if let navBarBgImage = navBarBackgroundImage {
+            navigationController?.setNeedsNavigationBarUpdate(backgroundImage: navBarBgImage)
+        } else {
+            navigationController?.setNeedsNavigationBarUpdate(barTintColor: navBarBarTintColor)
+        }
         navigationController?.setNeedsNavigationBarUpdate(barBackgroundAlpha: navBarBackgroundAlpha)
         navigationController?.setNeedsNavigationBarUpdate(tintColor: navBarTintColor)
         navigationController?.setNeedsNavigationBarUpdate(titleColor: navBarTitleColor)
