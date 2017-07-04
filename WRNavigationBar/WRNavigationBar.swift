@@ -526,12 +526,19 @@ extension UIViewController
     var navBarBackgroundImage: UIImage? {
         get {
             guard let bgImage = objc_getAssociatedObject(self, &AssociatedKeys.navBarBackgroundImage) as? UIImage else {
-                return nil
+                return UIColor.defaultNavBarBackgroundImage
             }
             return bgImage
         }
         set {
-            objc_setAssociatedObject(self, &AssociatedKeys.navBarBackgroundImage, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            if customNavBar.isKind(of: UINavigationBar.self) {
+                let navBar = customNavBar as! UINavigationBar
+                navBar.wr_setBackgroundImage(image: newValue!)
+            }
+            else
+            {
+                objc_setAssociatedObject(self, &AssociatedKeys.navBarBackgroundImage, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            }
         }
     }
     
@@ -760,11 +767,13 @@ extension UIColor
     fileprivate struct AssociatedKeys
     {   // default is system attributes
         static var defNavBarBarTintColor: UIColor = UIColor.white
+        static var defNavBarBackgroundImage: UIImage = UIImage()
         static var defNavBarTintColor: UIColor = UIColor(red: 0, green: 0.478431, blue: 1, alpha: 1.0)
         static var defNavBarTitleColor: UIColor = UIColor.black
         static var defStatusBarStyle: UIStatusBarStyle = UIStatusBarStyle.default
         static var defShadowImageHidden: Bool = false
     }
+    
     class var defaultNavBarBarTintColor: UIColor {
         get {
             guard let def = objc_getAssociatedObject(self, &AssociatedKeys.defNavBarBarTintColor) as? UIColor else {
@@ -774,6 +783,18 @@ extension UIColor
         }
         set {
             objc_setAssociatedObject(self, &AssociatedKeys.defNavBarBarTintColor, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    class var defaultNavBarBackgroundImage: UIImage? {
+        get {
+            guard let def = objc_getAssociatedObject(self, &AssociatedKeys.defNavBarBackgroundImage) as? UIImage else {
+                return nil
+            }
+            return def
+        }
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.defNavBarBackgroundImage, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
