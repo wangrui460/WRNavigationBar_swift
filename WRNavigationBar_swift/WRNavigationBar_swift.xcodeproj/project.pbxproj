@@ -164,8 +164,6 @@
 				1AD014091EDBFB4500A6893C /* ZhiHuController.swift */,
 				1AD014121EDC091F00A6893C /* QQMineController.swift */,
 				1A966E8C1EE048F60045FCB8 /* AntForestController.swift */,
-				1A05B4771F07FAD7001D7B64 /* ImageNavController.swift */,
-				1A05B4791F080D0B001D7B64 /* MillcolorGradController.swift */,
 			);
 			name = "普通";
 			path = Demos;
@@ -177,6 +175,8 @@
 				1A869EDC1ECAA0C1006D96F8 /* BaseViewController.swift */,
 				1A96559B1ED6B64F00A89E30 /* CustomListController.swift */,
 				1A869EDE1ECAA36B006D96F8 /* CustomNavBarController.swift */,
+				1A05B4771F07FAD7001D7B64 /* ImageNavController.swift */,
+				1A05B4791F080D0B001D7B64 /* MillcolorGradController.swift */,
 			);
 			name = "自定义导航栏";
 			path = Demos;

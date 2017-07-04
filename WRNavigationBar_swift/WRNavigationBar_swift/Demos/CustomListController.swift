@@ -45,7 +45,11 @@ extension CustomListController: UITableViewDelegate, UITableViewDataSource
         var str:String? = nil
         switch indexPath.row {
         case 0:
-            str = "主页";
+            str = "主页"
+        case 1:
+            str = "导航栏显示图片"
+        case 2:
+            str = "实现导航栏渐变色的另一种方式"
         default:
             str = ""
         }
@@ -64,6 +68,10 @@ extension CustomListController: UITableViewDelegate, UITableViewDataSource
         switch indexPath.row {
         case 0:
             navigationController?.pushViewController(CustomNavBarController(), animated: true)
+        case 1:
+            navigationController?.pushViewController(ImageNavController(), animated: true)
+        case 2:
+            navigationController?.pushViewController(MillcolorGradController(), animated: true)
         default:
            break
         }

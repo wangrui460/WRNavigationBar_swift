@@ -30,11 +30,24 @@ class BaseViewController: UIViewController
         
         view.addSubview(navBar)
         navBar.items = [navItem]
-        // 导航条背景颜色
-        navBar.barTintColor = MainNavBarColor
-        // 导航条标题颜色
-        navBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
-        // 导航条左右按钮字体颜色
-        navBar.tintColor = UIColor.white
+        
+        // 设置自定义导航栏背景图片
+        navBarBackgroundImage = UIImage(named: "millcolorGrad")
+
+        // 设置自定义导航栏默认背景颜色
+        // navBarBarTintColor = MainNavBarColor
+        
+        // 设置自定义导航栏标题颜色
+        navBarTitleColor = UIColor.white
+
+        // 设置自定义导航栏左右按钮字体颜色
+        navBarTintColor = UIColor.white
+        
+        navItem.leftBarButtonItem = UIBarButtonItem(title: "<<", style: .plain, target: self, action: #selector(back))
+    }
+    
+    @objc fileprivate func back()
+    {
+        _ = navigationController?.popViewController(animated: true)
     }
 }

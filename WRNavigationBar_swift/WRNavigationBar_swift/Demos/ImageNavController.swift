@@ -12,11 +12,11 @@ import UIKit
 private let IMAGE_HEIGHT:CGFloat = 220
 private let NAVBAR_COLORCHANGE_POINT:CGFloat = IMAGE_HEIGHT - CGFloat(kNavBarBottom * 2)
 
-class ImageNavController: UIViewController
+class ImageNavController: BaseViewController
 {    
     lazy var tableView:UITableView = {
         let table:UITableView = UITableView(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: self.view.bounds.height), style: .plain)
-        table.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0);
+        table.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
         table.delegate = self
         table.dataSource = self
         return table
@@ -32,10 +32,11 @@ class ImageNavController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        title = "玛丽莲·梦露"
+        navItem.title = "玛丽莲·梦露"
         view.backgroundColor = UIColor.red
         view.addSubview(tableView)
         tableView.tableHeaderView = topView
+        view.insertSubview(navBar, aboveSubview: tableView)
         
         // 设置导航栏显示图片
         navBarBackgroundImage = UIImage(named: "imageNav")
@@ -94,10 +95,10 @@ extension ImageNavController:UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         tableView.deselectRow(at: indexPath, animated: true)
-        let vc:UIViewController = UIViewController()
-        vc.view.backgroundColor = UIColor.white
-        let str = "WRNavigationBar"
-        vc.title = str
+        let vc:BaseViewController = BaseViewController()
+        vc.view.backgroundColor = UIColor.red
+        let str = String(format: "右滑返回查看效果 ", indexPath.row)
+        vc.navItem.title = str
         navigationController?.pushViewController(vc, animated: true)
     }
 }

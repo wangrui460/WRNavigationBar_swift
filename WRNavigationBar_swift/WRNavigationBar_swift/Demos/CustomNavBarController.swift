@@ -17,7 +17,7 @@ class CustomNavBarController: BaseViewController
     lazy var tableView:UITableView = {
         let frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: self.view.bounds.height)
         let table:UITableView = UITableView(frame: frame, style: .plain)
-        table.contentInset = UIEdgeInsetsMake(0, 0, CGFloat(kTabBarHeight), 0);
+        table.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
         table.delegate = self
         table.dataSource = self
         return table
@@ -44,7 +44,7 @@ class CustomNavBarController: BaseViewController
         imageView.center = topView.center
         tableView.tableHeaderView = topView
         view.insertSubview(navBar, aboveSubview: tableView)
-        navItem.leftBarButtonItem = UIBarButtonItem(title: "<<", style: .plain, target: self, action: #selector(back))
+        
         navItem.title = "个人中心"
         
         // 设置导航栏颜色
@@ -109,12 +109,6 @@ extension CustomNavBarController:UITableViewDelegate,UITableViewDataSource
         vc.view.backgroundColor = UIColor.red
         let str = String(format: "右滑返回查看效果 ", indexPath.row)
         vc.navItem.title = str
-        vc.navItem.leftBarButtonItem = UIBarButtonItem(title: "返回", style: .plain, target: self, action: #selector(back))
         navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    @objc fileprivate func back()
-    {
-        _ = navigationController?.popViewController(animated: true)
     }
 }

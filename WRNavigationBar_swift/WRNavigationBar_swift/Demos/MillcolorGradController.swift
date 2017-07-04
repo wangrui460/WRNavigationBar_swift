@@ -12,11 +12,11 @@ import UIKit
 private let IMAGE_HEIGHT:CGFloat = 250
 private let NAVBAR_COLORCHANGE_POINT:CGFloat = IMAGE_HEIGHT - CGFloat(kNavBarBottom * 2)
 
-class MillcolorGradController: UIViewController
+class MillcolorGradController: BaseViewController
 {    
     lazy var tableView:UITableView = {
         let table:UITableView = UITableView(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: self.view.bounds.height), style: .plain)
-        table.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0);
+        table.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
         table.delegate = self
         table.dataSource = self
         return table
@@ -32,13 +32,11 @@ class MillcolorGradController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        title = "奥黛丽·赫本"
+        navItem.title = "奥黛丽·赫本"
         view.backgroundColor = UIColor.red
         view.addSubview(tableView)
         tableView.tableHeaderView = topView
-        
-        // 设置导航栏显示图片
-        navBarBackgroundImage = UIImage(named: "millcolorGrad")
+        view.insertSubview(navBar, aboveSubview: tableView)
         
         // 设置初始导航栏透明度
         navBarBackgroundAlpha = 0
@@ -94,10 +92,10 @@ extension MillcolorGradController:UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         tableView.deselectRow(at: indexPath, animated: true)
-        let vc:UIViewController = UIViewController()
-        vc.view.backgroundColor = UIColor.white
-        let str = "WRNavigationBar"
-        vc.title = str
+        let vc:BaseViewController = BaseViewController()
+        vc.view.backgroundColor = UIColor.red
+        let str = String(format: "右滑返回查看效果 ", indexPath.row)
+        vc.navItem.title = str
         navigationController?.pushViewController(vc, animated: true)
     }
 }
