@@ -43,7 +43,9 @@ class BaseViewController: UIViewController
         // 设置自定义导航栏左右按钮字体颜色
         navBarTintColor = UIColor.white
         
-        navItem.leftBarButtonItem = UIBarButtonItem(title: "<<", style: .plain, target: self, action: #selector(back))
+        if self.navigationController?.childViewControllers.count != 1 {
+            navItem.leftBarButtonItem = UIBarButtonItem(title: "<<", style: .plain, target: self, action: #selector(back))
+        }
     }
     
     @objc fileprivate func back()
