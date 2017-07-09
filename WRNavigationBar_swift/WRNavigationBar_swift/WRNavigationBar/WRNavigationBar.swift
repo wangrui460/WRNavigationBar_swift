@@ -707,31 +707,58 @@ extension UIViewController
     
     func wr_viewWillAppear(_ animated: Bool)
     {
-        pushToNextVCFinished = false
-        navigationController?.setNeedsNavigationBarUpdate(tintColor: navBarTintColor)
-        navigationController?.setNeedsNavigationBarUpdate(titleColor: navBarTitleColor)
+        if canUpdateNavigationBar() == true {
+            pushToNextVCFinished = false
+            navigationController?.setNeedsNavigationBarUpdate(tintColor: navBarTintColor)
+            navigationController?.setNeedsNavigationBarUpdate(titleColor: navBarTitleColor)
+        }
         wr_viewWillAppear(animated)
     }
     
     func wr_viewWillDisappear(_ animated: Bool)
     {
-        pushToNextVCFinished = true
+        if canUpdateNavigationBar() == true {
+            pushToNextVCFinished = true
+        }
         wr_viewWillDisappear(animated)
     }
     
     func wr_viewDidAppear(_ animated: Bool)
     {
-        if let navBarBgImage = navBarBackgroundImage {
-            navigationController?.setNeedsNavigationBarUpdate(backgroundImage: navBarBgImage)
-        } else {
-            navigationController?.setNeedsNavigationBarUpdate(barTintColor: navBarBarTintColor)
+        if canUpdateNavigationBar() == true
+        {
+            if let navBarBgImage = navBarBackgroundImage {
+                navigationController?.setNeedsNavigationBarUpdate(backgroundImage: navBarBgImage)
+            } else {
+                navigationController?.setNeedsNavigationBarUpdate(barTintColor: navBarBarTintColor)
+            }
+            navigationController?.setNeedsNavigationBarUpdate(barBackgroundAlpha: navBarBackgroundAlpha)
+            navigationController?.setNeedsNavigationBarUpdate(tintColor: navBarTintColor)
+            navigationController?.setNeedsNavigationBarUpdate(titleColor: navBarTitleColor)
+            navigationController?.setNeedsNavigationBarUpdate(hideShadowImage: navBarShadowImageHidden)
         }
-        navigationController?.setNeedsNavigationBarUpdate(barBackgroundAlpha: navBarBackgroundAlpha)
-        navigationController?.setNeedsNavigationBarUpdate(tintColor: navBarTintColor)
-        navigationController?.setNeedsNavigationBarUpdate(titleColor: navBarTitleColor)
-        navigationController?.setNeedsNavigationBarUpdate(hideShadowImage: navBarShadowImageHidden)
         wr_viewDidAppear(animated)
     }
+    
+    func canUpdateNavigationBar() -> Bool
+    {
+        let screenX = 0
+        let screenY = 0
+        let screenWidth = UIScreen.main.bounds.size.width
+        let screenHeight = UIScreen.main.bounds.size.height
+    
+        let selfX = Int(self.view.frame.origin.x)
+        let selfY = Int(self.view.frame.origin.y)
+        let selfWidth = self.view.frame.size.width
+        let selfHeight = self.view.frame.size.height
+        
+        if self.navigationController != nil && screenX == selfX && screenY == selfY && screenWidth == selfWidth && screenHeight == selfHeight {
+            return true
+        } else {
+            return false
+        }
+    }
+    
 }
 
 //====================================================================================
