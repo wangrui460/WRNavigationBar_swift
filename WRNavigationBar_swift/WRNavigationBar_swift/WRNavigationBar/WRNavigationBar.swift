@@ -741,18 +741,8 @@ extension UIViewController
     }
     
     func canUpdateNavigationBar() -> Bool
-    {
-        let screenX = 0
-        let screenY = 0
-        let screenWidth = UIScreen.main.bounds.size.width
-        let screenHeight = UIScreen.main.bounds.size.height
-    
-        let selfX = Int(self.view.frame.origin.x)
-        let selfY = Int(self.view.frame.origin.y)
-        let selfWidth = self.view.frame.size.width
-        let selfHeight = self.view.frame.size.height
-        
-        if self.navigationController != nil && screenX == selfX && screenY == selfY && screenWidth == selfWidth && screenHeight == selfHeight {
+    {        
+        if self.navigationController != nil && view.frame.equalTo(UIScreen.main.bounds) {
             return true
         } else {
             return false
