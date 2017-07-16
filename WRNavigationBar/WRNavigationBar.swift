@@ -50,6 +50,7 @@ extension UINavigationBar
             // add a image(nil color) to _UIBarBackground make it clear
             setBackgroundImage(UIImage(), for: .default)
             backgroundImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: Int(bounds.width), height: 64))
+            backgroundImageView?.autoresizingMask = .flexibleWidth
             // _UIBarBackground is first subView for navigationBar
             subviews.first?.insertSubview(backgroundImageView ?? UIImageView(), at: 0)
         }
@@ -66,6 +67,7 @@ extension UINavigationBar
             // add a image(nil color) to _UIBarBackground make it clear
             setBackgroundImage(UIImage(), for: .default)
             backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: Int(bounds.width), height: 64))
+            backgroundView?.autoresizingMask = .flexibleWidth
             // _UIBarBackground is first subView for navigationBar
             subviews.first?.insertSubview(backgroundView ?? UIView(), at: 0)
         }
