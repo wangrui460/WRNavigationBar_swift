@@ -76,6 +76,9 @@ UIColor.defaultShadowImageHidden = true
 
 
 ## Update
+- **2017.07.22**
+添加新DEMO：连续多个界面导航栏透明
+
 - **2017.07.09**
 解决问题：当一个控制器中包含多个控制器时，导航栏颜色或透明度不正常的问题
 

@@ -56,10 +56,8 @@ extension NormalListController: UITableViewDelegate, UITableViewDataSource
             str = "QQ我的资料页"
         case 5:
             str = "蚂蚁森林"
-//        case 6:
-//            str = "导航栏显示图片"
-//        case 7:
-//            str = "实现导航栏渐变色的另一种方式"
+        case 6:
+            str = "连续多个界面导航栏透明"
         default:
             str = ""
         }
@@ -88,10 +86,8 @@ extension NormalListController: UITableViewDelegate, UITableViewDataSource
             navigationController?.pushViewController(QQMineController(), animated: true)
         case 5:
             navigationController?.pushViewController(AntForestController(), animated: true)
-//        case 6:
-//            navigationController?.pushViewController(ImageNavController(), animated: true)
-//        case 7:
-//            navigationController?.pushViewController(MillcolorGradController(), animated: true)
+        case 6:
+            navigationController?.pushViewController(AllTransparent(), animated: true)
         default:
            break
         }
