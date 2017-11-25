@@ -33,6 +33,7 @@
 		1AD014101EDBFEAC00A6893C /* WRCycleScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD0140D1EDBFEAC00A6893C /* WRCycleScrollView.swift */; };
 		1AD014111EDBFEAC00A6893C /* WRProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD0140E1EDBFEAC00A6893C /* WRProxy.swift */; };
 		1AD014131EDC091F00A6893C /* QQMineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD014121EDC091F00A6893C /* QQMineController.swift */; };
+		34A093CA1FC941B0009119BF /* WRCustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A093C91FC941B0009119BF /* WRCustomNavigationBar.swift */; };
 		BA823A4F29CFCD6EEC3B52B9 /* Pods_WRNavigationBar_swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C8A182323696F064D8660C /* Pods_WRNavigationBar_swift.framework */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +79,7 @@
 		1AD0140E1EDBFEAC00A6893C /* WRProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WRProxy.swift; sourceTree = "<group>"; };
 		1AD014121EDC091F00A6893C /* QQMineController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QQMineController.swift; sourceTree = "<group>"; };
 		272C2A7862DC39DA91D57781 /* Pods-WRNavigationBar_swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WRNavigationBar_swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-WRNavigationBar_swift/Pods-WRNavigationBar_swift.release.xcconfig"; sourceTree = "<group>"; };
+		34A093C91FC941B0009119BF /* WRCustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WRCustomNavigationBar.swift; sourceTree = "<group>"; };
 		63C8A182323696F064D8660C /* Pods_WRNavigationBar_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WRNavigationBar_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D76868588A082EB7E7777210 /* Pods-WRNavigationBar_swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WRNavigationBar_swift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WRNavigationBar_swift/Pods-WRNavigationBar_swift.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -152,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				1A05B4731F07FA9C001D7B64 /* WRNavigationBar.swift */,
+				34A093C91FC941B0009119BF /* WRCustomNavigationBar.swift */,
 			);
 			path = WRNavigationBar;
 			sourceTree = "<group>";
@@ -278,11 +281,13 @@
 					1A0DF7761EA7176500191349 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 652U6LDTX4;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					1A0DF78A1EA7176500191349 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 652U6LDTX4;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 1A0DF7761EA7176500191349;
 					};
@@ -349,13 +354,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WRNavigationBar_swift-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D52EBFEB66FB9C860C432F23 /* [CP] Embed Pods Frameworks */ = {
@@ -364,9 +372,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-WRNavigationBar_swift/Pods-WRNavigationBar_swift-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -389,6 +400,7 @@
 				1AD014111EDBFEAC00A6893C /* WRProxy.swift in Sources */,
 				1AD0140A1EDBFB4500A6893C /* ZhiHuController.swift in Sources */,
 				1AD0140F1EDBFEAC00A6893C /* WRCycleCell.swift in Sources */,
+				34A093CA1FC941B0009119BF /* WRCustomNavigationBar.swift in Sources */,
 				1A869EDD1ECAA0C1006D96F8 /* BaseViewController.swift in Sources */,
 				1A05B4761F07FAB4001D7B64 /* NormalListController.swift in Sources */,
 				1A05B4741F07FA9C001D7B64 /* WRNavigationBar.swift in Sources */,
@@ -545,9 +557,10 @@
 				INFOPLIST_FILE = WRNavigationBar_swift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = video.wangrui.com;
+				PRODUCT_BUNDLE_IDENTIFIER = video.com.wangrui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -561,9 +574,10 @@
 				INFOPLIST_FILE = WRNavigationBar_swift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = video.wangrui.com;
+				PRODUCT_BUNDLE_IDENTIFIER = video.com.wangrui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -578,7 +592,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "video.wangrui.com.WRNavigationBar-swiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WRNavigationBar_swift.app/WRNavigationBar_swift";
 			};
 			name = Debug;
@@ -593,7 +608,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "video.wangrui.com.WRNavigationBar-swiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WRNavigationBar_swift.app/WRNavigationBar_swift";
 			};
 			name = Release;

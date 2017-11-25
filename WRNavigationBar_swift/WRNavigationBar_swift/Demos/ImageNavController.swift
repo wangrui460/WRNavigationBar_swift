@@ -39,7 +39,7 @@ class ImageNavController: BaseViewController
         view.insertSubview(navBar, aboveSubview: tableView)
         
         // 设置导航栏显示图片
-        navBarBackgroundImage = UIImage(named: "imageNav")
+//        navBarBackgroundImage = UIImage(named: "imageNav")
         
         // 设置初始导航栏透明度
         navBarBackgroundAlpha = 0

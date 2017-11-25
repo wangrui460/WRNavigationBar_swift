@@ -32,7 +32,7 @@ class BaseViewController: UIViewController
         navBar.items = [navItem]
         
         // 设置自定义导航栏背景图片
-        navBarBackgroundImage = UIImage(named: "millcolorGrad")
+//        navBarBackgroundImage = UIImage(named: "millcolorGrad")
 
         // 设置自定义导航栏默认背景颜色
         // navBarBarTintColor = MainNavBarColor

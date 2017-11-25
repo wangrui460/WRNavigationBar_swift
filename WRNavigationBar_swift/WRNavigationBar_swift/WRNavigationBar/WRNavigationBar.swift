@@ -9,7 +9,7 @@
 
 import UIKit
 
-extension UINavigationBar
+extension UINavigationBar:WRAwakeProtocol
 {
     fileprivate struct AssociatedKeys {
         static var backgroundView: UIView = UIView()
@@ -77,8 +77,17 @@ extension UINavigationBar
     // set _UIBarBackground alpha (_UIBarBackground subviews alpha <= _UIBarBackground alpha)
     fileprivate func wr_setBackgroundAlpha(alpha:CGFloat)
     {
-        let barBackgroundView = subviews[0]
-        barBackgroundView.alpha = alpha
+        if let barBackgroundView = subviews.first
+        {
+            if #available(iOS 11.0, *)
+            {   // sometimes we can't change _UIBarBackground alpha
+                for view in barBackgroundView.subviews {
+                    view.alpha = alpha
+                }
+            } else {
+                barBackgroundView.alpha = alpha
+            }
+        }
     }
     
     // 设置导航栏所有BarButtonItem的透明度
@@ -140,9 +149,8 @@ extension UINavigationBar
     
     // call swizzling methods active 主动调用交换方法
     private static let onceToken = UUID().uuidString
-    open override class func initialize()
+    public static func wrAwake()
     {
-        guard self == UINavigationBar.self else { return }
         DispatchQueue.once(token: onceToken)
         {
             let needSwizzleSelectorArr = [
@@ -151,9 +159,10 @@ extension UINavigationBar
             
             for selector in needSwizzleSelectorArr {
                 let str = ("wr_" + selector.description)
-                let originalMethod = class_getInstanceMethod(self, selector)
-                let swizzledMethod = class_getInstanceMethod(self, Selector(str))
-                method_exchangeImplementations(originalMethod, swizzledMethod)
+                if let originalMethod = class_getInstanceMethod(self, selector),
+                   let swizzledMethod = class_getInstanceMethod(self, Selector(str)) {
+                    method_exchangeImplementations(originalMethod, swizzledMethod)
+                }
             }
         }
     }
@@ -174,7 +183,7 @@ extension UINavigationBar
         
         var titleColor:UIColor?
         for attribute in originTitleTextAttributes {
-            if attribute.key == NSForegroundColorAttributeName {
+            if attribute.key == NSAttributedStringKey.foregroundColor {
                 titleColor = attribute.value as? UIColor
                 break
             }
@@ -185,8 +194,8 @@ extension UINavigationBar
             return
         }
 
-        if attributes[NSForegroundColorAttributeName] == nil {
-            attributes.updateValue(originTitleColor, forKey: NSForegroundColorAttributeName)
+        if attributes[NSAttributedStringKey.foregroundColor.rawValue] == nil {
+            attributes.updateValue(originTitleColor, forKey: NSAttributedStringKey.foregroundColor.rawValue)
         }
         wr_setTitleTextAttributes(attributes)
     }
@@ -195,10 +204,10 @@ extension UINavigationBar
 //==========================================================================
 // MARK: - UINavigationController
 //==========================================================================
-extension UINavigationController
+extension UINavigationController: WRFatherAwakeProtocol
 {
     override open var preferredStatusBarStyle: UIStatusBarStyle {
-        return topViewController?.statusBarStyle ?? UIColor.defaultStatusBarStyle
+        return topViewController?.statusBarStyle ?? WRNavigationBar.defaultStatusBarStyle
     }
     
     fileprivate func setNeedsNavigationBarUpdate(backgroundImage: UIImage)
@@ -228,47 +237,46 @@ extension UINavigationController
     fileprivate func setNeedsNavigationBarUpdate(titleColor: UIColor)
     {
         guard let titleTextAttributes = navigationBar.titleTextAttributes else {
-            navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:titleColor]
+            navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:titleColor]
             return
         }
         
         var newTitleTextAttributes = titleTextAttributes
-        newTitleTextAttributes.updateValue(titleColor, forKey: NSForegroundColorAttributeName)
+        newTitleTextAttributes.updateValue(titleColor, forKey: NSAttributedStringKey.foregroundColor)
         navigationBar.titleTextAttributes = newTitleTextAttributes
     }
     
     fileprivate func updateNavigationBar(fromVC: UIViewController?, toVC: UIViewController?, progress: CGFloat)
     {
         // change navBarBarTintColor
-        let fromBarTintColor = fromVC?.navBarBarTintColor ?? .defaultNavBarBarTintColor
-        let toBarTintColor   = toVC?.navBarBarTintColor ?? .defaultNavBarBarTintColor
-        let newBarTintColor  = UIColor.middleColor(fromColor: fromBarTintColor, toColor: toBarTintColor, percent: progress)
+        let fromBarTintColor = fromVC?.navBarBarTintColor ?? WRNavigationBar.defaultNavBarBarTintColor
+        let toBarTintColor   = toVC?.navBarBarTintColor ?? WRNavigationBar.defaultNavBarBarTintColor
+        let newBarTintColor  = WRNavigationBar.middleColor(fromColor: fromBarTintColor, toColor: toBarTintColor, percent: progress)
         setNeedsNavigationBarUpdate(barTintColor: newBarTintColor)
         
         // change navBarTintColor
-        let fromTintColor = fromVC?.navBarTintColor ?? .defaultNavBarTintColor
-        let toTintColor = toVC?.navBarTintColor ?? .defaultNavBarTintColor
-        let newTintColor = UIColor.middleColor(fromColor: fromTintColor, toColor: toTintColor, percent: progress)
+        let fromTintColor = fromVC?.navBarTintColor ?? WRNavigationBar.defaultNavBarTintColor
+        let toTintColor = toVC?.navBarTintColor ?? WRNavigationBar.defaultNavBarTintColor
+        let newTintColor = WRNavigationBar.middleColor(fromColor: fromTintColor, toColor: toTintColor, percent: progress)
         setNeedsNavigationBarUpdate(tintColor: newTintColor)
         
         // change navBarTitleColor
-        let fromTitleColor = fromVC?.navBarTitleColor ?? .defaultNavBarTitleColor
-        let toTitleColor = toVC?.navBarTitleColor ?? .defaultNavBarTitleColor
-        let newTitleColor = UIColor.middleColor(fromColor: fromTitleColor, toColor: toTitleColor, percent: progress)
+        let fromTitleColor = fromVC?.navBarTitleColor ?? WRNavigationBar.defaultNavBarTitleColor
+        let toTitleColor = toVC?.navBarTitleColor ?? WRNavigationBar.defaultNavBarTitleColor
+        let newTitleColor = WRNavigationBar.middleColor(fromColor: fromTitleColor, toColor: toTitleColor, percent: progress)
         setNeedsNavigationBarUpdate(titleColor: newTitleColor)
         
         // change navBar _UIBarBackground alpha
-        let fromBarBackgroundAlpha = fromVC?.navBarBackgroundAlpha ?? UIColor.defaultBackgroundAlpha
-        let toBarBackgroundAlpha = toVC?.navBarBackgroundAlpha ?? UIColor.defaultBackgroundAlpha
-        let newBarBackgroundAlpha = UIColor.middleAlpha(fromAlpha: fromBarBackgroundAlpha, toAlpha: toBarBackgroundAlpha, percent: progress)
+        let fromBarBackgroundAlpha = fromVC?.navBarBackgroundAlpha ?? WRNavigationBar.defaultBackgroundAlpha
+        let toBarBackgroundAlpha = toVC?.navBarBackgroundAlpha ?? WRNavigationBar.defaultBackgroundAlpha
+        let newBarBackgroundAlpha = WRNavigationBar.middleAlpha(fromAlpha: fromBarBackgroundAlpha, toAlpha: toBarBackgroundAlpha, percent: progress)
         setNeedsNavigationBarUpdate(barBackgroundAlpha: newBarBackgroundAlpha)
     }
     
     // call swizzling methods active 主动调用交换方法
     private static let onceToken = UUID().uuidString
-    open override class func initialize()
+    public static func fatherAwake()
     {
-        guard self == UINavigationController.self else { return }
         DispatchQueue.once(token: onceToken)
         {
             let needSwizzleSelectorArr = [
@@ -277,13 +285,14 @@ extension UINavigationController
                 #selector(popToRootViewController),
                 #selector(pushViewController)
             ]
-            
+
             for selector in needSwizzleSelectorArr {
                 // _updateInteractiveTransition:  =>  wr_updateInteractiveTransition:
                 let str = ("wr_" + selector.description).replacingOccurrences(of: "__", with: "_")
-                let originalMethod = class_getInstanceMethod(self, selector)
-                let swizzledMethod = class_getInstanceMethod(self, Selector(str))
-                method_exchangeImplementations(originalMethod, swizzledMethod)
+                if let originalMethod = class_getInstanceMethod(self, selector),
+                    let swizzledMethod = class_getInstanceMethod(self, Selector(str)) {
+                    method_exchangeImplementations(originalMethod, swizzledMethod)
+                }
             }
         }
     }
@@ -434,8 +443,8 @@ extension UINavigationController: UINavigationBarDelegate
     private func dealInteractionChanges(_ context: UIViewControllerTransitionCoordinatorContext)
     {
         let animations: (UITransitionContextViewControllerKey) -> () = {
-            let curColor = context.viewController(forKey: $0)?.navBarBarTintColor ?? UIColor.defaultNavBarBarTintColor
-            let curAlpha = context.viewController(forKey: $0)?.navBarBackgroundAlpha ?? UIColor.defaultBackgroundAlpha
+            let curColor = context.viewController(forKey: $0)?.navBarBarTintColor ?? WRNavigationBar.defaultNavBarBarTintColor
+            let curAlpha = context.viewController(forKey: $0)?.navBarBackgroundAlpha ?? WRNavigationBar.defaultBackgroundAlpha
             
             self.setNeedsNavigationBarUpdate(barTintColor: curColor)
             self.setNeedsNavigationBarUpdate(barBackgroundAlpha: curAlpha)
@@ -479,7 +488,7 @@ extension UINavigationController: UINavigationBarDelegate
 //=============================================================================
 // MARK: - store navigationBar barTintColor and tintColor every viewController
 //=============================================================================
-extension UIViewController
+extension UIViewController: WRAwakeProtocol
 {
     fileprivate struct AssociatedKeys
     {
@@ -488,10 +497,10 @@ extension UIViewController
         
         static var navBarBackgroundImage: UIImage = UIImage()
         
-        static var navBarBarTintColor: UIColor = UIColor.defaultNavBarBarTintColor
+        static var navBarBarTintColor: UIColor = WRNavigationBar.defaultNavBarBarTintColor
         static var navBarBackgroundAlpha:CGFloat = 1.0
-        static var navBarTintColor: UIColor = UIColor.defaultNavBarTintColor
-        static var navBarTitleColor: UIColor = UIColor.defaultNavBarTitleColor
+        static var navBarTintColor: UIColor = WRNavigationBar.defaultNavBarTintColor
+        static var navBarTitleColor: UIColor = WRNavigationBar.defaultNavBarTitleColor
         static var statusBarStyle: UIStatusBarStyle = UIStatusBarStyle.default
         static var navBarShadowImageHidden: Bool = false
         
@@ -525,30 +534,30 @@ extension UIViewController
     }
     
     // you can set navigationBar backgroundImage
-    var navBarBackgroundImage: UIImage? {
+    var navBarBackgroundImage: UIImage?
+    {
         get {
             guard let bgImage = objc_getAssociatedObject(self, &AssociatedKeys.navBarBackgroundImage) as? UIImage else {
-                return UIColor.defaultNavBarBackgroundImage
+                return WRNavigationBar.defaultNavBarBackgroundImage
             }
             return bgImage
         }
-        set {
-            if customNavBar.isKind(of: UINavigationBar.self) {
-                let navBar = customNavBar as! UINavigationBar
-                navBar.wr_setBackgroundImage(image: newValue!)
-            }
-            else
-            {
-                objc_setAssociatedObject(self, &AssociatedKeys.navBarBackgroundImage, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            }
-        }
+//        set {
+//            if customNavBar.isKind(of: UINavigationBar.self) {
+//                let navBar = customNavBar as! UINavigationBar
+//                navBar.wr_setBackgroundImage(image: newValue!)
+//            }
+//            else {
+//                objc_setAssociatedObject(self, &AssociatedKeys.navBarBackgroundImage, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+//            }
+//        }
     }
     
     // navigationBar barTintColor
     var navBarBarTintColor: UIColor {
         get {
             guard let barTintColor = objc_getAssociatedObject(self, &AssociatedKeys.navBarBarTintColor) as? UIColor else {
-                return UIColor.defaultNavBarBarTintColor
+                return WRNavigationBar.defaultNavBarBarTintColor
             }
             return barTintColor
         }
@@ -596,7 +605,7 @@ extension UIViewController
     var navBarTintColor: UIColor {
         get {
             guard let tintColor = objc_getAssociatedObject(self, &AssociatedKeys.navBarTintColor) as? UIColor else {
-                return UIColor.defaultNavBarTintColor
+                return WRNavigationBar.defaultNavBarTintColor
             }
             return tintColor
         }
@@ -620,7 +629,7 @@ extension UIViewController
     var navBarTitleColor: UIColor {
         get {
             guard let titleColor = objc_getAssociatedObject(self, &AssociatedKeys.navBarTitleColor) as? UIColor else {
-                return UIColor.defaultNavBarTitleColor
+                return WRNavigationBar.defaultNavBarTitleColor
             }
             return titleColor
         }
@@ -629,7 +638,7 @@ extension UIViewController
             
             if customNavBar.isKind(of: UINavigationBar.self) {
                 let navBar = customNavBar as! UINavigationBar
-                navBar.titleTextAttributes = [NSForegroundColorAttributeName:newValue]
+                navBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:newValue]
             }
             else
             {
@@ -644,7 +653,7 @@ extension UIViewController
     var statusBarStyle: UIStatusBarStyle {
         get {
             guard let style = objc_getAssociatedObject(self, &AssociatedKeys.statusBarStyle) as? UIStatusBarStyle else {
-                return UIColor.defaultStatusBarStyle
+                return WRNavigationBar.defaultStatusBarStyle
             }
             return style
         }
@@ -658,7 +667,7 @@ extension UIViewController
     var navBarShadowImageHidden:Bool {
         get {
             guard let isHidden = objc_getAssociatedObject(self, &AssociatedKeys.navBarShadowImageHidden) as? Bool else {
-                return UIColor.defaultShadowImageHidden
+                return WRNavigationBar.defaultShadowImageHidden
             }
             return isHidden
         }
@@ -683,12 +692,8 @@ extension UIViewController
     
     // swizzling two system methods: viewWillAppear(_:) and viewWillDisappear(_:)
     private static let onceToken = UUID().uuidString
-    open override class func initialize()
+    @objc public static func wrAwake()
     {
-        guard self == UIViewController.self else {
-            return
-        }
-        
         DispatchQueue.once(token: onceToken)
         {
             let needSwizzleSelectors = [
@@ -696,13 +701,14 @@ extension UIViewController
                 #selector(viewWillDisappear(_:)),
                 #selector(viewDidAppear(_:))
             ]
-            
+
             for selector in needSwizzleSelectors
             {
                 let newSelectorStr = "wr_" + selector.description
-                let originalMethod = class_getInstanceMethod(self, selector)
-                let swizzledMethod = class_getInstanceMethod(self, Selector(newSelectorStr))
-                method_exchangeImplementations(originalMethod, swizzledMethod)
+                if let originalMethod = class_getInstanceMethod(self, selector),
+                    let swizzledMethod = class_getInstanceMethod(self, Selector(newSelectorStr)) {
+                    method_exchangeImplementations(originalMethod, swizzledMethod)
+                }
             }
         }
     }
@@ -781,7 +787,7 @@ extension DispatchQueue {
 //===========================================================================================
 // MARK: - default navigationBar barTintColor、tintColor and statusBarStyle YOU CAN CHANGE!!!
 //===========================================================================================
-extension UIColor
+class WRNavigationBar
 {
     fileprivate struct AssociatedKeys
     {   // default is system attributes
@@ -904,8 +910,70 @@ extension UIColor
     }
 }
 
+extension WRNavigationBar
+{
+    class func isIphoneX() -> Bool {
+        return UIScreen.main.bounds.equalTo(CGRect(x: 0, y: 0, width: 375, height: 812))
+    }
+    class func navBarBottom() -> Int {
+        return self.isIphoneX() ? 88 : 64;
+    }
+    class func screenWidth() -> Int {
+        return Int(UIScreen.main.bounds.size.width)
+    }
+    class func screenHeight() -> Int {
+        return Int(UIScreen.main.bounds.size.height)
+    }
+}
 
 
 
 
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 1. 定义 WRAwakeProtocol 协议
+public protocol WRAwakeProtocol: class {
+    static func wrAwake()
+}
+public protocol WRFatherAwakeProtocol: class
+{   // 1.1 定义 WRFatherAwakeProtocol ()
+    static func fatherAwake()
+}
+
+class NothingToSeeHere
+{
+    static func harmlessFunction(){
+        let typeCount = Int(objc_getClassList(nil, 0))
+        let  types = UnsafeMutablePointer<AnyClass?>.allocate(capacity: typeCount)
+        let autoreleaseintTypes = AutoreleasingUnsafeMutablePointer<AnyClass>(types)
+        objc_getClassList(autoreleaseintTypes, Int32(typeCount)) //获取所有的类
+        for index in 0 ..< typeCount {
+            (types[index] as? WRAwakeProtocol.Type)?.wrAwake() //如果该类实现了SelfAware协议，那么调用 awake 方法
+            (types[index] as? WRFatherAwakeProtocol.Type)?.fatherAwake()
+        }
+        types.deallocate(capacity: typeCount)
+    }
+}
+
+// 2. 让APP启动时只执行一次 harmlessFunction 方法
+extension UIApplication
+{
+    private static let runOnce:Void = { //使用静态属性以保证只调用一次(该属性是个方法)
+        NothingToSeeHere.harmlessFunction()
+    }()
+    
+    open override var next: UIResponder?{ //重写next属性
+        UIApplication.runOnce
+        return super.next
+    }
+}
+
+// 3. 自定义类实现 WRAwakeProtocol 协议，重写 wrAwake 方法
+//    自定义类实现 WRFatherAwakeProtocol 协议，重写 fatherAwake 方法
 

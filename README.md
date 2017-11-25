@@ -76,6 +76,9 @@ UIColor.defaultShadowImageHidden = true
 
 
 ## Update
+- **2017.11.25**
+更新：更新到 Swift 4，适配iOS 11、iPhone X，自定义导航栏再等两天~
+
 - **2017.07.22**
 添加新DEMO：连续多个界面导航栏透明
 

@@ -237,7 +237,7 @@ extension WRCycleScrollView
     }
     
     // 执行这个方法的前提是 isAutoScroll = true
-    func changeCycleCell()
+    @objc func changeCycleCell()
     {
         if canChangeCycleCell == true
         {

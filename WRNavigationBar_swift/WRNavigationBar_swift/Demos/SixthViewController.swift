@@ -35,7 +35,7 @@ class SixthViewController: UIViewController
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "自定义返回", style: .done, target: self, action: #selector(back))
     }
     
-    func back() {
+    @objc func back() {
         _ = self.navigationController?.popViewController(animated: true)
     }
     
