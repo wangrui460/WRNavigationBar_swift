@@ -40,9 +40,8 @@
 
 ## How To Use
 
+具体使用方法请参考Demo
 <pre><code>
-// 一行代码搞定导航栏显示图片
-navBarBackgroundImage = UIImage(named: "imageNav")
 // 一行代码搞定导航栏颜色
 navBarBarTintColor = .white
 // 一行代码搞定导航栏透明度
@@ -76,6 +75,9 @@ UIColor.defaultShadowImageHidden = true
 
 
 ## Update
+-**2017.11.29**-
+更新：支持自定义导航栏~
+
 - **2017.11.25**
 更新：更新到 Swift 4，适配iOS 11、iPhone X，自定义导航栏再等两天~
 

@@ -565,8 +565,8 @@ extension UIViewController: WRAwakeProtocol
             objc_setAssociatedObject(self, &AssociatedKeys.navBarBarTintColor, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             
             if customNavBar.isKind(of: UINavigationBar.self) {
-                let navBar = customNavBar as! UINavigationBar
-                navBar.wr_setBackgroundColor(color: newValue)
+//                let navBar = customNavBar as! UINavigationBar
+//                navBar.wr_setBackgroundColor(color: newValue)
             }
             else
             {
@@ -589,8 +589,8 @@ extension UIViewController: WRAwakeProtocol
             objc_setAssociatedObject(self, &AssociatedKeys.navBarBackgroundAlpha, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             
             if customNavBar.isKind(of: UINavigationBar.self) {
-                let navBar = customNavBar as! UINavigationBar
-                navBar.wr_setBackgroundAlpha(alpha: newValue)
+//                let navBar = customNavBar as! UINavigationBar
+//                navBar.wr_setBackgroundAlpha(alpha: newValue)
             }
             else
             {
@@ -613,8 +613,8 @@ extension UIViewController: WRAwakeProtocol
             objc_setAssociatedObject(self, &AssociatedKeys.navBarTintColor, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             
             if customNavBar.isKind(of: UINavigationBar.self) {
-                let navBar = customNavBar as! UINavigationBar
-                navBar.tintColor = newValue
+//                let navBar = customNavBar as! UINavigationBar
+//                navBar.tintColor = newValue
             }
             else
             {
@@ -637,8 +637,8 @@ extension UIViewController: WRAwakeProtocol
             objc_setAssociatedObject(self, &AssociatedKeys.navBarTitleColor, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             
             if customNavBar.isKind(of: UINavigationBar.self) {
-                let navBar = customNavBar as! UINavigationBar
-                navBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:newValue]
+//                let navBar = customNavBar as! UINavigationBar
+//                navBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:newValue]
             }
             else
             {
