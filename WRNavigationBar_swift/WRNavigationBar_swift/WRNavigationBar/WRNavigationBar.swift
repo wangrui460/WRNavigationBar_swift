@@ -749,8 +749,13 @@ extension UIViewController: WRAwakeProtocol
     }
     
     func canUpdateNavigationBar() -> Bool
-    {        
-        if self.navigationController != nil && view.frame.equalTo(UIScreen.main.bounds) {
+    {
+        let viewFrame = view.frame
+        let maxFrame = UIScreen.main.bounds
+        let minFrame = CGRect(x: 0, y: WRNavigationBar.navBarBottom(), width: WRNavigationBar.screenWidth(), height: WRNavigationBar.screenHeight()-WRNavigationBar.navBarBottom())
+        // 蝙蝠🦇
+        let isBat = viewFrame.equalTo(maxFrame) || viewFrame.equalTo(minFrame)
+        if self.navigationController != nil && isBat == true {
             return true
         } else {
             return false
