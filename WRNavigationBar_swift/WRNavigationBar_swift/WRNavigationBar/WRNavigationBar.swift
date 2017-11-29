@@ -570,7 +570,8 @@ extension UIViewController: WRAwakeProtocol
             }
             else
             {
-                if pushToCurrentVCFinished == true && pushToNextVCFinished == false {
+                let isRootViewController = self.navigationController?.viewControllers.first == self
+                if (pushToCurrentVCFinished == true || isRootViewController == true) && pushToNextVCFinished == false {
                     navigationController?.setNeedsNavigationBarUpdate(barTintColor: newValue)
                 }
             }
