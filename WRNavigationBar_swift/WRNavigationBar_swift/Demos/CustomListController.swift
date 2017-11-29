@@ -22,8 +22,11 @@ class CustomListController: BaseViewController
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = UIColor.white
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = .never
+        } 
         view.insertSubview(navBar, aboveSubview: tableView)
-        navItem.title = "自定义导航栏"
+        navBar.title = "自定义导航栏"
     }
 }
 

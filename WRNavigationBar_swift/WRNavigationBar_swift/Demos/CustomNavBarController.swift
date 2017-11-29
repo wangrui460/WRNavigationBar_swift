@@ -43,21 +43,21 @@ class CustomNavBarController: BaseViewController
         topView.addSubview(imageView)
         imageView.center = topView.center
         tableView.tableHeaderView = topView
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = .never
+        }
         view.insertSubview(navBar, aboveSubview: tableView)
         
-        navItem.title = "个人中心"
+        navBar.title = "个人中心"
         
         // 设置导航栏颜色
-        navBarBarTintColor = UIColor.init(red: 247/255.0, green: 247/255.0, blue: 247/255.0, alpha: 1.0)
+        navBar.barBackgroundColor = UIColor(red: 247/255.0, green: 247/255.0, blue: 247/255.0, alpha: 1.0)
         
         // 设置初始导航栏透明度
-        navBarBackgroundAlpha = 0
-        
-        // 设置导航栏按钮
-        navBarTintColor = .white
+        navBar.wr_setBackgroundAlpha(alpha: 0)
         
         // 设置标题文字颜色
-        navBarTitleColor = .white
+        navBar.titleLabelColor = UIColor.white
     }
 }
 
@@ -71,16 +71,16 @@ extension CustomNavBarController
         if (offsetY > NAVBAR_COLORCHANGE_POINT)
         {
             let alpha = (offsetY - NAVBAR_COLORCHANGE_POINT) / CGFloat(kNavBarBottom)
-            navBarBackgroundAlpha = alpha
-            navBarTintColor =  UIColor.black.withAlphaComponent(alpha)
-            navBarTitleColor = UIColor.black.withAlphaComponent(alpha)
+            navBar.wr_setBackgroundAlpha(alpha: alpha)
+            navBar.wr_setTintColor(color: UIColor.black.withAlphaComponent(alpha))
+            navBar.titleLabelColor = UIColor.black.withAlphaComponent(alpha)
             statusBarStyle = .default
         }
         else
         {
-            navBarBackgroundAlpha = 0
-            navBarTintColor = .white
-            navBarTitleColor = .white
+            navBar.wr_setBackgroundAlpha(alpha: 0)
+            navBar.wr_setTintColor(color: .white)
+            navBar.titleLabelColor = .white
             statusBarStyle = .lightContent
         }
     }
@@ -108,7 +108,7 @@ extension CustomNavBarController:UITableViewDelegate,UITableViewDataSource
         let vc:BaseViewController = BaseViewController()
         vc.view.backgroundColor = UIColor.red
         let str = String(format: "右滑返回查看效果 ", indexPath.row)
-        vc.navItem.title = str
+        vc.navBar.title = str
         navigationController?.pushViewController(vc, animated: true)
     }
 }

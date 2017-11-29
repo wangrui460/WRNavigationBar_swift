@@ -32,17 +32,20 @@ class MillcolorGradController: BaseViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        navItem.title = "奥黛丽·赫本"
+        navBar.title = "奥黛丽·赫本"
         view.backgroundColor = UIColor.red
         view.addSubview(tableView)
         tableView.tableHeaderView = topView
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = .never
+        }
         view.insertSubview(navBar, aboveSubview: tableView)
         
         // 设置初始导航栏透明度
-        navBarBackgroundAlpha = 0
+        navBar.wr_setBackgroundAlpha(alpha: 0)
         
         // 设置导航栏按钮和标题颜色
-        navBarTintColor = .white
+        navBar.wr_setTintColor(color: .white)
         
         // 设置状态栏style
         statusBarStyle = .lightContent
@@ -64,11 +67,11 @@ extension MillcolorGradController
         if (offsetY > NAVBAR_COLORCHANGE_POINT)
         {
             let alpha = (offsetY - NAVBAR_COLORCHANGE_POINT) / CGFloat(kNavBarBottom)
-            navBarBackgroundAlpha = alpha
+            navBar.wr_setBackgroundAlpha(alpha: alpha)
         }
         else
         {
-            navBarBackgroundAlpha = 0
+            navBar.wr_setBackgroundAlpha(alpha: 0)
         }
     }
 }
@@ -95,7 +98,7 @@ extension MillcolorGradController:UITableViewDelegate,UITableViewDataSource
         let vc:BaseViewController = BaseViewController()
         vc.view.backgroundColor = UIColor.red
         let str = String(format: "右滑返回查看效果 ", indexPath.row)
-        vc.navItem.title = str
+        vc.navBar.title = str
         navigationController?.pushViewController(vc, animated: true)
     }
 }

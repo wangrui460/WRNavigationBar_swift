@@ -11,8 +11,7 @@ import UIKit
 
 class BaseViewController: UIViewController
 {
-    lazy var navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 64))
-    lazy var navItem = UINavigationItem()
+    lazy var navBar = WRCustomNavigationBar.CustomNavigationBar()
     
     override func viewDidLoad()
     {
@@ -25,26 +24,23 @@ class BaseViewController: UIViewController
 
     fileprivate func setupNavBar()
     {
-        // 自定义导航栏必须设置这个属性!!!!!!
-        customNavBar = navBar
         
         view.addSubview(navBar)
-        navBar.items = [navItem]
         
         // 设置自定义导航栏背景图片
-//        navBarBackgroundImage = UIImage(named: "millcolorGrad")
+        navBar.barBackgroundImage = UIImage(named: "millcolorGrad")
 
-        // 设置自定义导航栏默认背景颜色
-        // navBarBarTintColor = MainNavBarColor
+        // 设置自定义导航栏背景颜色
+        // navBar.backgroundColor = MainNavBarColor
         
         // 设置自定义导航栏标题颜色
-        navBarTitleColor = UIColor.white
+        navBar.titleLabelColor = .white
 
         // 设置自定义导航栏左右按钮字体颜色
-        navBarTintColor = UIColor.white
+        navBar.wr_setTintColor(color: .white)
         
         if self.navigationController?.childViewControllers.count != 1 {
-            navItem.leftBarButtonItem = UIBarButtonItem(title: "<<", style: .plain, target: self, action: #selector(back))
+            navBar.wr_setLeftButton(title: "<<", titleColor: UIColor.white)
         }
     }
     
