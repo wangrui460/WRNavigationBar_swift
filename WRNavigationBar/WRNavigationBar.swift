@@ -170,7 +170,7 @@ extension UINavigationBar:WRAwakeProtocol
     //==========================================================================
     // MARK: swizzling pop
     //==========================================================================
-    func wr_setTitleTextAttributes(_ newTitleTextAttributes:[String : Any]?)
+    @objc func wr_setTitleTextAttributes(_ newTitleTextAttributes:[String : Any]?)
     {
         guard var attributes = newTitleTextAttributes else {
             return
@@ -311,7 +311,7 @@ extension UINavigationController: WRFatherAwakeProtocol
     }
     
     // swizzling system method: popToViewController
-    func wr_popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]?
+    @objc func wr_popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]?
     {
         var displayLink:CADisplayLink? = CADisplayLink(target: self, selector: #selector(popNeedDisplay))
         // UITrackingRunLoopMode: 界面跟踪 Mode，用于 ScrollView 追踪触摸滑动，保证界面滑动时不受其他 Mode 影响
@@ -330,7 +330,7 @@ extension UINavigationController: WRFatherAwakeProtocol
     }
     
     // swizzling system method: popToRootViewControllerAnimated
-    func wr_popToRootViewControllerAnimated(_ animated: Bool) -> [UIViewController]?
+    @objc func wr_popToRootViewControllerAnimated(_ animated: Bool) -> [UIViewController]?
     {
         var displayLink:CADisplayLink? = CADisplayLink(target: self, selector: #selector(popNeedDisplay))
         displayLink?.add(to: RunLoop.main, forMode: .commonModes)
@@ -377,7 +377,7 @@ extension UINavigationController: WRFatherAwakeProtocol
     }
     
     // swizzling system method: pushViewController
-    func wr_pushViewController(_ viewController: UIViewController, animated: Bool)
+    @objc func wr_pushViewController(_ viewController: UIViewController, animated: Bool)
     {
         var displayLink:CADisplayLink? = CADisplayLink(target: self, selector: #selector(pushNeedDisplay))
         displayLink?.add(to: RunLoop.main, forMode: .defaultRunLoopMode)
@@ -713,7 +713,7 @@ extension UIViewController: WRAwakeProtocol
         }
     }
     
-    func wr_viewWillAppear(_ animated: Bool)
+    @objc func wr_viewWillAppear(_ animated: Bool)
     {
         if canUpdateNavigationBar() == true {
             pushToNextVCFinished = false
@@ -723,7 +723,7 @@ extension UIViewController: WRAwakeProtocol
         wr_viewWillAppear(animated)
     }
     
-    func wr_viewWillDisappear(_ animated: Bool)
+    @objc func wr_viewWillDisappear(_ animated: Bool)
     {
         if canUpdateNavigationBar() == true {
             pushToNextVCFinished = true
@@ -731,7 +731,7 @@ extension UIViewController: WRAwakeProtocol
         wr_viewWillDisappear(animated)
     }
     
-    func wr_viewDidAppear(_ animated: Bool)
+    @objc func wr_viewDidAppear(_ animated: Bool)
     {
         if canUpdateNavigationBar() == true
         {
