@@ -380,7 +380,7 @@ extension UINavigationController: WRFatherAwakeProtocol
     @objc func wr_pushViewController(_ viewController: UIViewController, animated: Bool)
     {
         var displayLink:CADisplayLink? = CADisplayLink(target: self, selector: #selector(pushNeedDisplay))
-        displayLink?.add(to: RunLoop.main, forMode: .defaultRunLoopMode)
+        displayLink?.add(to: RunLoop.main, forMode: .commonModes)
         CATransaction.setCompletionBlock {
             displayLink?.invalidate()
             displayLink = nil
