@@ -16,7 +16,7 @@ class WeiBoMineController: UIViewController
 {    
     lazy var tableView:UITableView = {
         let table:UITableView = UITableView(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: self.view.bounds.height), style: .plain)
-        table.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0);
+        table.contentInset = UIEdgeInsetsMake(-CGFloat(kNavBarBottom), 0, 0, 0);
         table.delegate = self
         table.dataSource = self
         return table

@@ -17,7 +17,7 @@ class QQMineController: UIViewController
     lazy var tableView:UITableView = {
         let table:UITableView = UITableView(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: self.view.bounds.height), style: .plain)
         table.backgroundColor = UIColor.clear
-        table.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0);
+        table.contentInset = UIEdgeInsetsMake(-CGFloat(kNavBarBottom), 0, 0, 0);
         table.delegate = self
         table.dataSource = self
         return table
@@ -46,7 +46,7 @@ class QQMineController: UIViewController
         return imgView
     }()
     lazy var topView:UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: 64, width: kScreenWidth, height: IMAGE_HEIGHT))
+        let view = UIView(frame: CGRect(x: 0, y: CGFloat(kNavBarBottom), width: kScreenWidth, height: IMAGE_HEIGHT))
         view.backgroundColor = UIColor.clear
         return view
     }()

@@ -9,7 +9,7 @@
 
 import UIKit
 
-let kNavBarBottom = 64
+let kNavBarBottom = WRNavigationBar.navBarBottom()
 
 class NormalListController: UIViewController
 {
