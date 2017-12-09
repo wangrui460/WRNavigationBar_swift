@@ -754,9 +754,10 @@ extension UIViewController: WRAwakeProtocol
     {
         let viewFrame = view.frame
         let maxFrame = UIScreen.main.bounds
-        let minFrame = CGRect(x: 0, y: WRNavigationBar.navBarBottom(), width: WRNavigationBar.screenWidth(), height: WRNavigationBar.screenHeight()-WRNavigationBar.navBarBottom())
+        let middleFrame = CGRect(x: 0, y: WRNavigationBar.navBarBottom(), width: WRNavigationBar.screenWidth(), height: WRNavigationBar.screenHeight()-WRNavigationBar.navBarBottom())
+        let minFrame = CGRect(x: 0, y: WRNavigationBar.navBarBottom(), width: WRNavigationBar.screenWidth(), height: WRNavigationBar.screenHeight()-WRNavigationBar.navBarBottom()-WRNavigationBar.tabBarHeight())
         // 蝙蝠🦇
-        let isBat = viewFrame.equalTo(maxFrame) || viewFrame.equalTo(minFrame)
+        let isBat = viewFrame.equalTo(maxFrame) || viewFrame.equalTo(middleFrame) || viewFrame.equalTo(minFrame)
         if self.navigationController != nil && isBat == true {
             return true
         } else {
@@ -924,6 +925,9 @@ extension WRNavigationBar
     }
     class func navBarBottom() -> Int {
         return self.isIphoneX() ? 88 : 64;
+    }
+    class func tabBarHeight() -> Int {
+        return self.isIphoneX() ? 83 : 49;
     }
     class func screenWidth() -> Int {
         return Int(UIScreen.main.bounds.size.width)
