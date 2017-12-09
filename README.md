@@ -1,3 +1,5 @@
+### 注意：练习方式变更（因QQ常年不用，所以联系方式换成微信，请在页面底部查看）
+
 ![image](https://github.com/wangrui460/WRNavigationBar/raw/master/screenshots/WRNavigationBar.png)
 
 [For Objective-C：https://github.com/wangrui460/WRNavigationBar](https://github.com/wangrui460/WRNavigationBar)
@@ -75,6 +77,9 @@ UIColor.defaultShadowImageHidden = true
 
 
 ## Update
+- **2017.12.09**
+解决问题：解决点击返回按钮导航栏标题颜色闪烁的问题
+
 -**2017.11.29**-
 更新：解决部分用户设置导航栏无效的问题~
 
@@ -126,7 +131,13 @@ UIColor.defaultShadowImageHidden = true
 # Contact me
 - Weibo: [@wangrui460](http://weibo.com/wangrui460)
 - Email:  wangruidev@gmail.com
-- QQ：1204607318
+- QQ：1204607318 （基本不用）
+- 微信群：下图所示
+
+<div class="wrap">
+<img src="https://github.com/wangrui460/WRNavigationBar/raw/master/screenshots/group.png" alt="">
+<img src="https://github.com/wangrui460/WRNavigationBar/raw/master/screenshots/appreciate.png" alt="">
+</div>
 
 # License
 

@@ -261,10 +261,10 @@ extension UINavigationController: WRFatherAwakeProtocol
         setNeedsNavigationBarUpdate(tintColor: newTintColor)
         
         // change navBarTitleColor
-        let fromTitleColor = fromVC?.navBarTitleColor ?? WRNavigationBar.defaultNavBarTitleColor
-        let toTitleColor = toVC?.navBarTitleColor ?? WRNavigationBar.defaultNavBarTitleColor
-        let newTitleColor = WRNavigationBar.middleColor(fromColor: fromTitleColor, toColor: toTitleColor, percent: progress)
-        setNeedsNavigationBarUpdate(titleColor: newTitleColor)
+//        let fromTitleColor = fromVC?.navBarTitleColor ?? WRNavigationBar.defaultNavBarTitleColor
+//        let toTitleColor = toVC?.navBarTitleColor ?? WRNavigationBar.defaultNavBarTitleColor
+//        let newTitleColor = WRNavigationBar.middleColor(fromColor: fromTitleColor, toColor: toTitleColor, percent: progress)
+//        setNeedsNavigationBarUpdate(titleColor: newTitleColor)
         
         // change navBar _UIBarBackground alpha
         let fromBarBackgroundAlpha = fromVC?.navBarBackgroundAlpha ?? WRNavigationBar.defaultBackgroundAlpha
@@ -313,6 +313,7 @@ extension UINavigationController: WRFatherAwakeProtocol
     // swizzling system method: popToViewController
     @objc func wr_popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]?
     {
+        setNeedsNavigationBarUpdate(titleColor: viewController.navBarTitleColor)
         var displayLink:CADisplayLink? = CADisplayLink(target: self, selector: #selector(popNeedDisplay))
         // UITrackingRunLoopMode: 界面跟踪 Mode，用于 ScrollView 追踪触摸滑动，保证界面滑动时不受其他 Mode 影响
         // NSRunLoopCommonModes contains kCFRunLoopDefaultMode and UITrackingRunLoopMode
