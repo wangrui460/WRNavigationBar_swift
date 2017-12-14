@@ -569,10 +569,8 @@ extension UIViewController: WRAwakeProtocol
 //                let navBar = customNavBar as! UINavigationBar
 //                navBar.wr_setBackgroundColor(color: newValue)
             }
-            else
-            {
-                let isRootViewController = self.navigationController?.viewControllers.first == self
-                if (pushToCurrentVCFinished == true || isRootViewController == true) && pushToNextVCFinished == false {
+            else {
+                if canUpdateNavBarBarTintColorOrBackgroundAlpha == true {
                     navigationController?.setNeedsNavigationBarUpdate(barTintColor: newValue)
                 }
             }
@@ -594,11 +592,20 @@ extension UIViewController: WRAwakeProtocol
 //                let navBar = customNavBar as! UINavigationBar
 //                navBar.wr_setBackgroundAlpha(alpha: newValue)
             }
-            else
-            {
-                if pushToCurrentVCFinished == true && pushToNextVCFinished == false {
+            else {
+                if canUpdateNavBarBarTintColorOrBackgroundAlpha == true {
                     navigationController?.setNeedsNavigationBarUpdate(barBackgroundAlpha: newValue)
                 }
+            }
+        }
+    }
+    private var canUpdateNavBarBarTintColorOrBackgroundAlpha:Bool {
+        get {
+            let isRootViewController = self.navigationController?.viewControllers.first == self
+            if (pushToCurrentVCFinished == true || isRootViewController == true) && pushToNextVCFinished == false {
+                return true
+            } else {
+                return false
             }
         }
     }
@@ -735,6 +742,10 @@ extension UIViewController: WRAwakeProtocol
     
     @objc func wr_viewDidAppear(_ animated: Bool)
     {
+        
+        if self.navigationController?.viewControllers.first != self {
+            self.pushToCurrentVCFinished = true
+        }
         if canUpdateNavigationBar() == true
         {
             if let navBarBgImage = navBarBackgroundImage {
