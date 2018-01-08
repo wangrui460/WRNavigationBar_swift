@@ -971,15 +971,18 @@ public protocol WRFatherAwakeProtocol: class
 class NothingToSeeHere
 {
     static func harmlessFunction(){
-        let typeCount = Int(objc_getClassList(nil, 0))
-        let  types = UnsafeMutablePointer<AnyClass?>.allocate(capacity: typeCount)
-        let autoreleaseintTypes = AutoreleasingUnsafeMutablePointer<AnyClass>(types)
-        objc_getClassList(autoreleaseintTypes, Int32(typeCount)) //获取所有的类
-        for index in 0 ..< typeCount {
-            (types[index] as? WRAwakeProtocol.Type)?.wrAwake() //如果该类实现了SelfAware协议，那么调用 awake 方法
-            (types[index] as? WRFatherAwakeProtocol.Type)?.fatherAwake()
-        }
-        types.deallocate(capacity: typeCount)
+//        let typeCount = Int(objc_getClassList(nil, 0))
+//        let  types = UnsafeMutablePointer<AnyClass?>.allocate(capacity: typeCount)
+//        let autoreleaseintTypes = AutoreleasingUnsafeMutablePointer<AnyClass>(types)
+//        objc_getClassList(autoreleaseintTypes, Int32(typeCount)) //获取所有的类
+//        for index in 0 ..< typeCount {
+//            (types[index] as? WRAwakeProtocol.Type)?.wrAwake() //如果该类实现了SelfAware协议，那么调用 awake 方法
+//            (types[index] as? WRFatherAwakeProtocol.Type)?.fatherAwake()
+//        }
+//        types.deallocate(capacity: typeCount)
+        UINavigationBar.wrAwake()
+        UIViewController.wrAwake()
+        UINavigationController.fatherAwake()
     }
 }
 
