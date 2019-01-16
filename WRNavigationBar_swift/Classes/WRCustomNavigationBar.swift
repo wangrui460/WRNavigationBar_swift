@@ -112,7 +112,7 @@ public class WRCustomNavigationBar: UIView
         return label
     }()
     
-    fileprivate lazy var leftButton:UIButton = {
+    public lazy var leftButton:UIButton = {
         let button = UIButton()
         button.imageView?.contentMode = .center
         button.isHidden = true
@@ -120,7 +120,7 @@ public class WRCustomNavigationBar: UIView
         return button
     }()
     
-    fileprivate lazy var rightButton:UIButton = {
+    public lazy var rightButton:UIButton = {
         let button = UIButton()
         button.imageView?.contentMode = .center
         button.isHidden = true
