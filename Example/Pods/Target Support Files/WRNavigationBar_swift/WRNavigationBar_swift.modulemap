@@ -1,0 +1,6 @@
+framework module WRNavigationBar_swift {
+  umbrella header "WRNavigationBar_swift-umbrella.h"
+
+  export *
+  module * { export * }
+}

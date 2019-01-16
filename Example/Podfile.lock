@@ -1,0 +1,16 @@
+PODS:
+  - WRNavigationBar_swift (0.1.0)
+
+DEPENDENCIES:
+  - WRNavigationBar_swift (from `../`)
+
+EXTERNAL SOURCES:
+  WRNavigationBar_swift:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  WRNavigationBar_swift: ec68cfa6759f2f2a3815412ddca899ec2c7b17b5
+
+PODFILE CHECKSUM: b9c9e56e2153483fea864e416272c298196d42b7
+
+COCOAPODS: 1.5.3
