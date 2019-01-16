@@ -8,7 +8,4 @@ use_frameworks!
 
 target ‘WRNavigationBar_swift’ do
     
-    #swift
-    pod 'Kingfisher'
-
 end

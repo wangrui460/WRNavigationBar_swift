@@ -18,7 +18,7 @@ class ZhiHuController: UIViewController
 {
     lazy var tableView:UITableView = {
         let table:UITableView = UITableView(frame: CGRect.init(x: 0, y: 0, width: Int(kScreenWidth), height: Int(self.view.bounds.height)), style: .plain)
-        table.contentInset = UIEdgeInsetsMake(IMAGE_HEIGHT-CGFloat(kNavBarBottom), 0, 0, 0);
+        table.contentInset = UIEdgeInsets(top: IMAGE_HEIGHT-CGFloat(kNavBarBottom), left: 0, bottom: 0, right: 0);
         table.showsVerticalScrollIndicator = false
         table.delegate = self
         table.dataSource = self

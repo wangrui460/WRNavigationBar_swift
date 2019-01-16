@@ -17,7 +17,7 @@ class QQMineController: UIViewController
     lazy var tableView:UITableView = {
         let table:UITableView = UITableView(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: self.view.bounds.height), style: .plain)
         table.backgroundColor = UIColor.clear
-        table.contentInset = UIEdgeInsetsMake(-CGFloat(kNavBarBottom), 0, 0, 0);
+        table.contentInset = UIEdgeInsets(top: -CGFloat(kNavBarBottom), left: 0, bottom: 0, right: 0);
         table.delegate = self
         table.dataSource = self
         return table

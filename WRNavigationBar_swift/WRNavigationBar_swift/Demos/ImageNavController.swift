@@ -16,7 +16,7 @@ class ImageNavController: BaseViewController
 {    
     lazy var tableView:UITableView = {
         let table:UITableView = UITableView(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: self.view.bounds.height), style: .plain)
-        table.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        table.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0);
         table.delegate = self
         table.dataSource = self
         return table
@@ -24,7 +24,7 @@ class ImageNavController: BaseViewController
     lazy var topView:UIImageView = {
         let imgView = UIImageView(image: UIImage(named: "image7"))
         imgView.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: IMAGE_HEIGHT)
-        imgView.contentMode = UIViewContentMode.scaleAspectFill
+        imgView.contentMode = UIView.ContentMode.scaleAspectFill
         imgView.clipsToBounds = true
         return imgView
     }()

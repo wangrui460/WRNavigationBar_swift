@@ -181,7 +181,7 @@ extension Kingfisher where Base: Image {
             let rep = NSBitmapImageRep(cgImage: cgimage)
             return rep.representation(using: .png, properties: [:])
         #else
-            return UIImagePNGRepresentation(base)
+        return base.pngData()
         #endif
     }
     
@@ -194,7 +194,7 @@ extension Kingfisher where Base: Image {
             let rep = NSBitmapImageRep(cgImage: cgImage)
             return rep.representation(using:.jpeg, properties: [.compressionFactor: compressionQuality])
         #else
-            return UIImageJPEGRepresentation(base, compressionQuality)
+            return base.jpegData(compressionQuality: compressionQuality)
         #endif
     }
     
@@ -394,7 +394,7 @@ extension Kingfisher where Base: Image {
     }
     
     #if os(iOS) || os(tvOS)
-    func resize(to size: CGSize, for contentMode: UIViewContentMode) -> Image {
+    func resize(to size: CGSize, for contentMode: UIView.ContentMode) -> Image {
         switch contentMode {
         case .scaleAspectFit:
             return resize(to: size, for: .aspectFit)

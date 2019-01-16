@@ -17,7 +17,7 @@ class CustomNavBarController: BaseViewController
     lazy var tableView:UITableView = {
         let frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: self.view.bounds.height)
         let table:UITableView = UITableView(frame: frame, style: .plain)
-        table.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        table.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0);
         table.delegate = self
         table.dataSource = self
         return table

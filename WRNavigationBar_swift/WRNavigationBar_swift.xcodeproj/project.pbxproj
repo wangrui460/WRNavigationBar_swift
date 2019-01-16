@@ -7,7 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1A05B4741F07FA9C001D7B64 /* WRNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B4731F07FA9C001D7B64 /* WRNavigationBar.swift */; };
+		12CE35BA21EEE1DD00F43FC1 /* WRCycleScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE35B721EEE1DD00F43FC1 /* WRCycleScrollView.swift */; };
+		12CE35BB21EEE1DD00F43FC1 /* WRCycleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE35B821EEE1DD00F43FC1 /* WRCycleCell.swift */; };
+		12CE35BC21EEE1DD00F43FC1 /* WRProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE35B921EEE1DD00F43FC1 /* WRProxy.swift */; };
+		12CE35C121EEE2EC00F43FC1 /* WRNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE35BF21EEE2EC00F43FC1 /* WRNavigationBar.swift */; };
+		12CE35C221EEE2EC00F43FC1 /* WRCustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE35C021EEE2EC00F43FC1 /* WRCustomNavigationBar.swift */; };
+		12CE360921EEE37C00F43FC1 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE35F221EEE37B00F43FC1 /* Image.swift */; };
+		12CE360A21EEE37C00F43FC1 /* KingfisherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE35F321EEE37B00F43FC1 /* KingfisherManager.swift */; };
+		12CE360B21EEE37C00F43FC1 /* Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE35F421EEE37B00F43FC1 /* Kingfisher.swift */; };
+		12CE360C21EEE37C00F43FC1 /* CacheSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE35F521EEE37B00F43FC1 /* CacheSerializer.swift */; };
+		12CE360D21EEE37C00F43FC1 /* String+MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE35F621EEE37B00F43FC1 /* String+MD5.swift */; };
+		12CE360E21EEE37C00F43FC1 /* KingfisherOptionsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE35F721EEE37B00F43FC1 /* KingfisherOptionsInfo.swift */; };
+		12CE360F21EEE37C00F43FC1 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE35F821EEE37B00F43FC1 /* ImageDownloader.swift */; };
+		12CE361021EEE37C00F43FC1 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE35F921EEE37B00F43FC1 /* Resource.swift */; };
+		12CE361121EEE37C00F43FC1 /* AnimatedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE35FA21EEE37B00F43FC1 /* AnimatedImageView.swift */; };
+		12CE361221EEE37C00F43FC1 /* ImageTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE35FC21EEE37B00F43FC1 /* ImageTransition.swift */; };
+		12CE361321EEE37C00F43FC1 /* ImagePrefetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE35FD21EEE37B00F43FC1 /* ImagePrefetcher.swift */; };
+		12CE361421EEE37C00F43FC1 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE35FE21EEE37B00F43FC1 /* Box.swift */; };
+		12CE361521EEE37C00F43FC1 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE35FF21EEE37B00F43FC1 /* Filter.swift */; };
+		12CE361621EEE37C00F43FC1 /* Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE360021EEE37B00F43FC1 /* Placeholder.swift */; };
+		12CE361721EEE37C00F43FC1 /* RequestModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE360121EEE37B00F43FC1 /* RequestModifier.swift */; };
+		12CE361821EEE37C00F43FC1 /* ImageProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE360221EEE37B00F43FC1 /* ImageProcessor.swift */; };
+		12CE361921EEE37C00F43FC1 /* ThreadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE360321EEE37B00F43FC1 /* ThreadHelper.swift */; };
+		12CE361A21EEE37C00F43FC1 /* UIButton+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE360421EEE37B00F43FC1 /* UIButton+Kingfisher.swift */; };
+		12CE361B21EEE37C00F43FC1 /* ImageView+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE360521EEE37B00F43FC1 /* ImageView+Kingfisher.swift */; };
+		12CE361C21EEE37C00F43FC1 /* FormatIndicatedCacheSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE360621EEE37B00F43FC1 /* FormatIndicatedCacheSerializer.swift */; };
+		12CE361D21EEE37C00F43FC1 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE360721EEE37B00F43FC1 /* ImageCache.swift */; };
+		12CE361E21EEE37C00F43FC1 /* Indicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CE360821EEE37B00F43FC1 /* Indicator.swift */; };
 		1A05B4761F07FAB4001D7B64 /* NormalListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B4751F07FAB4001D7B64 /* NormalListController.swift */; };
 		1A05B4781F07FAD7001D7B64 /* ImageNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B4771F07FAD7001D7B64 /* ImageNavController.swift */; };
 		1A05B47A1F080D0B001D7B64 /* MillcolorGradController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05B4791F080D0B001D7B64 /* MillcolorGradController.swift */; };
@@ -29,11 +55,7 @@
 		1AB7026A1EA9AC7A006DBA79 /* QQAppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB702691EA9AC7A006DBA79 /* QQAppController.swift */; };
 		1AB7026C1EA9B753006DBA79 /* QQZoneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB7026B1EA9B753006DBA79 /* QQZoneController.swift */; };
 		1AD0140A1EDBFB4500A6893C /* ZhiHuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD014091EDBFB4500A6893C /* ZhiHuController.swift */; };
-		1AD0140F1EDBFEAC00A6893C /* WRCycleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD0140C1EDBFEAC00A6893C /* WRCycleCell.swift */; };
-		1AD014101EDBFEAC00A6893C /* WRCycleScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD0140D1EDBFEAC00A6893C /* WRCycleScrollView.swift */; };
-		1AD014111EDBFEAC00A6893C /* WRProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD0140E1EDBFEAC00A6893C /* WRProxy.swift */; };
 		1AD014131EDC091F00A6893C /* QQMineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD014121EDC091F00A6893C /* QQMineController.swift */; };
-		34A093CA1FC941B0009119BF /* WRCustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A093C91FC941B0009119BF /* WRCustomNavigationBar.swift */; };
 		BA823A4F29CFCD6EEC3B52B9 /* Pods_WRNavigationBar_swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C8A182323696F064D8660C /* Pods_WRNavigationBar_swift.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,7 +70,34 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1A05B4731F07FA9C001D7B64 /* WRNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WRNavigationBar.swift; sourceTree = "<group>"; };
+		12CE35B721EEE1DD00F43FC1 /* WRCycleScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WRCycleScrollView.swift; path = WRNavigationBar_swift/WRCycleScrollView.swift; sourceTree = SOURCE_ROOT; };
+		12CE35B821EEE1DD00F43FC1 /* WRCycleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WRCycleCell.swift; path = WRNavigationBar_swift/WRCycleCell.swift; sourceTree = SOURCE_ROOT; };
+		12CE35B921EEE1DD00F43FC1 /* WRProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WRProxy.swift; path = WRNavigationBar_swift/WRProxy.swift; sourceTree = SOURCE_ROOT; };
+		12CE35BF21EEE2EC00F43FC1 /* WRNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WRNavigationBar.swift; path = ../../WRNavigationBar/WRNavigationBar.swift; sourceTree = "<group>"; };
+		12CE35C021EEE2EC00F43FC1 /* WRCustomNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WRCustomNavigationBar.swift; path = ../../WRNavigationBar/WRCustomNavigationBar.swift; sourceTree = "<group>"; };
+		12CE35F221EEE37B00F43FC1 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Image.swift; path = Kingfisher/Image.swift; sourceTree = "<group>"; };
+		12CE35F321EEE37B00F43FC1 /* KingfisherManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KingfisherManager.swift; path = Kingfisher/KingfisherManager.swift; sourceTree = "<group>"; };
+		12CE35F421EEE37B00F43FC1 /* Kingfisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Kingfisher.swift; path = Kingfisher/Kingfisher.swift; sourceTree = "<group>"; };
+		12CE35F521EEE37B00F43FC1 /* CacheSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CacheSerializer.swift; path = Kingfisher/CacheSerializer.swift; sourceTree = "<group>"; };
+		12CE35F621EEE37B00F43FC1 /* String+MD5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+MD5.swift"; path = "Kingfisher/String+MD5.swift"; sourceTree = "<group>"; };
+		12CE35F721EEE37B00F43FC1 /* KingfisherOptionsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KingfisherOptionsInfo.swift; path = Kingfisher/KingfisherOptionsInfo.swift; sourceTree = "<group>"; };
+		12CE35F821EEE37B00F43FC1 /* ImageDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageDownloader.swift; path = Kingfisher/ImageDownloader.swift; sourceTree = "<group>"; };
+		12CE35F921EEE37B00F43FC1 /* Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Resource.swift; path = Kingfisher/Resource.swift; sourceTree = "<group>"; };
+		12CE35FA21EEE37B00F43FC1 /* AnimatedImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnimatedImageView.swift; path = Kingfisher/AnimatedImageView.swift; sourceTree = "<group>"; };
+		12CE35FB21EEE37B00F43FC1 /* Kingfisher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Kingfisher.h; path = Kingfisher/Kingfisher.h; sourceTree = "<group>"; };
+		12CE35FC21EEE37B00F43FC1 /* ImageTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageTransition.swift; path = Kingfisher/ImageTransition.swift; sourceTree = "<group>"; };
+		12CE35FD21EEE37B00F43FC1 /* ImagePrefetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImagePrefetcher.swift; path = Kingfisher/ImagePrefetcher.swift; sourceTree = "<group>"; };
+		12CE35FE21EEE37B00F43FC1 /* Box.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Box.swift; path = Kingfisher/Box.swift; sourceTree = "<group>"; };
+		12CE35FF21EEE37B00F43FC1 /* Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Filter.swift; path = Kingfisher/Filter.swift; sourceTree = "<group>"; };
+		12CE360021EEE37B00F43FC1 /* Placeholder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Placeholder.swift; path = Kingfisher/Placeholder.swift; sourceTree = "<group>"; };
+		12CE360121EEE37B00F43FC1 /* RequestModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RequestModifier.swift; path = Kingfisher/RequestModifier.swift; sourceTree = "<group>"; };
+		12CE360221EEE37B00F43FC1 /* ImageProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageProcessor.swift; path = Kingfisher/ImageProcessor.swift; sourceTree = "<group>"; };
+		12CE360321EEE37B00F43FC1 /* ThreadHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThreadHelper.swift; path = Kingfisher/ThreadHelper.swift; sourceTree = "<group>"; };
+		12CE360421EEE37B00F43FC1 /* UIButton+Kingfisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIButton+Kingfisher.swift"; path = "Kingfisher/UIButton+Kingfisher.swift"; sourceTree = "<group>"; };
+		12CE360521EEE37B00F43FC1 /* ImageView+Kingfisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ImageView+Kingfisher.swift"; path = "Kingfisher/ImageView+Kingfisher.swift"; sourceTree = "<group>"; };
+		12CE360621EEE37B00F43FC1 /* FormatIndicatedCacheSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FormatIndicatedCacheSerializer.swift; path = Kingfisher/FormatIndicatedCacheSerializer.swift; sourceTree = "<group>"; };
+		12CE360721EEE37B00F43FC1 /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageCache.swift; path = Kingfisher/ImageCache.swift; sourceTree = "<group>"; };
+		12CE360821EEE37B00F43FC1 /* Indicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Indicator.swift; path = Kingfisher/Indicator.swift; sourceTree = "<group>"; };
 		1A05B4751F07FAB4001D7B64 /* NormalListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalListController.swift; sourceTree = "<group>"; };
 		1A05B4771F07FAD7001D7B64 /* ImageNavController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageNavController.swift; sourceTree = "<group>"; };
 		1A05B4791F080D0B001D7B64 /* MillcolorGradController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MillcolorGradController.swift; sourceTree = "<group>"; };
@@ -74,12 +123,8 @@
 		1AB702691EA9AC7A006DBA79 /* QQAppController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QQAppController.swift; sourceTree = "<group>"; };
 		1AB7026B1EA9B753006DBA79 /* QQZoneController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QQZoneController.swift; sourceTree = "<group>"; };
 		1AD014091EDBFB4500A6893C /* ZhiHuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZhiHuController.swift; sourceTree = "<group>"; };
-		1AD0140C1EDBFEAC00A6893C /* WRCycleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WRCycleCell.swift; sourceTree = "<group>"; };
-		1AD0140D1EDBFEAC00A6893C /* WRCycleScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WRCycleScrollView.swift; sourceTree = "<group>"; };
-		1AD0140E1EDBFEAC00A6893C /* WRProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WRProxy.swift; sourceTree = "<group>"; };
 		1AD014121EDC091F00A6893C /* QQMineController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QQMineController.swift; sourceTree = "<group>"; };
 		272C2A7862DC39DA91D57781 /* Pods-WRNavigationBar_swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WRNavigationBar_swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-WRNavigationBar_swift/Pods-WRNavigationBar_swift.release.xcconfig"; sourceTree = "<group>"; };
-		34A093C91FC941B0009119BF /* WRCustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WRCustomNavigationBar.swift; sourceTree = "<group>"; };
 		63C8A182323696F064D8660C /* Pods_WRNavigationBar_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WRNavigationBar_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D76868588A082EB7E7777210 /* Pods-WRNavigationBar_swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WRNavigationBar_swift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WRNavigationBar_swift/Pods-WRNavigationBar_swift.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,6 +148,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		12CE35BD21EEE2CD00F43FC1 /* WRCycleScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				12CE35B821EEE1DD00F43FC1 /* WRCycleCell.swift */,
+				12CE35B721EEE1DD00F43FC1 /* WRCycleScrollView.swift */,
+				12CE35B921EEE1DD00F43FC1 /* WRProxy.swift */,
+			);
+			name = WRCycleScrollView;
+			sourceTree = "<group>";
+		};
+		12CE35BE21EEE2D800F43FC1 /* WRNavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				12CE35C021EEE2EC00F43FC1 /* WRCustomNavigationBar.swift */,
+				12CE35BF21EEE2EC00F43FC1 /* WRNavigationBar.swift */,
+			);
+			name = WRNavigationBar;
+			sourceTree = "<group>";
+		};
+		12CE35F121EEE36A00F43FC1 /* Kingfisher */ = {
+			isa = PBXGroup;
+			children = (
+				12CE35FA21EEE37B00F43FC1 /* AnimatedImageView.swift */,
+				12CE35FE21EEE37B00F43FC1 /* Box.swift */,
+				12CE35F521EEE37B00F43FC1 /* CacheSerializer.swift */,
+				12CE35FF21EEE37B00F43FC1 /* Filter.swift */,
+				12CE360621EEE37B00F43FC1 /* FormatIndicatedCacheSerializer.swift */,
+				12CE35F221EEE37B00F43FC1 /* Image.swift */,
+				12CE360721EEE37B00F43FC1 /* ImageCache.swift */,
+				12CE35F821EEE37B00F43FC1 /* ImageDownloader.swift */,
+				12CE35FD21EEE37B00F43FC1 /* ImagePrefetcher.swift */,
+				12CE360221EEE37B00F43FC1 /* ImageProcessor.swift */,
+				12CE35FC21EEE37B00F43FC1 /* ImageTransition.swift */,
+				12CE360521EEE37B00F43FC1 /* ImageView+Kingfisher.swift */,
+				12CE360821EEE37B00F43FC1 /* Indicator.swift */,
+				12CE35FB21EEE37B00F43FC1 /* Kingfisher.h */,
+				12CE35F421EEE37B00F43FC1 /* Kingfisher.swift */,
+				12CE35F321EEE37B00F43FC1 /* KingfisherManager.swift */,
+				12CE35F721EEE37B00F43FC1 /* KingfisherOptionsInfo.swift */,
+				12CE360021EEE37B00F43FC1 /* Placeholder.swift */,
+				12CE360121EEE37B00F43FC1 /* RequestModifier.swift */,
+				12CE35F921EEE37B00F43FC1 /* Resource.swift */,
+				12CE35F621EEE37B00F43FC1 /* String+MD5.swift */,
+				12CE360321EEE37B00F43FC1 /* ThreadHelper.swift */,
+				12CE360421EEE37B00F43FC1 /* UIButton+Kingfisher.swift */,
+			);
+			name = Kingfisher;
+			sourceTree = "<group>";
+		};
 		1A0DF76E1EA7176500191349 = {
 			isa = PBXGroup;
 			children = (
@@ -126,10 +220,11 @@
 		1A0DF7791EA7176500191349 /* WRNavigationBar_swift */ = {
 			isa = PBXGroup;
 			children = (
+				12CE35F121EEE36A00F43FC1 /* Kingfisher */,
+				12CE35BE21EEE2D800F43FC1 /* WRNavigationBar */,
+				12CE35BD21EEE2CD00F43FC1 /* WRCycleScrollView */,
 				1A0DF77A1EA7176500191349 /* AppDelegate.swift */,
 				1A0DF7B81EA7521C00191349 /* BaseNavigationController.swift */,
-				1AD0140B1EDBFEAC00A6893C /* WRCycleScrollView */,
-				1A0DF79A1EA7179500191349 /* WRNavigationBar */,
 				1A0DF7B11EA7370000191349 /* 普通 */,
 				1A6FB6F51ED023EE0098622A /* 自定义导航栏 */,
 				1A96559A1ED6B5AB00A89E30 /* 移动导航栏 */,
@@ -148,15 +243,6 @@
 				1A0DF7911EA7176500191349 /* Info.plist */,
 			);
 			path = WRNavigationBar_swiftTests;
-			sourceTree = "<group>";
-		};
-		1A0DF79A1EA7179500191349 /* WRNavigationBar */ = {
-			isa = PBXGroup;
-			children = (
-				1A05B4731F07FA9C001D7B64 /* WRNavigationBar.swift */,
-				34A093C91FC941B0009119BF /* WRCustomNavigationBar.swift */,
-			);
-			path = WRNavigationBar;
 			sourceTree = "<group>";
 		};
 		1A0DF7B11EA7370000191349 /* 普通 */ = {
@@ -199,17 +285,6 @@
 			path = Demos;
 			sourceTree = "<group>";
 		};
-		1AD0140B1EDBFEAC00A6893C /* WRCycleScrollView */ = {
-			isa = PBXGroup;
-			children = (
-				1AD0140C1EDBFEAC00A6893C /* WRCycleCell.swift */,
-				1AD0140D1EDBFEAC00A6893C /* WRCycleScrollView.swift */,
-				1AD0140E1EDBFEAC00A6893C /* WRProxy.swift */,
-			);
-			name = WRCycleScrollView;
-			path = WRNavigationBar/WRCycleScrollView;
-			sourceTree = "<group>";
-		};
 		3DD6CC0BB5CD77C87CA6E111 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,8 +313,6 @@
 				1A0DF7731EA7176500191349 /* Sources */,
 				1A0DF7741EA7176500191349 /* Frameworks */,
 				1A0DF7751EA7176500191349 /* Resources */,
-				D52EBFEB66FB9C860C432F23 /* [CP] Embed Pods Frameworks */,
-				4D703F4092429718B46E9B6D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -280,13 +353,13 @@
 				TargetAttributes = {
 					1A0DF7761EA7176500191349 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 652U6LDTX4;
+						DevelopmentTeam = P3X2725LYY;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					1A0DF78A1EA7176500191349 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 652U6LDTX4;
+						DevelopmentTeam = P3X2725LYY;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 1A0DF7761EA7176500191349;
@@ -333,21 +406,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4D703F4092429718B46E9B6D /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WRNavigationBar_swift/Pods-WRNavigationBar_swift-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		8B07B81DC9245E9840A20E2B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -366,24 +424,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D52EBFEB66FB9C860C432F23 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-WRNavigationBar_swift/Pods-WRNavigationBar_swift-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WRNavigationBar_swift/Pods-WRNavigationBar_swift-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -391,28 +431,50 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12CE35BA21EEE1DD00F43FC1 /* WRCycleScrollView.swift in Sources */,
+				12CE360921EEE37C00F43FC1 /* Image.swift in Sources */,
 				1A869EDF1ECAA36B006D96F8 /* CustomNavBarController.swift in Sources */,
+				12CE361621EEE37C00F43FC1 /* Placeholder.swift in Sources */,
+				12CE361821EEE37C00F43FC1 /* ImageProcessor.swift in Sources */,
+				12CE361921EEE37C00F43FC1 /* ThreadHelper.swift in Sources */,
+				12CE361321EEE37C00F43FC1 /* ImagePrefetcher.swift in Sources */,
+				12CE360A21EEE37C00F43FC1 /* KingfisherManager.swift in Sources */,
+				12CE360C21EEE37C00F43FC1 /* CacheSerializer.swift in Sources */,
+				12CE35C121EEE2EC00F43FC1 /* WRNavigationBar.swift in Sources */,
 				1AD014131EDC091F00A6893C /* QQMineController.swift in Sources */,
 				1AB7026C1EA9B753006DBA79 /* QQZoneController.swift in Sources */,
 				1A05B47A1F080D0B001D7B64 /* MillcolorGradController.swift in Sources */,
+				12CE35BB21EEE1DD00F43FC1 /* WRCycleCell.swift in Sources */,
+				12CE361721EEE37C00F43FC1 /* RequestModifier.swift in Sources */,
+				12CE361021EEE37C00F43FC1 /* Resource.swift in Sources */,
 				1A05B4781F07FAD7001D7B64 /* ImageNavController.swift in Sources */,
+				12CE361A21EEE37C00F43FC1 /* UIButton+Kingfisher.swift in Sources */,
 				1A96559E1ED6B8C600A89E30 /* MoveListController.swift in Sources */,
-				1AD014111EDBFEAC00A6893C /* WRProxy.swift in Sources */,
+				12CE361221EEE37C00F43FC1 /* ImageTransition.swift in Sources */,
+				12CE361C21EEE37C00F43FC1 /* FormatIndicatedCacheSerializer.swift in Sources */,
+				12CE360B21EEE37C00F43FC1 /* Kingfisher.swift in Sources */,
+				12CE361D21EEE37C00F43FC1 /* ImageCache.swift in Sources */,
+				12CE35C221EEE2EC00F43FC1 /* WRCustomNavigationBar.swift in Sources */,
+				12CE360E21EEE37C00F43FC1 /* KingfisherOptionsInfo.swift in Sources */,
 				1AD0140A1EDBFB4500A6893C /* ZhiHuController.swift in Sources */,
-				1AD0140F1EDBFEAC00A6893C /* WRCycleCell.swift in Sources */,
-				34A093CA1FC941B0009119BF /* WRCustomNavigationBar.swift in Sources */,
+				12CE360F21EEE37C00F43FC1 /* ImageDownloader.swift in Sources */,
 				1A869EDD1ECAA0C1006D96F8 /* BaseViewController.swift in Sources */,
+				12CE361121EEE37C00F43FC1 /* AnimatedImageView.swift in Sources */,
 				1A05B4761F07FAB4001D7B64 /* NormalListController.swift in Sources */,
-				1A05B4741F07FA9C001D7B64 /* WRNavigationBar.swift in Sources */,
-				1AD014101EDBFEAC00A6893C /* WRCycleScrollView.swift in Sources */,
 				1A0DF7B51EA7380600191349 /* SixthViewController.swift in Sources */,
 				1AB7026A1EA9AC7A006DBA79 /* QQAppController.swift in Sources */,
+				12CE361521EEE37C00F43FC1 /* Filter.swift in Sources */,
 				1A0DF77B1EA7176500191349 /* AppDelegate.swift in Sources */,
+				12CE361B21EEE37C00F43FC1 /* ImageView+Kingfisher.swift in Sources */,
 				1A966E8D1EE048F60045FCB8 /* AntForestController.swift in Sources */,
 				1A96559C1ED6B64F00A89E30 /* CustomListController.swift in Sources */,
 				1AB702661EA9A43C006DBA79 /* SecondViewController.swift in Sources */,
+				12CE361421EEE37C00F43FC1 /* Box.swift in Sources */,
+				12CE360D21EEE37C00F43FC1 /* String+MD5.swift in Sources */,
 				1A0DF7B91EA7521C00191349 /* BaseNavigationController.swift in Sources */,
 				1AADC3941F23088600BB73D9 /* AllTransparent.swift in Sources */,
+				12CE35BC21EEE1DD00F43FC1 /* WRProxy.swift in Sources */,
+				12CE361E21EEE37C00F43FC1 /* Indicator.swift in Sources */,
 				1A0DF7B71EA7471B00191349 /* WeiBoMineController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -508,6 +570,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -557,6 +620,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -567,14 +631,14 @@
 			baseConfigurationReference = D76868588A082EB7E7777210 /* Pods-WRNavigationBar_swift.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 652U6LDTX4;
+				DEVELOPMENT_TEAM = P3X2725LYY;
 				INFOPLIST_FILE = WRNavigationBar_swift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = video.com.wangrui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -584,14 +648,14 @@
 			baseConfigurationReference = 272C2A7862DC39DA91D57781 /* Pods-WRNavigationBar_swift.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 652U6LDTX4;
+				DEVELOPMENT_TEAM = P3X2725LYY;
 				INFOPLIST_FILE = WRNavigationBar_swift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = video.com.wangrui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -601,13 +665,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = 652U6LDTX4;
+				DEVELOPMENT_TEAM = P3X2725LYY;
 				INFOPLIST_FILE = WRNavigationBar_swiftTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "video.wangrui.com.WRNavigationBar-swiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WRNavigationBar_swift.app/WRNavigationBar_swift";
 			};
 			name = Debug;
@@ -617,13 +681,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = 652U6LDTX4;
+				DEVELOPMENT_TEAM = P3X2725LYY;
 				INFOPLIST_FILE = WRNavigationBar_swiftTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "video.wangrui.com.WRNavigationBar-swiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WRNavigationBar_swift.app/WRNavigationBar_swift";
 			};
 			name = Release;

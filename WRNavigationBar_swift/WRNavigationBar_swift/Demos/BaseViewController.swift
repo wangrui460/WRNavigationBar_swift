@@ -39,7 +39,7 @@ class BaseViewController: UIViewController
         // 设置自定义导航栏左右按钮字体颜色
         navBar.wr_setTintColor(color: .white)
         
-        if self.navigationController?.childViewControllers.count != 1 {
+        if self.navigationController?.children.count != 1 {
             navBar.wr_setLeftButton(title: "<<", titleColor: UIColor.white)
         }
     }

@@ -18,14 +18,14 @@ class AntForestController: UIViewController
 {
     lazy var tableView:UITableView = {
         let table:UITableView = UITableView(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: self.view.bounds.height), style: .plain)
-        table.contentInset = UIEdgeInsetsMake(IMAGE_HEIGHT-CGFloat(kNavBarBottom), 0, 0, 0);
+        table.contentInset = UIEdgeInsets(top: IMAGE_HEIGHT-CGFloat(kNavBarBottom), left: 0, bottom: 0, right: 0);
         table.delegate = self
         table.dataSource = self
         return table
     }()
     lazy var imageView:UIImageView = {
         let imgView = UIImageView(frame: CGRect(x: 0, y: -IMAGE_HEIGHT, width: kScreenWidth, height: IMAGE_HEIGHT))
-            imgView.contentMode = UIViewContentMode.scaleAspectFill
+        imgView.contentMode = UIView.ContentMode.scaleAspectFill
             imgView.clipsToBounds = true
         imgView.image = UIImage(named: "mysl")
         return imgView
