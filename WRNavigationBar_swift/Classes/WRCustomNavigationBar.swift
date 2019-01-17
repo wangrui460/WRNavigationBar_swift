@@ -46,20 +46,15 @@ public extension UIViewController
         }
     }
 
-    class func wr_currentViewController(from fromVC:UIViewController) -> UIViewController
+    class func wr_currentViewController(from fromVC: UIViewController) -> UIViewController
     {
-        if fromVC.isKind(of: UINavigationController.self) {
-            let navigationController = fromVC as! UINavigationController
-            return wr_currentViewController(from: navigationController.viewControllers.last!)
-        }
-        else if fromVC.isKind(of: UITabBarController.self) {
-            let tabBarController = fromVC as! UITabBarController
-            return wr_currentViewController(from: tabBarController.selectedViewController!)
-        }
-        else if fromVC.presentedViewController != nil {
-            return wr_currentViewController(from:fromVC.presentingViewController!)
-        }
-        else {
+        if let navigationController = fromVC as? UINavigationController, let subViewController = navigationController.viewControllers.last {
+            return wr_currentViewController(from: subViewController)
+        } else if let tabBarController = fromVC as? UITabBarController, let subViewController = tabBarController.selectedViewController {
+            return wr_currentViewController(from: subViewController)
+        } else if let presentedViewController = fromVC.presentedViewController {
+            return wr_currentViewController(from: presentedViewController)
+        } else {
             return fromVC
         }
     }

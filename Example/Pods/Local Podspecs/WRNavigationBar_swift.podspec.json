@@ -9,12 +9,13 @@
     "file": "LICENSE"
   },
   "authors": {
-    "EyreFree": "eyrefree@eyrefree.org"
+    "wangrui460": "wangruidev@gmail.com"
   },
   "source": {
     "git": "https://github.com/wangrui460/WRNavigationBar_swift.git",
     "tag": "0.1.0"
   },
+  "swift_version": "4.2",
   "platforms": {
     "ios": "8.0"
   },

@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  WRNavigationBar_swift: ec68cfa6759f2f2a3815412ddca899ec2c7b17b5
+  WRNavigationBar_swift: 2aa357390ecb7e3cc50dffb0b82c338e1dffad63
 
 PODFILE CHECKSUM: b9c9e56e2153483fea864e416272c298196d42b7
 
