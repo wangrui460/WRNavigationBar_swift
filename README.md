@@ -76,6 +76,8 @@ UIColor.defaultShadowImageHidden = true
 
 
 ## Update
+- **2020.08.17**
+解决问题：解决modal出来一个导航控制然后push到其他Vc，点击返回按钮crash的bug
 - **2017.12.09**
 解决问题：解决导航栏颜色和标题颜色改变失败的bug
 

@@ -57,7 +57,7 @@ extension UIViewController
             return wr_currentViewController(from: tabBarController.selectedViewController!)
         }
         else if fromVC.presentedViewController != nil {
-            return wr_currentViewController(from:fromVC.presentingViewController!)
+            return wr_currentViewController(from:fromVC.presentedViewController!)
         }
         else {
             return fromVC
