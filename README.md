@@ -131,9 +131,8 @@ UIColor.defaultShadowImageHidden = true
 
 
 # Contact me
-- Weibo: [@wangrui460](http://weibo.com/wangrui460)
-- Email:  wangruidev@gmail.com
-- QQ：1204607318 （基本不用）
+扫码回复1获取面试资料（持续更新）
+![](https://user-images.githubusercontent.com/11909313/123933944-6a4abe00-d9c5-11eb-83ca-379313a2af7c.png)
 
 # License
 
