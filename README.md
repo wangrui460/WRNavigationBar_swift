@@ -131,14 +131,8 @@ UIColor.defaultShadowImageHidden = true
 - **2017.05.12** 
 解决问题：侧滑一点松开透明的导航栏会变不透明
 
-## Features
 
-
-# Contact me
-扫码回复1获取面试资料（持续更新）
-![](https://user-images.githubusercontent.com/11909313/123933944-6a4abe00-d9c5-11eb-83ca-379313a2af7c.png)
-
-# License
+## License
 
 WRNavigationBar is available under the MIT license. See the LICENSE file for more info.
 
