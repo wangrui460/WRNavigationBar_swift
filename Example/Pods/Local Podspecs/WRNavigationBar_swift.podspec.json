@@ -1,0 +1,23 @@
+{
+  "name": "WRNavigationBar_swift",
+  "version": "0.1.0",
+  "summary": "A useful custom navigation bar.",
+  "description": "WRNavigationBar which allows you to change NavigationBar's appearance dynamically.",
+  "homepage": "https://github.com/wangrui460/WRNavigationBar_swift",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "wangrui460": "wangruidev@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/wangrui460/WRNavigationBar_swift.git",
+    "tag": "0.1.0"
+  },
+  "swift_version": "4.2",
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "WRNavigationBar_swift/Classes/**/*"
+}

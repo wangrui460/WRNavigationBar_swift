@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'WRNavigationBar_swift_Example' do
+  pod 'WRNavigationBar_swift', :path => '../'
+
+  target 'WRNavigationBar_swift_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
